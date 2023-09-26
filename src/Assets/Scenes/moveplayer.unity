@@ -443,11 +443,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55fe5cfb72556a4ea6575f95776ff2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  my_Thrust: 20
-  my_Thrust_Max: 50
+  my_Thrust: 2000
+  my_Thrust_Max: 70
   my_forward_speed: 1
-  jumpVector: 2000
-  gravity: 10
+  jumpVector: 20
+  gravity: 1000
+  slide_power: 150
 --- !u!1001 &927210335
 PrefabInstance:
   m_ObjectHideFlags: 0
