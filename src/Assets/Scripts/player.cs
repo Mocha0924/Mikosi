@@ -14,6 +14,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
+    [SerializeField] float slide_power = 2f;
     float Input_Horizontal;
 
     // Start is called before the first frame update
@@ -71,7 +72,7 @@ public class player : MonoBehaviour
         if (!Input.anyKey)
         {
 
-            if (my_Rigidbody.velocity.x < 1 && my_Rigidbody.velocity.x > -1)
+            if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
             {
 
                 float now_velocity_y = my_Rigidbody.velocity.y;
@@ -84,7 +85,7 @@ public class player : MonoBehaviour
             }
             else
             {
-                force = new Vector3(my_Rigidbody.velocity.x * -0.4f, 0, 0);
+                force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
             }
 
         }
@@ -94,11 +95,13 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space) && transform.position.y <= 2)
         {
-            
-            force += new Vector3(0, jumpVector, 0);
+            float now_velocity_x = my_Rigidbody.velocity.x;
+            float now_velocity_z = my_Rigidbody.velocity.z;
+            my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
            
         }
 
+        force *= Time.deltaTime;
         my_Rigidbody.AddForce(force, ForceMode.Acceleration);
         
 
