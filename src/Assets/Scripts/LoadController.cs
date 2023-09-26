@@ -1,20 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//using System;
 public class LoadController : MonoBehaviour
 {
     [SerializeField] private GameObject center;
-    [SerializeField] private GameObject end;
-    [SerializeField] private GameObject begin;
+    public  GameObject end;
+    public  GameObject begin;
+    public  GameObject Left;
+    public  GameObject Right;
     [SerializeField] private GameObject Load;
-    [SerializeField] private GameObject Player;
+    [SerializeField] GameObject people;
     [SerializeField] private LoadDirector Director;
     private Vector3 SpawnPosition = Vector3.zero;
+    private List<Vector3> CoodinateList = new List<Vector3>();
+    public List<GameObject> PeopleList = new List<GameObject>();
+         
 
     private void Start()
     {
         Director.LoadPlus(this.gameObject);
+        PeopleListGenerator();
+        PeopleGeneration();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -22,7 +29,51 @@ public class LoadController : MonoBehaviour
         {
             Quaternion LoadRotate = gameObject.transform.rotation;
             Instantiate(Load, end.gameObject.transform.position, LoadRotate);
+           
         }
        
     }
+    private void PeopleListGenerator()
+    {
+        List<float> LoadX = new List<float>();
+        List<float> LoadZ = new List<float>();
+        for (float i =Left.transform.position.x; i <= Right.transform.position.x; i++)
+        {
+            LoadX.Add(i);
+            // Debug.Log("X"+ i);
+        }
+
+
+        for (float i = begin.transform.position.z; i < end.transform.position.z; i++)
+        {
+            LoadZ.Add(i);
+            // Debug.Log("Z" + i);
+        }
+
+        for (int i = 0; i < LoadX.Count; i++)
+        {
+            for (int j = 0; j < LoadZ.Count; j++)
+            {
+                CoodinateList.Add(new Vector3(LoadX[i], Load.transform.position.y + Load.transform.localScale.y, LoadZ[j]));
+            }
+        }
+        for (int i = CoodinateList.Count - 1; i > 0; i--)
+        {
+            var j = Random.Range(0, i + 1);
+            var temp = CoodinateList[i];
+            CoodinateList[i] = CoodinateList[j];
+            CoodinateList[j] = temp;
+        }
+    }
+    public void PeopleGeneration()
+    {
+        int rand = Random.Range(10, 20);
+        for (int i = 0; i < rand; i++)
+        {
+            GameObject PeoplePre =  Instantiate(people, CoodinateList[i], Quaternion.identity);
+            PeopleList.Add(PeoplePre);
+        }
+
+    }
+
 }

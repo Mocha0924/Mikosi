@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5848282111a4a458a73a7d5d899acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  end: {fileID: 0}
+  begin: {fileID: 0}
+  Left: {fileID: 0}
+  Right: {fileID: 0}
+  PeopleList: []
