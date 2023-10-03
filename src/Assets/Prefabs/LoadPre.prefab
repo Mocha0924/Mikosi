@@ -274,8 +274,9 @@ MonoBehaviour:
   Right: {fileID: 1901086022595199852}
   Load: {fileID: 8175076051680745164}
   people: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
+  food: {fileID: 7748136802681959631, guid: 4034c82ba4cc6e94f890d40544a4402d, type: 3}
   Director: {fileID: 0}
-  PeopleList: []
+  ObjectList: []
 --- !u!54 &8879891200686925378
 Rigidbody:
   m_ObjectHideFlags: 0
