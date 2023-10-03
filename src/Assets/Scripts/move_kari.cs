@@ -6,15 +6,19 @@ public class move_kari : MonoBehaviour
 {
 
     Transform my_Transform;
-    Rigidbody my_Rigidbody;
-    [SerializeField] float my_forward_speed = 0.1f;
-    Vector3 my_velocity ;
+
+    [SerializeField] float foward_speed = 0.1f;
+
+    public bool turn_complete_R = false;
+    public bool turn_complete_L = false;
+    float times = 0f;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         my_Transform = GetComponent<Transform>();
-        my_Rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -26,7 +30,31 @@ public class move_kari : MonoBehaviour
     private void FixedUpdate()
     {
 
-        my_Transform.position += transform.forward * 0.1f;
+        my_Transform.position += transform.forward * foward_speed;
 
+
+
+        if (turn_complete_R)
+        {
+            times++;
+
+            transform.rotation = Quaternion.Euler(0, times, 0);
+
+            if (times % 90 == 0)
+            {
+                turn_complete_R = false;
+            }
+        }
+        else if(turn_complete_L)
+        {
+            times++;
+
+            transform.rotation = Quaternion.Euler(0, -times, 0);
+
+            if (times % 90 == 0)
+            {
+                turn_complete_L = false;
+            }
+        }
     }
 }

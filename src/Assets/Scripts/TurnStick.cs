@@ -8,10 +8,7 @@ public class TurnStick : MonoBehaviour
     float Input_Vertical = 0f;
     bool stick_right = true; bool stick_left = false; bool stick_up = false; bool stick_down = false;
     public bool in_corner = false;
-    public int turn_times = 10;
-
-    //[SerializeField] GameObject start_corner;
-    [SerializeField] GameObject end_corner;
+    public int turn_times = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,23 +24,25 @@ public class TurnStick : MonoBehaviour
         {
 
             turnStick(tag == "R");
-            Debug.Log(turn_times);
+            
         }
-        
-        
 
+
+        Debug.Log(turn_times);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("trigger");
         in_corner = true;
+        turn_times = 0;
     }
 
     void turnStick(bool RorL)
     {
         
-        Debug.Log(RorL);
+        
+        
 
         Input_Horizontal = Input.GetAxis("Horizontal");
         Input_Vertical = Input.GetAxis("Vertical");
@@ -60,6 +59,7 @@ public class TurnStick : MonoBehaviour
 
     void Right_corner()
     {
+        
 
         if (Input_Horizontal > 0 && stick_right)
         {
@@ -80,7 +80,6 @@ public class TurnStick : MonoBehaviour
         {
             stick_up = false;
             stick_right = true;
-
             turn_times += 1;
 
         }
@@ -88,6 +87,7 @@ public class TurnStick : MonoBehaviour
 
     void Left_corner()
     {
+        
         if (Input_Horizontal < 0 && stick_left)
         {
             stick_left = false;
@@ -98,7 +98,7 @@ public class TurnStick : MonoBehaviour
             stick_down = false;
             stick_right = true;
         }
-        else if (Input_Horizontal < 0 && stick_right)
+        else if (Input_Horizontal > 0 && stick_right)
         {
             stick_right = false;
             stick_up = true;
@@ -108,6 +108,7 @@ public class TurnStick : MonoBehaviour
             stick_up = false;
             stick_left = true;
 
+            
             turn_times += 1;
 
         }

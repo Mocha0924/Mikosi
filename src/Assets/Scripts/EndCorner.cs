@@ -6,65 +6,49 @@ public class EndCorner : MonoBehaviour
 {
 
     public GameObject corner_end;
+    move_kari move_Kari;
     TurnStick TurnStick;
     [SerializeField] GameObject player;
-    bool turn_complete = false;
-    float times;
+    [SerializeField] int turntimes_complete = 10;
+
     // Start is called before the first frame update
     void Start()
     {
         TurnStick = corner_end.GetComponent<TurnStick>();
-        
+        move_Kari = player.GetComponent<move_kari>();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        
 
+
+        
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger");
         TurnStick.in_corner = false;
 
-        if (TurnStick.turn_times >= 10)
+        if (TurnStick.turn_times >= turntimes_complete)
         {
 
-            times = (int)player.transform.rotation.y;
+            if (gameObject.tag == "R") { move_Kari.turn_complete_R = true; }          
+            else { move_Kari.turn_complete_L = true; }
             
-            //other.transform.rotation = Quaternion.Euler(0, 90, 0);
-            turn_complete = true;
-            
-
+            TurnStick.turn_times = 0;
         }
         else
         {
             Debug.Log("failed");
         }
+
+        
     }
 
-    void FixedUpdate()
-    {
-        Debug.Log(player.transform.);
-        if (turn_complete)
-        {
-            times++;
-            
-                player.transform.rotation =  Quaternion.Euler(0, times, 0);
-
-            if (times % 90 == 0)
-            {
-                turn_complete = false;
-            }
-            
-        }
-
-    }
+    
 
 
 }
