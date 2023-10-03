@@ -74,7 +74,7 @@ public class LoadController : MonoBehaviour
             GameObject PeoplePre =  Instantiate(people, CoodinateList[i], Quaternion.identity);
             ObjectList.Add(PeoplePre);
         }
-        for (int i = 0; i < 20; i++)
+        for (int i = rand ; i < 10+rand; i++)
         {
             GameObject FoodPre = Instantiate(food, CoodinateList[i], Quaternion.identity);
             ObjectList.Add(FoodPre);
