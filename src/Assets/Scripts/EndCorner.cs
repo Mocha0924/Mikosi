@@ -5,7 +5,7 @@ using UnityEngine;
 public class EndCorner : MonoBehaviour
 {
 
-    public GameObject corner_end;
+    public GameObject corner_start;
     move_kari move_Kari;
     TurnStick TurnStick;
     [SerializeField] GameObject player;
@@ -14,7 +14,7 @@ public class EndCorner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TurnStick = corner_end.GetComponent<TurnStick>();
+        TurnStick = corner_start.GetComponent<TurnStick>();
         move_Kari = player.GetComponent<move_kari>();
 
     }

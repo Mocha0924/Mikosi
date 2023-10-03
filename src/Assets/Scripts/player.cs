@@ -62,13 +62,15 @@ public class player : MonoBehaviour
                 force = new Vector3(0, 0, 0);
             }
 
+            
+
         }
 
-        
-       
+
+        Debug.Log(Input_Horizontal);
 
         //Debug.Log(my_Rigidbody.velocity);
-        
+
         if (!Input.anyKey)
         {
 
