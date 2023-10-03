@@ -7,11 +7,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class DestroyObjScript : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    void DestoryObj()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            Destroy(this.gameObject);
-        }
+        Destroy(gameObject);
     }
 }
