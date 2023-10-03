@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class MikoshiCollisionDetection : MonoBehaviour
 {
-    [SerializeField] int peopleCount;
     [SerializeField] int clearConditions;
-    [SerializeField] bool isFever;
     [SerializeField] GameObject AfterPeople;
+    [SerializeField] GameObject aPeopleParent;
+
+    [SerializeField] int touchFoodDecrPeople;
+    [SerializeField] int peopleCount;
+    [SerializeField] bool isFever;
+
     int behindPeopleCount;
     int behindPeopleRow;
     bool isSpawn;
@@ -19,116 +23,136 @@ public class MikoshiCollisionDetection : MonoBehaviour
         peopleCount = 6;
         AfterPeople.transform.localPosition = Vector3.zero;
 
-        clearConditions = 100;
         isFever = false;
 
         behindPeopleCount = 0;
         behindPeopleRow = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isFever == false && peopleCount >= clearConditions)
-        {
-            isFever = true;
-            FeverTime();
-        }
-    }
-
-    //_—`‚Æl‚Ì“–‚½‚è”»’è(l‚Æ“–‚½‚Á‚½Žž‚Él‚ð‘‚â‚·)
+    //ç¥žè¼¿ã¨ã®åˆ¤å®š
     void OnTriggerEnter(Collider other)
     {
+        //äººã¨ã®æŽ¥è§¦
         if (other.gameObject.tag == "People")
         {
+            Debug.Log("People Touch");
+
             peopleCount++;
             Destroy(other.gameObject);
-            //Debug.Log("People Touch");
+
             Debug.Log(peopleCount);
 
-            var parent = this.transform;
+            //äººã®ç”Ÿæˆ
+            GenerateMikoshiPeople();
 
-            pos = Vector3.zero;
-            pos.y += -0.25f;
-
-            //l‚Ì¶¬
-            //_—`’S‚®l‚Ì—×‚É’u‚­l
-            if (peopleCount > 6 && peopleCount <= 18)
+            if (peopleCount >= clearConditions&& isFever == false)
             {
-                if (peopleCount > 6 && peopleCount <= 12)
-                {
-                    if (peopleCount % 2 == 0) { pos.z = -1.4f; }
-                    else { pos.z = 1.4f; }
-                }
-                else if (peopleCount > 12 && peopleCount <= 18)
-                {
-                    if (peopleCount % 2 == 0) { pos.z = -2.0f; }
-                    else { pos.z = 2.0f; }
-                }
-
-                if (peopleCount == 7 || peopleCount == 8 ||
-                    peopleCount == 13 || peopleCount == 14) { pos.x = 0.5f; }
-                else if (peopleCount == 9 || peopleCount == 10 ||
-                    peopleCount == 15 || peopleCount == 16) { pos.x = -0.1f; }
-                else { pos.x = -0.75f; }
+                isFever = true;
+                FeverTime();
             }
-            //_—`‚ÌŒã‚ë‚É•t‚­l
-            else if (peopleCount > 18 && peopleCount <= clearConditions)
+        }
+
+        //é£Ÿã¹ç‰©ã¨ã®æŽ¥è§¦
+        if (other.gameObject.tag == "Food")
+        {
+            Debug.Log("Food Touch");
+
+            Destroy(other.gameObject);
+
+            for (int i = 0; i < touchFoodDecrPeople; i++)
             {
-                behindPeopleCount = peopleCount - 18;
-
-                if (behindPeopleCount % 9 == 1) { behindPeopleRow++; }
-
-                pos.x = -0.7f - 0.6f * behindPeopleRow;
-
-                switch (behindPeopleCount % 9)
+                if (peopleCount > 6)
                 {
-                    case 1:
-                        pos.z = 0f;
-                        break;
-
-                    case 2:
-                        pos.z = 0.6f;
-                        break;
-
-                    case 3:
-                        pos.z = -0.6f;
-                        break;
-
-                    case 4:
-                        pos.z = 1.2f;
-                        break;
-
-                    case 5:
-                        pos.z = -1.2f;
-                        break;
-
-                    case 6:
-                        pos.z = 1.8f;
-                        break;
-
-                    case 7:
-                        pos.z = -1.8f;
-                        break;
-
-                    case 8:
-                        pos.z = 2.4f;
-                        break;
-
-                    case 0:
-                        pos.z = -2.4f;
-                        break;
+                    Destroy(aPeopleParent.transform.GetChild(peopleCount - 7).gameObject);
+                    peopleCount--;
                 }
             }
-
-            AfterPeople.transform.localPosition = pos;
-            Instantiate(AfterPeople, parent);
-            Debug.Log(AfterPeople.transform.localPosition);
         }
     }
 
     void FeverTime()
     {
         Debug.Log("Fever");
+    }
+
+    void GenerateMikoshiPeople()
+    {
+        var parent = aPeopleParent.transform;
+
+        pos = Vector3.zero;
+        pos.y += -0.25f;
+
+        //ç¥žè¼¿ã®å‘¨ã‚Šã®äºº
+        if (peopleCount > 6 && peopleCount <= 18)
+        {
+            if (peopleCount > 6 && peopleCount <= 12)
+            {
+                if (peopleCount % 2 == 0) { pos.z = -1.4f; }
+                else { pos.z = 1.4f; }
+            }
+            else if (peopleCount > 12 && peopleCount <= 18)
+            {
+                if (peopleCount % 2 == 0) { pos.z = -2.0f; }
+                else { pos.z = 2.0f; }
+            }
+
+            if (peopleCount == 7 || peopleCount == 8 ||
+                peopleCount == 13 || peopleCount == 14) { pos.x = 0.5f; }
+            else if (peopleCount == 9 || peopleCount == 10 ||
+                peopleCount == 15 || peopleCount == 16) { pos.x = -0.1f; }
+            else { pos.x = -0.75f; }
+        }
+        //ç¥žè¼¿ã®å¾Œã‚ã®äºº
+        else if (peopleCount > 18 && peopleCount <= clearConditions)
+        {
+            behindPeopleCount = peopleCount - 18;
+
+            behindPeopleRow = (behindPeopleCount - 1) / 9;
+
+            pos.x = -1.3f - 0.6f * behindPeopleRow;
+
+            switch (behindPeopleCount % 9)
+            {
+                case 1:
+                    pos.z = 0f;
+                    break;
+
+                case 2:
+                    pos.z = 0.6f;
+                    break;
+
+                case 3:
+                    pos.z = -0.6f;
+                    break;
+
+                case 4:
+                    pos.z = 1.2f;
+                    break;
+
+                case 5:
+                    pos.z = -1.2f;
+                    break;
+
+                case 6:
+                    pos.z = 1.8f;
+                    break;
+
+                case 7:
+                    pos.z = -1.8f;
+                    break;
+
+                case 8:
+                    pos.z = 2.4f;
+                    break;
+
+                case 0:
+                    pos.z = -2.4f;
+                    break;
+            }
+        }
+
+        AfterPeople.name = peopleCount.ToString();
+        AfterPeople.transform.position = pos;
+        Instantiate(AfterPeople, parent);
     }
 }

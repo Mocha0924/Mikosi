@@ -26,8 +26,8 @@ public class LoadDirector : MonoBehaviour
             GameObject DestroyLode = Load_List[0];
             LoadReduce();
             LoadController controller = DestroyLode.GetComponent<LoadController>();
-            for(int i = 0; i <controller.PeopleList.Count;i++)
-                Destroy(controller.PeopleList[i]);
+            for(int i = 0; i <controller.ObjectList.Count;i++)
+                Destroy(controller.ObjectList[i]);
 
             Destroy(DestroyLode);
             

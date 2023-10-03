@@ -11,17 +11,18 @@ public class LoadController : MonoBehaviour
     public  GameObject Right;
     [SerializeField] private GameObject Load;
     [SerializeField] GameObject people;
+    [SerializeField] GameObject food;
     [SerializeField] private LoadDirector Director;
     private Vector3 SpawnPosition = Vector3.zero;
     private List<Vector3> CoodinateList = new List<Vector3>();
-    public List<GameObject> PeopleList = new List<GameObject>();
+    public List<GameObject> ObjectList = new List<GameObject>();
          
 
     private void Start()
     {
         Director.LoadPlus(this.gameObject);
         PeopleListGenerator();
-        PeopleGeneration();
+        Generation();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -65,15 +66,19 @@ public class LoadController : MonoBehaviour
             CoodinateList[j] = temp;
         }
     }
-    public void PeopleGeneration()
+    public void Generation()
     {
         int rand = Random.Range(10, 20);
         for (int i = 0; i < rand; i++)
         {
             GameObject PeoplePre =  Instantiate(people, CoodinateList[i], Quaternion.identity);
-            PeopleList.Add(PeoplePre);
+            ObjectList.Add(PeoplePre);
         }
-
+        for (int i = 0; i < 20; i++)
+        {
+            GameObject FoodPre = Instantiate(food, CoodinateList[i], Quaternion.identity);
+            ObjectList.Add(FoodPre);
+        }
     }
 
 }

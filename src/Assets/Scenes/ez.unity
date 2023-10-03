@@ -200,14 +200,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134507393}
-  m_LocalRotation: {x: 0.11032045, y: 0.68187493, z: -0.105148286, w: 0.7154159}
-  m_LocalPosition: {x: 178.91827, y: 127.782524, z: -0.13460572}
+  m_LocalRotation: {x: 0.22205901, y: 0, z: 0, w: 0.9750333}
+  m_LocalPosition: {x: 280, y: 4.95, z: -202.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.66, y: 0, z: 0}
 --- !u!114 &134507397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,134 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96df125b498f75943bd06318490e836b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &171559105
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 171559111}
-  - component: {fileID: 171559110}
-  - component: {fileID: 171559109}
-  - component: {fileID: 171559108}
-  - component: {fileID: 171559107}
-  - component: {fileID: 171559106}
-  m_Layer: 0
-  m_Name: Mikoshi
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!54 &171559106
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171559105}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &171559107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171559105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10649a24d0e5aa04c8f98ce743ca267d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Thrust: 20
---- !u!135 &171559108
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171559105}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &171559109
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171559105}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: fbed27a4997caaa4ab04a54141394cb0, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &171559110
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171559105}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &171559111
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171559105}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 203479317}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203479313
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,16 +312,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203479313}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 189.2, y: 120.86, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 280, y: 1.5, z: -195.31}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 171559111}
   - {fileID: 600461323}
+  - {fileID: 1803688428}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &203479318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,8 +365,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peopleCount: 0
   clearConditions: 100
+  touchFoodDecrPeople: 6
   isFever: 0
+  aPeopleParent: {fileID: 1803688427}
   AfterPeople: {fileID: 999420051843794743, guid: dae0bcd378ed8714abc2eaeefd432e74, type: 3}
+  People: []
 --- !u!1 &600461322
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 600461323}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirstPeople
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +405,7 @@ Transform:
   - {fileID: 947980827}
   - {fileID: 1256824111}
   m_Father: {fileID: 203479317}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -619,7 +494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: -152, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -637,7 +512,7 @@ GameObject:
   - component: {fileID: 816756590}
   - component: {fileID: 816756589}
   m_Layer: 0
-  m_Name: PeopleSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,8 +531,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
-  spawner: {x: 200, y: 120.9, z: 0}
-  spawnCount: 1
+  eSpawner: {x: 280, y: 1.5, z: -175}
+  eSpawnCount: 1
+  food: {fileID: 7748136802681959631, guid: 4034c82ba4cc6e94f890d40544a4402d, type: 3}
+  fSpawner: {x: 280, y: 1.5, z: -170}
 --- !u!4 &816756590
 Transform:
   m_ObjectHideFlags: 0
@@ -666,7 +543,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816756588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 120.9, z: 0}
+  m_LocalPosition: {x: 280, y: 1.5, z: -200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -739,6 +616,10 @@ PrefabInstance:
     - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
       propertyPath: m_Name
       value: MikoshiPeople (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
@@ -813,6 +694,10 @@ PrefabInstance:
     - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
       propertyPath: m_Name
       value: MikoshiPeople (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
@@ -910,14 +795,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120028197}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 280.6, y: 119.399994, z: 0}
-  m_LocalScale: {x: 200, y: 1, z: 50}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 280.6, y: 0, z: 0}
+  m_LocalScale: {x: 400, y: 1, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1001 &1124514856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -984,6 +869,10 @@ PrefabInstance:
     - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
       propertyPath: m_Name
       value: MikoshiPeople (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
@@ -1059,6 +948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MikoshiPeople (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
 --- !u!4 &1157646732 stripped
@@ -1133,6 +1026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MikoshiPeople (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
 --- !u!4 &1256824111 stripped
@@ -1140,6 +1037,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5346815943927818731, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
   m_PrefabInstance: {fileID: 1256824110}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1803688427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1803688428}
+  m_Layer: 6
+  m_Name: AfterPeopleParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1803688428
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803688427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 203479317}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1969314539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1206,6 +1134,10 @@ PrefabInstance:
     - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
       propertyPath: m_Name
       value: MikoshiPeople
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062091706775012116, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f94e44a6ef0604aac2d8553d41c558, type: 3}
