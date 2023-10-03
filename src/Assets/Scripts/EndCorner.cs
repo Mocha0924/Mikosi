@@ -16,16 +16,12 @@ public class EndCorner : MonoBehaviour
     {
         TurnStick = corner_end.GetComponent<TurnStick>();
         move_Kari = player.GetComponent<move_kari>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,9 +31,9 @@ public class EndCorner : MonoBehaviour
         if (TurnStick.turn_times >= turntimes_complete)
         {
 
-            if (gameObject.tag == "R") { move_Kari.turn_complete_R = true; }          
+            if (gameObject.tag == "R") { move_Kari.turn_complete_R = true; }
             else { move_Kari.turn_complete_L = true; }
-            
+
             TurnStick.turn_times = 0;
         }
         else
@@ -45,13 +41,7 @@ public class EndCorner : MonoBehaviour
             Debug.Log("failed");
         }
 
-        
-    }
 
-    
     }
-    }
-    }
-
 
 }

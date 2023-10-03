@@ -11,6 +11,7 @@ public class move_kari : MonoBehaviour
 
     public bool turn_complete_R = false;
     public bool turn_complete_L = false;
+    [SerializeField] int Turn_speed = 1;
     float times = 0f;
 
 
@@ -36,7 +37,7 @@ public class move_kari : MonoBehaviour
 
         if (turn_complete_R)
         {
-            times++;
+            times += Turn_speed ;
 
             transform.rotation = Quaternion.Euler(0, times, 0);
 
@@ -47,7 +48,7 @@ public class move_kari : MonoBehaviour
         }
         else if(turn_complete_L)
         {
-            times++;
+            times += Turn_speed ;
 
             transform.rotation = Quaternion.Euler(0, -times, 0);
 
