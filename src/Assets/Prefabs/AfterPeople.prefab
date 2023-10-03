@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4324802478071186616}
   - component: {fileID: 4483032298722316968}
   - component: {fileID: 4299615130599953063}
-  - component: {fileID: 507761151244430431}
   m_Layer: 8
   m_Name: AfterPeople
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999420051843794743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3, y: -0.25, z: 1.2}
+  m_LocalPosition: {x: 0.5, y: -0.25, z: 1.4}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,15 +98,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &507761151244430431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999420051843794743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7998a7c951f680e49810c14652c960b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
