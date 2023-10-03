@@ -50,7 +50,6 @@ public class EndCorner : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(player.transform.);
         if (turn_complete)
         {
             times++;
