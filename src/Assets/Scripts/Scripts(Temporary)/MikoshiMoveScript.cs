@@ -11,7 +11,7 @@ public class MikoshiMoveScript : MonoBehaviour
     private void Start()
     {
         m_Rigidbody=GetComponent<Rigidbody>();
-        force = new Vector3(Thrust, 0, 0);
+        force = new Vector3(0, 0, Thrust);
     }
 
     private void FixedUpdate()
@@ -19,13 +19,17 @@ public class MikoshiMoveScript : MonoBehaviour
         if(Input.GetKey(KeyCode.W)) {
             m_Rigidbody.AddForce(force);
         }
+        if(Input.GetKey(KeyCode.S))
+        {
+            m_Rigidbody.AddForce(-force);
+        }
         if (Input.GetKey(KeyCode.D))
         {
-            m_Rigidbody.AddForce(0, 0, -Thrust);
+            m_Rigidbody.AddForce(Thrust, 0, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            m_Rigidbody.AddForce(0, 0, Thrust);
+            m_Rigidbody.AddForce(-Thrust, 0, 0);
         }
     }
 }

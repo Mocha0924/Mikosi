@@ -5,8 +5,12 @@ using UnityEngine;
 public class EnemySpawnScript : MonoBehaviour
 {
     [SerializeField] GameObject enemy;
-    [SerializeField] Vector3 spawner;
-    [SerializeField] int spawnCount;
+    [SerializeField] Vector3 eSpawner;
+    [SerializeField] int eSpawnCount;
+
+    [SerializeField] GameObject food;
+    [SerializeField] Vector3 fSpawner;
+    int fSpawnCount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -17,17 +21,23 @@ public class EnemySpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.LeftControl))
         {
-            Spawn();
+            Spawn(enemy, eSpawner, eSpawnCount);
         }
+
+        if (Input.GetKeyDown(KeyCode.RightControl))
+        {
+            Spawn(food, fSpawner, fSpawnCount);
+        }
+
     }
 
-    void Spawn()
+    void Spawn(GameObject obj, Vector3 spawner, int spawnCount)
     {
         for (int i = 0; i < spawnCount; i++)
         {
-            Instantiate(enemy,spawner,Quaternion.identity);
+            Instantiate(obj, spawner, Quaternion.identity);
         }
     }
 }
