@@ -55,7 +55,7 @@ public class LoadController : MonoBehaviour
         {
             for (int j = 0; j < LoadZ.Count; j++)
             {
-                CoodinateList.Add(new Vector3(LoadX[i], Load.transform.position.y + Load.transform.localScale.y, LoadZ[j]));
+                CoodinateList.Add(new Vector3(LoadX[i], Load.transform.position.y+1.3f + Load.transform.localScale.y, LoadZ[j]));
             }
         }
         for (int i = CoodinateList.Count - 1; i > 0; i--)
