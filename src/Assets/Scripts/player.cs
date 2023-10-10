@@ -120,7 +120,7 @@ public class player : MonoBehaviour
     private void FixedUpdate()
     {
 
-        my_Transform.position += transform.forward * my_forward_speed;
+       // my_Transform.position += transform.forward * my_forward_speed;
 
 
 
