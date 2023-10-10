@@ -10,10 +10,14 @@ public class EndCorner : MonoBehaviour
     TurnStick TurnStick;
     [SerializeField] GameObject player;
     [SerializeField] int turntimes_complete = 10;
+    private LoadDirector Director;
 
     // Start is called before the first frame update
     void Start()
     {
+        Director = GameObject.Find("LoadDirector").GetComponent<LoadDirector>();
+        corner_start = Director.StartTurn;
+        player = GameObject.Find("Player");
         TurnStick = corner_start.GetComponent<TurnStick>();
         player_script = player.GetComponent<player>();
 

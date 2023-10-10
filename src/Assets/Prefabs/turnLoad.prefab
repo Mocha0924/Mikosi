@@ -232,8 +232,9 @@ GameObject:
   - component: {fileID: 2165614045004099335}
   - component: {fileID: 8648731151436857474}
   - component: {fileID: 8879891200686925378}
+  - component: {fileID: 5129215361235602870}
   m_Layer: 0
-  m_Name: LoadPre
+  m_Name: turnLoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,8 +273,8 @@ MonoBehaviour:
   begin: {fileID: 3480607384160745225}
   Left: {fileID: 7041214373511118500}
   Right: {fileID: 1901086022595199852}
-  Load: {fileID: 8175076051680745164}
-  TurnLoad: {fileID: 8175076051680745164, guid: d30564fa4e31cca46ac2a1d11a884dac, type: 3}
+  Load: {fileID: 8175076051680745164, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
+  TurnLoad: {fileID: 8175076051680745164}
   EndTurnLoad: {fileID: 8175076051680745164, guid: c4bcddf61d9175543acd4d28888ff702, type: 3}
   people: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
   food: {fileID: 7748136802681959631, guid: 4034c82ba4cc6e94f890d40544a4402d, type: 3}
@@ -296,6 +297,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5129215361235602870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8175076051680745164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4242a065e50d6c5488726d11ca137f76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  in_corner: 0
+  turn_times: 0
 --- !u!1 &8214509148230272523
 GameObject:
   m_ObjectHideFlags: 0
