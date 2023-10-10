@@ -19,6 +19,9 @@ public class player_move : MonoBehaviour
     [SerializeField] float slide_power = 2f;
     float Input_Horizontal;
     float old_Horizontal;
+    float Input_Jump;
+    float old_Jump;
+    float Input_Jump_once;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +41,9 @@ public class player_move : MonoBehaviour
     void Update()
     {
         Input_Horizontal = Input.GetAxis("Horizontal");
+        Input_Jump = Input.GetAxis("Jump");
 
+        Input_Jump_once = old_Jump - Input_Jump; 
         //my_Rigidbody.velocity = new Vector3(0, -gravity, my_forward_speed);
 
 
@@ -105,7 +110,7 @@ public class player_move : MonoBehaviour
 
         force.y = -gravity;
 
-        if (Input.GetKeyUp(KeyCode.Space) && transform.position.y <= 2)
+        if (Input_Jump_once == 1 && transform.position.y <= 2)
         {
             float now_velocity_x = my_Rigidbody.velocity.x;
             float now_velocity_z = my_Rigidbody.velocity.z;
@@ -116,8 +121,9 @@ public class player_move : MonoBehaviour
         force *= Time.deltaTime;
         my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
-        Debug.Log(Horizon_move);
+        Debug.Log(Input_Jump_once);
         old_Horizontal = Input_Horizontal;
+        old_Jump = Input_Jump;
 
 
     }
@@ -137,21 +143,23 @@ public class player_move : MonoBehaviour
 
         string Horizon_move = "0";
 
-        if (old == 0)
+        
+        if (old > Input_Horizontal)
+        {
+            if (Input_Horizontal > 0) { Horizon_move = "dontmove"; }
+            else { Horizon_move = "leftmove"; }
+        }
+        else if (old < Input_Horizontal)
+        {
+            if (Input_Horizontal < 0){Horizon_move = "dontmove";}
+            else { Horizon_move = "rightmove"; }
+        }
+        else if (old == Input_Horizontal)
         {
             if (input == 0) { Horizon_move = "dontmove"; }
             else if (input < 0) { Horizon_move = "leftmove"; }
             else if (input > 0) { Horizon_move = "rightmove"; }
 
-        }
-        else if (old < 0)
-        {
-            if(input == 0) { Horizon_move = "s"; }
-            Horizon_move = "leftmove";
-        }
-        else if (old > 0)
-        {
-            Horizon_move = "rightmove";
         }
 
         return Horizon_move;
