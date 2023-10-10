@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   my_Thrust: 2000
   my_Thrust_Max: 70
-  my_forward_speed: 1
+  my_forward_speed: 0
   jumpVector: 20
   gravity: 1000
   slide_power: 150

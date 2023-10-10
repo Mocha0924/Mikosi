@@ -6,7 +6,7 @@ public class EndCorner : MonoBehaviour
 {
 
     public GameObject corner_start;
-    move_kari move_Kari;
+    player player_script;
     TurnStick TurnStick;
     [SerializeField] GameObject player;
     [SerializeField] int turntimes_complete = 10;
@@ -15,7 +15,7 @@ public class EndCorner : MonoBehaviour
     void Start()
     {
         TurnStick = corner_start.GetComponent<TurnStick>();
-        move_Kari = player.GetComponent<move_kari>();
+        player_script = player.GetComponent<player>();
 
     }
 
@@ -31,8 +31,8 @@ public class EndCorner : MonoBehaviour
         if (TurnStick.turn_times >= turntimes_complete)
         {
 
-            if (gameObject.tag == "R") { move_Kari.turn_complete_R = true; }
-            else { move_Kari.turn_complete_L = true; }
+            if (gameObject.tag == "R") { player_script.turn_complete_R = true; }
+            else { player_script.turn_complete_L = true; }
 
             TurnStick.turn_times = 0;
         }
