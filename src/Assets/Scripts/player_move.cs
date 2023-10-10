@@ -44,15 +44,11 @@ public class player_move : MonoBehaviour
         Input_Jump = Input.GetAxis("Jump");
 
         Input_Jump_once = old_Jump - Input_Jump; 
-        //my_Rigidbody.velocity = new Vector3(0, -gravity, my_forward_speed);
-
 
         if (Input_Horizontal - old_Horizontal > 0) { Horizontal_controll = 1; }
         else if (Input_Horizontal - old_Horizontal < 0) { Horizontal_controll = -1; }
         else if ((Input_Horizontal < 1 && Input_Horizontal > -1)) { Horizontal_controll = 0; }
 
-        //if (-0.9f > Input_Horizontal && Input_Horizontal > -0.8f) { Input_Horizontal = 0; }
-        //else { Input_Horizontal = -1; }
 
         Horizon_move = Horizontal_Contlroll(old_Horizontal, Input_Horizontal);
 
@@ -74,8 +70,6 @@ public class player_move : MonoBehaviour
         else if (Horizon_move == "rightmove")
         {
 
-            // if (0.9f > Input_Horizontal && Input_Horizontal > 0.8f) { Input_Horizontal = 0; }
-            // else { Input_Horizontal = 1; }
 
             if (my_Rigidbody.velocity.x < my_Thrust_Max)
             {
