@@ -15,6 +15,7 @@ public class LoadController : MonoBehaviour
     [SerializeField] GameObject people;
     [SerializeField] GameObject food;
     [SerializeField] private LoadDirector Director;
+    private player player;
     private Vector3 SpawnPosition = Vector3.zero;
     private List<Vector3> CoodinateList = new List<Vector3>();
     public List<GameObject> ObjectList = new List<GameObject>();
@@ -24,6 +25,7 @@ public class LoadController : MonoBehaviour
     [SerializeField] private int PeopleGenerationMax;
     [SerializeField] private int FoodGenerationMin;
     [SerializeField] private int FoodGenerationMax;
+    private bool HitCheck = false;
     public enum LoadType
     { 
         Up,
@@ -35,6 +37,7 @@ public class LoadController : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Player").GetComponent<player>();
         Director = GameObject.Find("LoadDirector").GetComponent<LoadDirector>();
         Director.LoadPlus(this.gameObject);
         PeopleListGenerator();
@@ -42,10 +45,18 @@ public class LoadController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.gameObject.tag == "Player")
         {
-      
-            if(Director.turnCheck)
+            switch (Angle)
+            {
+                case LoadType.Up: player.Angle = player.playerType.Up ; break;
+                case LoadType.Right: player.Angle = player.playerType.Right; break;
+                case LoadType.Down: player.Angle = player.playerType.Down; break;
+                case LoadType.Left: player.Angle = player.playerType.Left; break;
+                default: break;
+            }
+            if (Director.turnCheck)
             {
                 if (Director.RightTurn)
                 {
