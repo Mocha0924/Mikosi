@@ -11,6 +11,7 @@ public class EndCorner : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] int turntimes_complete = 10;
     private LoadDirector Director;
+    bool hit_check = true;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,8 @@ public class EndCorner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        
+        if (other.gameObject.tag == "Player" || hit_check)
         {
             TurnStick.in_corner = false;
             if (TurnStick.turn_times >= turntimes_complete)
@@ -45,6 +47,8 @@ public class EndCorner : MonoBehaviour
             {
                 Debug.Log("failed");
             }
+
+            hit_check = false;
         }
           
 

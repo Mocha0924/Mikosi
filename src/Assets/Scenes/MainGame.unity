@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 2054547882}
   - component: {fileID: 2054547883}
   - component: {fileID: 2054547888}
+  - component: {fileID: 2054547889}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -486,7 +487,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054547881}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c55fe5cfb72556a4ea6575f95776ff2a, type: 3}
   m_Name: 
@@ -500,6 +501,7 @@ MonoBehaviour:
   turn_complete_R: 0
   turn_complete_L: 0
   Turn_speed: 1
+  Angle: 0
 --- !u!54 &2054547883
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -617,6 +619,18 @@ MonoBehaviour:
   peopleCount: 0
   isFever: 0
   scaleCorrection: 4
+--- !u!114 &2054547889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054547881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca98f34a5496f9d4599feb0640409244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &233556985597309139 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8648731151436857474, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
