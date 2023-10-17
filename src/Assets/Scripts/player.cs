@@ -133,9 +133,9 @@ public class player : MonoBehaviour
         }
         else if (turn_complete_L)
         {
-            turn_times += Turn_speed;
+            turn_times -= Turn_speed;
 
-            transform.rotation = Quaternion.Euler(0, -turn_times, 0);
+            transform.rotation = Quaternion.Euler(0, turn_times, 0);
 
             if (turn_times % 90 == 0)
             {
