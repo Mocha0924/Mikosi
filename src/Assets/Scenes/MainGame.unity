@@ -483,10 +483,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aea05032335434a9dd472fb13a4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearConditions: 0
+  clearConditions: 100
   AfterPeople: {fileID: 999420051843794743, guid: dae0bcd378ed8714abc2eaeefd432e74, type: 3}
   aPeopleParent: {fileID: 1625726589}
-  touchFoodDecrPeople: 10
+  touchFoodDecrPeople: 6
   peopleCount: 0
   isFever: 0
 --- !u!114 &233556985597309139 stripped
