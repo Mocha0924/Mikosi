@@ -9,6 +9,7 @@ public class player : MonoBehaviour
     Transform my_Transform;
     Vector3 force;
     Vector3 pos;
+    LoadController load;
     string Horizon_move;
     public float my_Thrust = 20f;
     public float my_Thrust_Max = 20f;
@@ -27,6 +28,16 @@ public class player : MonoBehaviour
     public bool turn_complete_L = false;
     [SerializeField] int Turn_speed = 1;
     float turn_times = 0f;
+
+
+    public enum playerType
+    {
+        Up,
+        Right,
+        Down,
+        Left
+    }
+    public playerType Angle;
 
     int Horizontal_controll;
     // Start is called before the first frame update
@@ -57,10 +68,227 @@ public class player : MonoBehaviour
 
         Horizon_move = Horizontal_Contlroll(old_Horizontal, Input_Horizontal);
 
+
+        switch (Angle)
+        {
+            case playerType.Up:
+                {
+
+                    if (Horizon_move == "leftmove")
+                    {
+
+                        if (my_Rigidbody.velocity.x > -my_Thrust_Max)
+                        {
+                            force = new Vector3(-my_Thrust, 0, 0);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+
+                        }
+                    }
+                    else if (Horizon_move == "rightmove")
+                    {
+
+
+                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        {
+                            force = new Vector3(my_Thrust, 0, 0);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+                        }
+                    }
+                    else
+                    {
+
+                        if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
+                        {
+
+                            float now_velocity_y = my_Rigidbody.velocity.y;
+                            float now_velocity_z = my_Rigidbody.velocity.z;
+
+                            my_Rigidbody.velocity = new Vector3(0, now_velocity_y, now_velocity_z);
+
+
+
+                        }
+                        else
+                        {
+                            force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
+                        }
+
+                    }
+
+                    break;
+                }
+
+            case playerType.Down:
+                {
+
+                    if (Horizon_move == "leftmove")
+                    {
+
+                        if (my_Rigidbody.velocity.x > -my_Thrust_Max)
+                        {
+                            force = new Vector3(my_Thrust, 0, 0);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+
+                        }
+                    }
+                    else if (Horizon_move == "rightmove")
+                    {
+
+
+                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        {
+                            force = new Vector3(-my_Thrust, 0, 0);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+                        }
+                    }
+                    else
+                    {
+
+                        if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
+                        {
+
+                            float now_velocity_y = my_Rigidbody.velocity.y;
+                            float now_velocity_z = my_Rigidbody.velocity.z;
+
+                            my_Rigidbody.velocity = new Vector3(0, now_velocity_y, now_velocity_z);
+
+
+
+                        }
+                        else
+                        {
+                            force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
+                        }
+
+                    }
+
+                    break;
+                }
+
+            case playerType.Left:
+                {
+
+                    if (Horizon_move == "leftmove")
+                    {
+
+                        if (my_Rigidbody.velocity.x > -my_Thrust_Max)
+                        {
+                            force = new Vector3(0, 0, -my_Thrust);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+
+                        }
+                    }
+                    else if (Horizon_move == "rightmove")
+                    {
+
+
+                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        {
+                            force = new Vector3(0, 0, my_Thrust);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+                        }
+                    }
+                    else
+                    {
+
+                        if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
+                        {
+
+                            float now_velocity_y = my_Rigidbody.velocity.y;
+                            float now_velocity_x = my_Rigidbody.velocity.x;
+
+                            my_Rigidbody.velocity = new Vector3(now_velocity_x, now_velocity_y, 0);
+
+
+
+                        }
+                        else
+                        {
+                            force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
+                        }
+
+                    }
+
+                    break;
+                }
+
+            case playerType.Right:
+                {
+
+                    if (Horizon_move == "leftmove")
+                    {
+
+                        if (my_Rigidbody.velocity.x > -my_Thrust_Max)
+                        {
+                            force = new Vector3(0, 0, my_Thrust);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+
+                        }
+                    }
+                    else if (Horizon_move == "rightmove")
+                    {
+
+
+                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        {
+                            force = new Vector3(0, 0, -my_Thrust);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+                        }
+                    }
+                    else
+                    {
+
+                        if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
+                        {
+
+                            float now_velocity_y = my_Rigidbody.velocity.y;
+                            float now_velocity_x = my_Rigidbody.velocity.x;
+
+                            my_Rigidbody.velocity = new Vector3(now_velocity_x, now_velocity_y, 0);
+
+
+
+                        }
+                        else
+                        {
+                            force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
+                        }
+
+                    }
+
+                    break;
+                }
+
+        }
+
+
+
         if (Horizon_move == "leftmove")
         {
-
-
 
             if (my_Rigidbody.velocity.x > -my_Thrust_Max)
             {
@@ -120,7 +348,6 @@ public class player : MonoBehaviour
         force *= Time.deltaTime;
         my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
-        Debug.Log(Input_Jump_once);
         old_Horizontal = Input_Horizontal;
         old_Jump = Input_Jump;
 
