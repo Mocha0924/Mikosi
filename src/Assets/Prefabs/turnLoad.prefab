@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 5129215361235602870}
   m_Layer: 0
   m_Name: turnLoad
-  m_TagString: Untagged
+  m_TagString: L
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

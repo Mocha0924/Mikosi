@@ -30,21 +30,23 @@ public class EndCorner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        TurnStick.in_corner = false;
-
-        if (TurnStick.turn_times >= turntimes_complete)
+        if (other.gameObject.tag == "Player")
         {
+            TurnStick.in_corner = false;
+            if (TurnStick.turn_times >= turntimes_complete)
+            {
 
-            if (gameObject.tag == "R") { player_script.turn_complete_R = true; }
-            else { player_script.turn_complete_L = true; }
+                if (gameObject.tag == "R") { player_script.turn_complete_R = true; }
+                else { player_script.turn_complete_L = true; }
 
-            TurnStick.turn_times = 0;
+                TurnStick.turn_times = 0;
+            }
+            else
+            {
+                Debug.Log("failed");
+            }
         }
-        else
-        {
-            Debug.Log("failed");
-        }
-
+          
 
     }
 

@@ -73,7 +73,7 @@ public class player : MonoBehaviour
         }
 
 
-        Debug.Log(Input_Horizontal);
+       // Debug.Log(Input_Horizontal);
 
         //Debug.Log(my_Rigidbody.velocity);
 
@@ -120,10 +120,6 @@ public class player : MonoBehaviour
     private void FixedUpdate()
     {
 
-       // my_Transform.position += transform.forward * my_forward_speed;
-
-
-
         if (turn_complete_R)
         {
             turn_times += Turn_speed;
@@ -146,8 +142,10 @@ public class player : MonoBehaviour
                 turn_complete_L = false;
             }
         }
+        else
+            my_Transform.position += transform.forward * my_forward_speed;
 
-        my_Transform.position += new Vector3(0, 0, my_forward_speed);
+        //my_Transform.position += new Vector3(0, 0, my_forward_speed);
 
 
     }
