@@ -25,7 +25,7 @@ public class LoadController : MonoBehaviour
     [SerializeField] private int PeopleGenerationMax;
     [SerializeField] private int FoodGenerationMin;
     [SerializeField] private int FoodGenerationMax;
-    private bool HitCheck = false;
+    private bool HitCheck = true;
     public enum LoadType
     { 
         Up,
@@ -45,102 +45,105 @@ public class LoadController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-       
-        if (other.gameObject.tag == "Player")
+       if(HitCheck)
         {
-            switch (Angle)
+            if (other.gameObject.tag == "Player")
             {
-                case LoadType.Up: player.Angle = player.playerType.Up ; break;
-                case LoadType.Right: player.Angle = player.playerType.Right; break;
-                case LoadType.Down: player.Angle = player.playerType.Down; break;
-                case LoadType.Left: player.Angle = player.playerType.Left; break;
-                default: break;
-            }
-            if (Director.turnCheck)
-            {
-                if (Director.RightTurn)
+                switch (Angle)
                 {
-                    TurnStartLoad = this.gameObject;
-                    Director.StartTurnLoad(TurnStartLoad);
-                    LoadRotate = gameObject.transform.rotation;
-                    Quaternion q = Quaternion.Euler(0f, 90f, 0f);
-                    LoadRotate *= q;
-                    GameObject newLoad = EndTurnLoad;
-                    switch (Angle)
+                    case LoadType.Up: player.Angle = player.playerType.Up; break;
+                    case LoadType.Right: player.Angle = player.playerType.Right; break;
+                    case LoadType.Down: player.Angle = player.playerType.Down; break;
+                    case LoadType.Left: player.Angle = player.playerType.Left; break;
+                    default: break;
+                }
+                if (Director.turnCheck)
+                {
+                    if (Director.RightTurn)
                     {
-                        case LoadType.Up: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, -20), LoadRotate); ; break;
-                        case LoadType.Right: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
-                        case LoadType.Down: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                        case LoadType.Left: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                        default: Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
+                        TurnStartLoad = this.gameObject;
+                        Director.StartTurnLoad(TurnStartLoad);
+                        LoadRotate = gameObject.transform.rotation;
+                        Quaternion q = Quaternion.Euler(0f, 90f, 0f);
+                        LoadRotate *= q;
+                        GameObject newLoad = EndTurnLoad;
+                        switch (Angle)
+                        {
+                            case LoadType.Up: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, -20), LoadRotate); ; break;
+                            case LoadType.Right: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
+                            case LoadType.Down: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
+                            case LoadType.Left: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
+                            default: Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
+                        }
+                        newLoad.gameObject.tag = "R";
+                        LoadController loadcontroller = newLoad.GetComponent<LoadController>();
+                        if (Angle == LoadType.Left)
+                            loadcontroller.Angle = LoadType.Up;
+                        else
+                            loadcontroller.Angle = Angle + 1;
+                        Director.turnCheck = false;
+                        Director.turnCount = 0;
                     }
-                    newLoad.gameObject.tag = "R";
-                    LoadController loadcontroller = newLoad.GetComponent<LoadController>();
-                    if (Angle == LoadType.Left)
-                        loadcontroller.Angle = LoadType.Up;
                     else
-                        loadcontroller.Angle = Angle + 1;
-                    Director.turnCheck = false;
-                    Director.turnCount = 0;
+                    {
+                        TurnStartLoad = this.gameObject;
+                        Director.StartTurnLoad(TurnStartLoad);
+                        LoadRotate = gameObject.transform.rotation;
+                        Quaternion q = Quaternion.Euler(0f, -90f, 0f);
+                        LoadRotate *= q;
+                        GameObject newLoad = EndTurnLoad;
+                        switch (Angle)
+                        {
+                            case LoadType.Up: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
+                            case LoadType.Right: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
+                            case LoadType.Down: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, -20), LoadRotate); ; break;
+                            case LoadType.Left: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
+                            default: Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
+                        }
+                        newLoad.gameObject.tag = "L";
+
+                        LoadController loadcontroller = newLoad.GetComponent<LoadController>();
+                        if (Angle == LoadType.Up)
+                            loadcontroller.Angle = LoadType.Left;
+                        else
+                            loadcontroller.Angle = Angle - 1;
+                        Director.turnCheck = false;
+                        Director.turnCount = 0;
+                    }
+
+
+                }
+                else if (Director.turnCount >= 0)
+                {
+                    int rand = Random.Range(0, 2);
+                    if (rand > 0)
+                        Director.RightTurn = true;
+                    else
+                        Director.RightTurn = false;
+                    LoadRotate = gameObject.transform.rotation;
+                    GameObject newLoad = Instantiate(TurnLoad, end.gameObject.transform.position, LoadRotate);
+                    if (Director.RightTurn)
+                        newLoad.gameObject.tag = "R";
+                    else
+                        newLoad.gameObject.tag = "L";
+                    LoadController loadcontroller = newLoad.GetComponent<LoadController>();
+                    loadcontroller.Angle = Angle;
+                    Director.turnCheck = true;
+
                 }
                 else
                 {
-                    TurnStartLoad = this.gameObject;
-                      Director.StartTurnLoad(TurnStartLoad);
-                      LoadRotate = gameObject.transform.rotation;
-                      Quaternion q = Quaternion.Euler(0f, -90f, 0f);
-                      LoadRotate *= q;
-                      GameObject newLoad = EndTurnLoad;
-                      switch (Angle)
-                      { 
-                          case LoadType.Up: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                          case LoadType.Right: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                          case LoadType.Down: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, -20), LoadRotate); ; break;
-                          case LoadType.Left: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
-                          default: Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
-                      }
-                      newLoad.gameObject.tag = "L";
-
-                      LoadController loadcontroller = newLoad.GetComponent<LoadController>();
-                      if (Angle == LoadType.Up)
-                          loadcontroller.Angle = LoadType.Left;
-                      else
-                          loadcontroller.Angle = Angle - 1;
-                      Director.turnCheck = false;
-                      Director.turnCount = 0;
+                    LoadRotate = gameObject.transform.rotation;
+                    GameObject newLoad = Instantiate(Load, end.gameObject.transform.position, LoadRotate);
+                    LoadController loadcontroller = newLoad.GetComponent<LoadController>();
+                    loadcontroller.Angle = Angle;
+                    Director.turnCount++;
                 }
 
-
+                HitCheck = false;
             }
-            else if (Director.turnCount >= 0)
-            {
-                int rand = Random.Range(0, 2);
-                if (rand > 0)
-                    Director.RightTurn = true;
-                else
-                    Director.RightTurn = false;
-                LoadRotate = gameObject.transform.rotation;
-                GameObject newLoad =  Instantiate(TurnLoad, end.gameObject.transform.position, LoadRotate);
-                if(Director.RightTurn)
-                    newLoad.gameObject.tag = "R";
-                else
-                    newLoad.gameObject.tag = "L";
-                LoadController loadcontroller = newLoad.GetComponent<LoadController>();
-                loadcontroller.Angle = Angle;
-                Director.turnCheck = true;
-
-            }
-            else
-            {
-                LoadRotate = gameObject.transform.rotation;
-                GameObject newLoad = Instantiate(Load, end.gameObject.transform.position, LoadRotate);
-                LoadController loadcontroller = newLoad.GetComponent<LoadController>();
-                loadcontroller.Angle = Angle;
-                Director.turnCount++;
-            }
-           
-           
         }
+        
        
     }
     private void PeopleListGenerator()
