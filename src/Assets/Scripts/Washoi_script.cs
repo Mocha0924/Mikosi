@@ -20,7 +20,7 @@ public class Washoi_script : MonoBehaviour
 
         if(Input_washoi < 0)
         {
-            if()
+           // if()
             GameObject.Find("LoadDirector");
         }
 

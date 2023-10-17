@@ -316,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corner_start: {fileID: 0}
   player: {fileID: 0}
-  turntimes_complete: 0
+  turntimes_complete: 10
 --- !u!1 &8214509148230272523
 GameObject:
   m_ObjectHideFlags: 0

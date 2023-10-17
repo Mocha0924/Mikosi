@@ -32,7 +32,7 @@ public class EndCorner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if (other.gameObject.tag == "Player" || hit_check)
+        if (other.gameObject.tag == "Player" && hit_check)
         {
             TurnStick.in_corner = false;
             if (TurnStick.turn_times >= turntimes_complete)
