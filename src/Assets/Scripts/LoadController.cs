@@ -20,6 +20,10 @@ public class LoadController : MonoBehaviour
     public List<GameObject> ObjectList = new List<GameObject>();
     public GameObject TurnStartLoad;
     Quaternion LoadRotate;
+    [SerializeField] private int PeopleGenerationMin;
+    [SerializeField] private int PeopleGenerationMax;
+    [SerializeField] private int FoodGenerationMin;
+    [SerializeField] private int FoodGenerationMax;
     public enum LoadType
     { 
         Up,
@@ -43,16 +47,40 @@ public class LoadController : MonoBehaviour
       
             if(Director.turnCheck)
             {
-                TurnStartLoad = this.gameObject;
-                Director.StartTurnLoad(TurnStartLoad);
-                LoadRotate = gameObject.transform.rotation;
-                Quaternion q = Quaternion.Euler(0f, 90f, 0f);
-                LoadRotate*=q;
-                GameObject newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position, LoadRotate);
-                LoadController loadcontroller = newLoad.GetComponent<LoadController>();
-                loadcontroller.Angle = Angle+1;
-                Director.turnCheck = false;
-                Director.turnCount = 0;
+                //if()
+                //{
+                //    TurnStartLoad = this.gameObject;
+                //    Director.StartTurnLoad(TurnStartLoad);
+                //    LoadRotate = gameObject.transform.rotation;
+                //    Quaternion q = Quaternion.Euler(0f, 90f, 0f);
+                //    LoadRotate *= q;
+                //    GameObject newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate);
+                //    LoadController loadcontroller = newLoad.GetComponent<LoadController>();
+                //    if (Angle == LoadType.Left)
+                //        loadcontroller.Angle = LoadType.Up;
+                //     else
+                //        loadcontroller.Angle = Angle + 1;
+                //    Director.turnCheck = false;
+                //    Director.turnCount = 0;
+                //}
+                //else
+                //{
+                      TurnStartLoad = this.gameObject;
+                      Director.StartTurnLoad(TurnStartLoad);
+                      LoadRotate = gameObject.transform.rotation;
+                      Quaternion q = Quaternion.Euler(0f, -90f, 0f);
+                      LoadRotate *= q;
+                      GameObject newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate);
+                      LoadController loadcontroller = newLoad.GetComponent<LoadController>();
+                      if (Angle == LoadType.Up)
+                          loadcontroller.Angle = LoadType.Left;
+                      else
+                          loadcontroller.Angle = Angle - 1;
+                      Director.turnCheck = false;
+                      Director.turnCount = 0;
+                //}
+
+
             }
             else if (Director.turnCount >= 0)
             {
@@ -146,7 +174,7 @@ public class LoadController : MonoBehaviour
             {
                 for (int j = 0; j < LoadZ.Count; j++)
                 {
-                    CoodinateList.Add(new Vector3(LoadX[i], Load.transform.position.y + 1.3f + Load.transform.localScale.y, LoadZ[j]));
+                    CoodinateList.Add(new Vector3(LoadX[i], this.transform.position.y+1.3f, LoadZ[j]));
                 }
             }
         }
@@ -156,7 +184,7 @@ public class LoadController : MonoBehaviour
             {
                 for (int j = 0; j < LoadX.Count; j++)
                 {
-                    CoodinateList.Add(new Vector3(LoadZ[i], Load.transform.position.y + 1.3f + Load.transform.localScale.y, LoadX[j]));
+                    CoodinateList.Add(new Vector3(LoadZ[i], this.transform.position.y+1.3f, LoadX[j]));
                 }
             }
         }
@@ -171,13 +199,16 @@ public class LoadController : MonoBehaviour
     }
     public void Generation()
     {
-        int rand = Random.Range(10, 20);
-        for (int i = 0; i < rand; i++)
+        if (CoodinateList == null)
+            return;
+        int Peoplerand = Random.Range(PeopleGenerationMin, PeopleGenerationMax+1);
+        for (int i = 0; i < Peoplerand; i++)
         {
            GameObject PeoplePre =  Instantiate(people, CoodinateList[i], Quaternion.identity);
            ObjectList.Add(PeoplePre);
         }
-        for (int i = rand ; i < 10+rand; i++)
+        int Foodrand = Random.Range(FoodGenerationMin,FoodGenerationMax + 1);
+        for (int i = Peoplerand ; i < Peoplerand+Foodrand; i++)
         {
             GameObject FoodPre = Instantiate(food, CoodinateList[i], Quaternion.identity);
             ObjectList.Add(FoodPre);
