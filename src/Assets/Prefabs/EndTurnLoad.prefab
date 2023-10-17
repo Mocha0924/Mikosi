@@ -277,10 +277,15 @@ MonoBehaviour:
   TurnLoad: {fileID: 8175076051680745164, guid: d30564fa4e31cca46ac2a1d11a884dac, type: 3}
   EndTurnLoad: {fileID: 8175076051680745164}
   people: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
-  food: {fileID: 7748136802681959631, guid: 4034c82ba4cc6e94f890d40544a4402d, type: 3}
+  food: {fileID: 817022640060111432, guid: e8680a1605fd5a1488324a9b68ffff8e, type: 3}
   Director: {fileID: 0}
   ObjectList: []
   TurnStartLoad: {fileID: 0}
+  PeopleGenerationMin: 5
+  PeopleGenerationMax: 10
+  FoodGenerationMin: 1
+  FoodGenerationMax: 3
+  Angle: 0
 --- !u!54 &8879891200686925378
 Rigidbody:
   m_ObjectHideFlags: 0
