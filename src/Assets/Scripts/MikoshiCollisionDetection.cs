@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MikoshiCollisionDetection : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] int peopleCount;
     [SerializeField] bool isFever;
 
+    [SerializeField] int scaleCorrection;
     int behindPeopleCount;
     int behindPeopleRow;
     int rowMax;
@@ -33,6 +35,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         behindPeopleRow = 0;
         behindMax = 9;
         rowMax = (clearConditions - 18) / 9;
+        //余りがある場合、もう1列分追加
         if ((clearConditions - 18) % 9 != 0) { rowMax++; }
         aPeopleParents= new GameObject[rowMax];
 
@@ -45,7 +48,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             cloneParent.transform.localPosition = pos;
             cloneParent.transform.localRotation = Quaternion.identity;
 
-            pos.x = -1.3f - 0.6f * i;
+            pos.z = -1.3f - 0.6f * i;
             aPeopleParents[i] = cloneParent;
         }
     }
@@ -94,20 +97,20 @@ public class MikoshiCollisionDetection : MonoBehaviour
         {
             if (peopleCount > 6 && peopleCount <= 12)
             {
-                if (peopleCount % 2 == 0) { pos.z = -1.6f; }
-                else { pos.z = 1.6f; }
+                if (peopleCount % 2 == 0) { pos.x = -1.6f * scaleCorrection; }
+                else { pos.x = 1.6f * scaleCorrection; }
             }
             else if (peopleCount > 12 && peopleCount <= 18)
             {
-                if (peopleCount % 2 == 0) { pos.z = -2.2f; }
-                else { pos.z = 2.2f; }
+                if (peopleCount % 2 == 0) { pos.x = -2.2f * scaleCorrection; }
+                else { pos.x = 2.2f * scaleCorrection; }
             }
 
             if (peopleCount == 7 || peopleCount == 8 ||
-                peopleCount == 13 || peopleCount == 14) { pos.x = 0.5f; }
+                peopleCount == 13 || peopleCount == 14) { pos.z = 0.5f * scaleCorrection; }
             else if (peopleCount == 9 || peopleCount == 10 ||
-                peopleCount == 15 || peopleCount == 16) { pos.x = -0.1f; }
-            else { pos.x = -0.75f; }
+                peopleCount == 15 || peopleCount == 16) { pos.z = -0.1f * scaleCorrection; }
+            else { pos.z = -0.75f * scaleCorrection; }
         }
         //神輿の後ろの人
         else if (peopleCount > 18 && peopleCount <= clearConditions)
@@ -119,39 +122,39 @@ public class MikoshiCollisionDetection : MonoBehaviour
             switch (behindPeopleCount % 9)
             {
                 case 1:
-                    pos.z = 0f;
+                    pos.x = 0f * scaleCorrection;
                     break;
 
                 case 2:
-                    pos.z = 0.6f;
+                    pos.x = 0.6f * scaleCorrection;
                     break;
 
                 case 3:
-                    pos.z = -0.6f;
+                    pos.x = -0.6f * scaleCorrection;
                     break;
 
                 case 4:
-                    pos.z = 1.2f;
+                    pos.x = 1.2f * scaleCorrection;
                     break;
 
                 case 5:
-                    pos.z = -1.2f;
+                    pos.x = -1.2f * scaleCorrection;
                     break;
 
                 case 6:
-                    pos.z = 1.8f;
+                    pos.x = 1.8f * scaleCorrection;
                     break;
 
                 case 7:
-                    pos.z = -1.8f;
+                    pos.x = -1.8f * scaleCorrection;
                     break;
 
                 case 8:
-                    pos.z = 2.4f;
+                    pos.x = 2.4f * scaleCorrection;
                     break;
 
                 case 0:
-                    pos.z = -2.4f;
+                    pos.x = -2.4f * scaleCorrection;
                     break;
             }
         }
@@ -193,38 +196,29 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("右側");
 
+        bool isR = true;
+
         int decrCount = 0;
 
-        for (int i = behindPeopleRow; i >= 0; i--)
-        {
-            int childCount = aPeopleParents[i].transform.childCount;
+        DecrPeople(isR, ref decrCount);
 
-            for (int j = 0; j < childCount; j++)
-            {
-                Transform childTransform = aPeopleParents[i].transform.GetChild(j);
-                Vector3 childObj = childTransform.localPosition;
+        //減った部分に後ろから人を補充する
 
-                float z = childObj.z;
-
-                if (z <= -1.2f)
-                {
-                    Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
-                    peopleCount--;
-                    decrCount++;                
-                }
-            }
-        }
-
-        Debug.Log("peopleCount:" + peopleCount);
-        Debug.Log("decrCount:" + decrCount);
     }
 
     public void LeftHit()
     {
         Debug.Log("左側");
 
+        bool isR = false;
+
         int decrCount = 0;
 
+        DecrPeople(isR, ref decrCount);
+    }
+
+    void DecrPeople(bool isR, ref int decrCount)
+    {
         for (int i = behindPeopleRow; i >= 0; i--)
         {
             int childCount = aPeopleParents[i].transform.childCount;
@@ -234,9 +228,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 Transform childTransform = aPeopleParents[i].transform.GetChild(j);
                 Vector3 childObj = childTransform.localPosition;
 
-                float z = childObj.z;
+                float x = childObj.x;
 
-                if (z >= 1.2f)
+                if ((isR == true) && (x >= 1.2f * scaleCorrection) || 
+                    (isR == false) && (x <= -1.2f * scaleCorrection))
                 {
                     Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
                     peopleCount--;
@@ -244,7 +239,6 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 }
             }
         }
-
         Debug.Log("peopleCount:" + peopleCount);
         Debug.Log("decrCount:" + decrCount);
     }
