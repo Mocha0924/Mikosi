@@ -28,14 +28,18 @@ public class TurnStick : MonoBehaviour
         }
 
 
-        Debug.Log(turn_times);
+       // Debug.Log(turn_times);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger");
-        in_corner = true;
-        turn_times = 0;
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("trigger");
+            in_corner = true;
+            turn_times = 0;
+        }
+       
     }
 
     void turnStick(bool RorL)

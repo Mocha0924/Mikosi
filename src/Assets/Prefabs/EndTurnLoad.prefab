@@ -126,8 +126,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 9.019563, z: 0.25737166}
-  m_Center: {x: 0, y: 3.9890873, z: -0.17739229}
+  m_Size: {x: 0.3123856, y: 9.019563, z: 0.6537466}
+  m_Center: {x: -0.01926416, y: 3.9890873, z: -0.15134434}
 --- !u!1 &2494231206801007170
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 27863841701428050}
   m_Layer: 0
   m_Name: EndTurnLoad
-  m_TagString: Untagged
+  m_TagString: L
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   corner_start: {fileID: 0}
   player: {fileID: 0}
-  turntimes_complete: 10
+  turntimes_complete: 0
 --- !u!1 &8214509148230272523
 GameObject:
   m_ObjectHideFlags: 0
