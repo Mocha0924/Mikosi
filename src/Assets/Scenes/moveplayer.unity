@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 828795806}
   - component: {fileID: 828795805}
   - component: {fileID: 828795810}
+  - component: {fileID: 828795811}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -438,17 +439,38 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828795804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c55fe5cfb72556a4ea6575f95776ff2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   my_Thrust: 2000
   my_Thrust_Max: 70
-  my_forward_speed: 1
+  my_forward_speed: 0
   jumpVector: 20
   gravity: 1000
   slide_power: 150
+  turn_complete_R: 0
+  turn_complete_L: 0
+  Turn_speed: 1
+--- !u!114 &828795811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828795804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cad47854483abe44b46c916463c0fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  my_Thrust: 2000
+  my_Thrust_Max: 70
+  my_forward_speed: 0
+  jumpVector: 20
+  gravity: 1000
+  slide_power: 100
 --- !u!1001 &927210335
 PrefabInstance:
   m_ObjectHideFlags: 0

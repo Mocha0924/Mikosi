@@ -344,11 +344,11 @@ GameObject:
   - component: {fileID: 2054547886}
   - component: {fileID: 2054547885}
   - component: {fileID: 2054547884}
-  - component: {fileID: 2054547883}
   - component: {fileID: 2054547882}
+  - component: {fileID: 2054547883}
   - component: {fileID: 2054547888}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,12 +366,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55fe5cfb72556a4ea6575f95776ff2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  my_Thrust: 2000
+  my_Thrust: 4000
   my_Thrust_Max: 70
-  my_forward_speed: 1
+  my_forward_speed: 3
   jumpVector: 20
   gravity: 1000
   slide_power: 2
+  turn_complete_R: 0
+  turn_complete_L: 0
+  Turn_speed: 1
 --- !u!54 &2054547883
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -627,15 +630,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2165614045004099335, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2165614045004099335, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2165614045004099335, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2165614045004099335, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -652,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 8175076051680745164, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
       propertyPath: m_Name
       value: LoadPre
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214509148230272527, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8648731151436857474, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
       propertyPath: Director

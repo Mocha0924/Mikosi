@@ -10,6 +10,9 @@ public class LoadDirector : MonoBehaviour
     [SerializeField]private List<GameObject> Load_List = new List<GameObject>();
     public List<Vector3> PeopleList = new List<Vector3>();
     [SerializeField] private GameObject Load;
+    public GameObject StartTurn;
+    public int turnCount = 0;
+    public bool turnCheck = false;
    
     public void LoadPlus(GameObject Load)
     {
@@ -32,6 +35,10 @@ public class LoadDirector : MonoBehaviour
             Destroy(DestroyLode);
             
         }
+    }
+    public void StartTurnLoad(GameObject start)
+    {
+        StartTurn = start;
     }
   
    
