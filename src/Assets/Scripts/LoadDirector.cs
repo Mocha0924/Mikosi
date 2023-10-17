@@ -13,6 +13,7 @@ public class LoadDirector : MonoBehaviour
     public GameObject StartTurn;
     public int turnCount = 0;
     public bool turnCheck = false;
+    public bool RightTurn = false;
    
     public void LoadPlus(GameObject Load)
     {
