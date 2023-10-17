@@ -5,17 +5,21 @@ using UnityEngine;
 public class EndCorner : MonoBehaviour
 {
 
-    public GameObject corner_end;
-    move_kari move_Kari;
+    public GameObject corner_start;
+    player player_script;
     TurnStick TurnStick;
     [SerializeField] GameObject player;
     [SerializeField] int turntimes_complete = 10;
+    private LoadDirector Director;
 
     // Start is called before the first frame update
     void Start()
     {
-        TurnStick = corner_end.GetComponent<TurnStick>();
-        move_Kari = player.GetComponent<move_kari>();
+        Director = GameObject.Find("LoadDirector").GetComponent<LoadDirector>();
+        corner_start = Director.StartTurn;
+        player = GameObject.Find("Player");
+        TurnStick = corner_start.GetComponent<TurnStick>();
+        player_script = player.GetComponent<player>();
 
     }
 
@@ -31,8 +35,8 @@ public class EndCorner : MonoBehaviour
         if (TurnStick.turn_times >= turntimes_complete)
         {
 
-            if (gameObject.tag == "R") { move_Kari.turn_complete_R = true; }
-            else { move_Kari.turn_complete_L = true; }
+            if (gameObject.tag == "R") { player_script.turn_complete_R = true; }
+            else { player_script.turn_complete_L = true; }
 
             TurnStick.turn_times = 0;
         }
