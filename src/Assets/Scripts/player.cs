@@ -130,6 +130,19 @@ public class player : MonoBehaviour
                     if (Horizon_move == "leftmove")
                     {
 
+                       
+                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        {
+                            force = new Vector3(-my_Thrust, 0, 0);
+                        }
+                        else
+                        {
+                            force = new Vector3(0, 0, 0);
+                        }
+                    }
+                    else if (Horizon_move == "rightmove")
+                    {
+
                         if (my_Rigidbody.velocity.x > -my_Thrust_Max)
                         {
                             force = new Vector3(my_Thrust, 0, 0);
@@ -139,19 +152,7 @@ public class player : MonoBehaviour
                             force = new Vector3(0, 0, 0);
 
                         }
-                    }
-                    else if (Horizon_move == "rightmove")
-                    {
 
-
-                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
-                        {
-                            force = new Vector3(-my_Thrust, 0, 0);
-                        }
-                        else
-                        {
-                            force = new Vector3(0, 0, 0);
-                        }
                     }
                     else
                     {
@@ -183,7 +184,7 @@ public class player : MonoBehaviour
                     if (Horizon_move == "leftmove")
                     {
 
-                        if (my_Rigidbody.velocity.x > -my_Thrust_Max)
+                        if (my_Rigidbody.velocity.z > -my_Thrust_Max)
                         {
                             force = new Vector3(0, 0, -my_Thrust);
                         }
@@ -197,7 +198,7 @@ public class player : MonoBehaviour
                     {
 
 
-                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        if (my_Rigidbody.velocity.z < my_Thrust_Max)
                         {
                             force = new Vector3(0, 0, my_Thrust);
                         }
@@ -209,7 +210,7 @@ public class player : MonoBehaviour
                     else
                     {
 
-                        if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
+                        if (my_Rigidbody.velocity.z < 3 && my_Rigidbody.velocity.z > -3)
                         {
 
                             float now_velocity_y = my_Rigidbody.velocity.y;
@@ -222,7 +223,7 @@ public class player : MonoBehaviour
                         }
                         else
                         {
-                            force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
+                            force = new Vector3(0, 0, my_Rigidbody.velocity.z * -slide_power);
                         }
 
                     }
@@ -236,33 +237,33 @@ public class player : MonoBehaviour
                     if (Horizon_move == "leftmove")
                     {
 
-                        if (my_Rigidbody.velocity.x > -my_Thrust_Max)
+                        if (my_Rigidbody.velocity.z < my_Thrust_Max)
                         {
                             force = new Vector3(0, 0, my_Thrust);
                         }
                         else
                         {
                             force = new Vector3(0, 0, 0);
-
                         }
                     }
                     else if (Horizon_move == "rightmove")
                     {
 
 
-                        if (my_Rigidbody.velocity.x < my_Thrust_Max)
+                        if (my_Rigidbody.velocity.z > -my_Thrust_Max)
                         {
                             force = new Vector3(0, 0, -my_Thrust);
                         }
                         else
                         {
                             force = new Vector3(0, 0, 0);
+
                         }
                     }
                     else
                     {
 
-                        if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
+                        if (my_Rigidbody.velocity.z < 3 && my_Rigidbody.velocity.z > -3)
                         {
 
                             float now_velocity_y = my_Rigidbody.velocity.y;
@@ -275,7 +276,7 @@ public class player : MonoBehaviour
                         }
                         else
                         {
-                            force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
+                            force = new Vector3(0, 0, my_Rigidbody.velocity.z * -slide_power);
                         }
 
                     }
@@ -284,56 +285,6 @@ public class player : MonoBehaviour
                 }
 
         }
-
-
-
-        if (Horizon_move == "leftmove")
-        {
-
-            if (my_Rigidbody.velocity.x > -my_Thrust_Max)
-            {
-                force = new Vector3(-my_Thrust, 0, 0);
-            }
-            else
-            {
-                force = new Vector3(0, 0, 0);
-
-            }
-        }
-        else if (Horizon_move == "rightmove")
-        {
-
-
-            if (my_Rigidbody.velocity.x < my_Thrust_Max)
-            {
-                force = new Vector3(my_Thrust, 0, 0);
-            }
-            else
-            {
-                force = new Vector3(0, 0, 0);
-            }
-        }
-        else
-        {
-
-            if (my_Rigidbody.velocity.x < 3 && my_Rigidbody.velocity.x > -3)
-            {
-
-                float now_velocity_y = my_Rigidbody.velocity.y;
-                float now_velocity_z = my_Rigidbody.velocity.z;
-
-                my_Rigidbody.velocity = new Vector3(0, now_velocity_y, now_velocity_z);
-
-
-
-            }
-            else
-            {
-                force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
-            }
-
-        }
-
 
         force.y = -gravity;
 
