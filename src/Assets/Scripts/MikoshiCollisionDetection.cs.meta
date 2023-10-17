@@ -3,7 +3,9 @@ guid: a0aea05032335434a9dd472fb13a4025
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - AfterPeople: {fileID: 999420051843794743, guid: dae0bcd378ed8714abc2eaeefd432e74, type: 3}
+  - aPeopleParent: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
