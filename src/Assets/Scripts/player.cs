@@ -22,7 +22,7 @@ public class player : MonoBehaviour
     float old_Horizontal;
     float Input_Jump;
     float old_Jump;
-    float Input_Jump_once;
+    [SerializeField]float Input_Jump_once;
 
     public bool turn_complete_R = false;
     public bool turn_complete_L = false;
@@ -30,7 +30,7 @@ public class player : MonoBehaviour
     float turn_times = 0f;
 
     [SerializeField] private TurnSlider turnSlider;
-
+    [SerializeField] private CameraController cameraController;
 
     public enum playerType
     {
@@ -312,7 +312,6 @@ public class player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (turn_complete_R)
         {
             turn_times += Turn_speed;
