@@ -9,11 +9,11 @@ public class TurnStick : MonoBehaviour
     bool stick_right = true; bool stick_left = false; bool stick_up = false; bool stick_down = false;
     public bool in_corner = false;
     public int turn_times = 0;
-
+    [SerializeField] private TurnSlider turnSlider;
     // Start is called before the first frame update
     void Start()
     {
-
+        turnSlider = GameObject.Find("UICanvas").GetComponent<TurnSlider>();
     }
 
     // Update is called once per frame
@@ -85,7 +85,7 @@ public class TurnStick : MonoBehaviour
             stick_up = false;
             stick_right = true;
             turn_times += 1;
-
+            turnSlider.RightSliser.value = turn_times;
         }
     }
 
@@ -114,6 +114,7 @@ public class TurnStick : MonoBehaviour
 
             
             turn_times += 1;
+            turnSlider.LeftSliser.value = turn_times;
 
         }
     }

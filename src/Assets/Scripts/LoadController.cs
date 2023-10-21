@@ -26,6 +26,8 @@ public class LoadController : MonoBehaviour
     [SerializeField] private int FoodGenerationMin;
     [SerializeField] private int FoodGenerationMax;
     private bool HitCheck = true;
+    [SerializeField] private TurnSlider turnSlider;
+    [SerializeField] private TurnStick turnStick;
     public enum LoadType
     { 
         Up,
@@ -39,6 +41,7 @@ public class LoadController : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<player>();
         Director = GameObject.Find("LoadDirector").GetComponent<LoadDirector>();
+        turnSlider = GameObject.Find("UICanvas").GetComponent<TurnSlider>();
         Director.LoadPlus(this.gameObject);
         PeopleListGenerator();
         Generation();
@@ -75,6 +78,10 @@ public class LoadController : MonoBehaviour
                             case LoadType.Left: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
                             default: Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
                         }
+                        EndCorner endCorner = newLoad.GetComponent<EndCorner>();
+                        turnSlider.endCorner = endCorner;
+                        endCorner.turntimes_complete = turnSlider.TurnTime_CompleteEnd;
+                        turnSlider.RightTurn();
                         newLoad.gameObject.tag = "R";
                         LoadController loadcontroller = newLoad.GetComponent<LoadController>();
                         if (Angle == LoadType.Left)
@@ -100,6 +107,10 @@ public class LoadController : MonoBehaviour
                             case LoadType.Left: newLoad = Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
                             default: Instantiate(EndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
                         }
+                        EndCorner endCorner = newLoad.GetComponent<EndCorner>();
+                        turnSlider.endCorner = endCorner;
+                        endCorner.turntimes_complete = turnSlider.TurnTime_CompleteEnd;
+                        turnSlider.LeftTurn();
                         newLoad.gameObject.tag = "L";
 
                         LoadController loadcontroller = newLoad.GetComponent<LoadController>();
@@ -122,6 +133,7 @@ public class LoadController : MonoBehaviour
                         Director.RightTurn = false;
                     LoadRotate = gameObject.transform.rotation;
                     GameObject newLoad = Instantiate(TurnLoad, end.gameObject.transform.position, LoadRotate);
+                    turnSlider.turnStick = turnStick;
                     if (Director.RightTurn)
                         newLoad.gameObject.tag = "R";
                     else

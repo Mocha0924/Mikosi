@@ -9,7 +9,7 @@ public class EndCorner : MonoBehaviour
     player player_script;
     TurnStick TurnStick;
     [SerializeField] GameObject player;
-    [SerializeField] int turntimes_complete = 10;
+    public int turntimes_complete = 10;
     private LoadDirector Director;
     bool hit_check = true;
 

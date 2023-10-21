@@ -29,6 +29,8 @@ public class player : MonoBehaviour
     [SerializeField] int Turn_speed = 1;
     float turn_times = 0f;
 
+    [SerializeField] private TurnSlider turnSlider;
+
 
     public enum playerType
     {
@@ -64,7 +66,7 @@ public class player : MonoBehaviour
         else if (Input_Horizontal - old_Horizontal < 0) { Horizontal_controll = -1; }
         else if ((Input_Horizontal < 1 && Input_Horizontal > -1)) { Horizontal_controll = 0; }
 
-        Debug.Log(Horizon_move);
+        //Debug.Log(Horizon_move);
 
         Horizon_move = Horizontal_Contlroll(old_Horizontal, Input_Horizontal);
 
@@ -320,6 +322,7 @@ public class player : MonoBehaviour
             if (turn_times % 90 == 0)
             {
                 turn_complete_R = false;
+                turnSlider.RightTurnEnd();
             }
         }
         else if (turn_complete_L)
@@ -331,6 +334,7 @@ public class player : MonoBehaviour
             if (turn_times % 90 == 0)
             {
                 turn_complete_L = false;
+                turnSlider.LeftTurnEnd();
             }
         }
         else
