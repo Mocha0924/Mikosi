@@ -7,6 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private GameObject MainCamera;
+    [SerializeField] private GameObject PlayerObj;
     [SerializeField] private player Player;
     [SerializeField] private Vector3 FrontPos;
     [SerializeField] private Vector3 RightPos;
@@ -15,13 +16,13 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //switch (Player.Angle)
-        //{
-        //    case player.playerType.Right: MainCamera.transform.localPosition = Vector3.MoveTowards(transform.position,RightPos, speed * Time.deltaTime); ; break;
-        //    case player.playerType.Left: MainCamera.transform.localPosition = Vector3.MoveTowards(transform.position, LeftPos, speed * Time.deltaTime); break;
-        //    default: MainCamera.transform.localPosition = Vector3.MoveTowards(transform.position, FrontPos, speed * Time.deltaTime); break;
-        //}
+        switch (Player.Angle)
+        {
+            case player.playerType.Right: MainCamera.transform.localPosition = MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos, speed); break;
+            case player.playerType.Left: MainCamera.transform.localPosition = MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos, speed); break;
+            default: MainCamera.transform.localPosition = MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos, speed); break;
+        }
     }
 }
