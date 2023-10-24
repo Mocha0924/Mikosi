@@ -25,7 +25,7 @@ public class LoadDirector : MonoBehaviour
     }
     private void Update()
     {
-        if(Load_List.Count >= 3)
+        if(Load_List.Count >= 4)
         {
             GameObject DestroyLode = Load_List[0];
             LoadReduce();

@@ -126,8 +126,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3123856, y: 9.019563, z: 0.6537466}
-  m_Center: {x: -0.01926416, y: 3.9890873, z: -0.15134434}
+  m_Size: {x: -1.012051, y: 9.130333, z: 0.6537466}
+  m_Center: {x: -0.6032439, y: 3.9337018, z: -0.15134434}
 --- !u!1 &2494231206801007170
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 8879891200686925378}
   - component: {fileID: 27863841701428050}
   m_Layer: 0
-  m_Name: EndTurnLoad
+  m_Name: RightEndTurnLoad
   m_TagString: L
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
   Right: {fileID: 1901086022595199852}
   Load: {fileID: 8175076051680745164, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
   TurnLoad: {fileID: 8175076051680745164, guid: d30564fa4e31cca46ac2a1d11a884dac, type: 3}
-  RightEndTurnLoad: {fileID: 8175076051680745164, guid: a1b504b9b3bcf18478cc518f2d59c28d, type: 3}
+  RightEndTurnLoad: {fileID: 8175076051680745164}
   LeftEndTurnLoad: {fileID: 8175076051680745164, guid: 34d8192352aeb6f4dabb6f6600f46ec5, type: 3}
   people: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
   food: {fileID: 3984345303793805276, guid: 8801323ac64b696489998ca0deebded6, type: 3}
