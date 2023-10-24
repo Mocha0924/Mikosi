@@ -275,10 +275,9 @@ MonoBehaviour:
   Right: {fileID: 1901086022595199852}
   Load: {fileID: 8175076051680745164, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
   TurnLoad: {fileID: 8175076051680745164, guid: d30564fa4e31cca46ac2a1d11a884dac, type: 3}
-  RightEndTurnLoad: {fileID: 8175076051680745164, guid: a1b504b9b3bcf18478cc518f2d59c28d, type: 3}
-  LeftEndTurnLoad: {fileID: 8175076051680745164, guid: 34d8192352aeb6f4dabb6f6600f46ec5, type: 3}
+  EndTurnLoad: {fileID: 8175076051680745164}
   people: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
-  food: {fileID: 3984345303793805276, guid: 8801323ac64b696489998ca0deebded6, type: 3}
+  food: {fileID: 817022640060111432, guid: e8680a1605fd5a1488324a9b68ffff8e, type: 3}
   Director: {fileID: 0}
   ObjectList: []
   TurnStartLoad: {fileID: 0}

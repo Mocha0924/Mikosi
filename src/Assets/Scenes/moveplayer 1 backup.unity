@@ -449,13 +449,9 @@ MonoBehaviour:
   jumpVector: 3000
   gravity: 30
   slide_power: 2
-  Input_Jump_once: 0
   turn_complete_R: 0
   turn_complete_L: 0
   Turn_speed: 1
-  turnSlider: {fileID: 0}
-  cameraController: {fileID: 0}
-  Angle: 0
 --- !u!1001 &927210335
 PrefabInstance:
   m_ObjectHideFlags: 0
