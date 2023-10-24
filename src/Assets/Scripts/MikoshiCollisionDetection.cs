@@ -5,14 +5,14 @@ using UnityEngine.UIElements;
 
 public class MikoshiCollisionDetection : MonoBehaviour
 {
-    [SerializeField] int clearConditions;
+    public int clearConditions;
     [SerializeField] GameObject AfterPeople;
     [SerializeField] GameObject[] aPeopleParents;
     [SerializeField] GameObject aPeopleParent;
 
     [SerializeField] int touchFoodDecrPeople;
-    [SerializeField] int peopleCount;
-    [SerializeField] bool isFever;
+    public int peopleCount;
+    public bool isFever;
 
     [SerializeField] int scaleCorrection;
     int behindPeopleCount;
@@ -77,7 +77,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         }
     }
 
-    void FeverTime()
+    public void FeverTime()
     {
         Debug.Log("Fever");
     }
@@ -88,7 +88,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     }
 
     //人の生成
-    void GenerateMikoshiPeople()
+    public void GenerateMikoshiPeople()
     {
         pos = Vector3.zero;
 

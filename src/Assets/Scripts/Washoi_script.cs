@@ -15,7 +15,7 @@ public class Washoi_script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MCD = MCD.GetComponent<MikoshiCollisionDetection>();
+        MCD = GetComponent<MikoshiCollisionDetection>();
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class Washoi_script : MonoBehaviour
     void Check_People()
     {
 
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, wasyoi_hankei,Vector3.forward);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, wasyoi_hankei,Vector3.one);
 
         foreach (var hit in hits)
         {
