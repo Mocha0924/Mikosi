@@ -285,6 +285,8 @@ MonoBehaviour:
   PeopleGenerationMax: 10
   FoodGenerationMin: 1
   FoodGenerationMax: 3
+  turnSlider: {fileID: 0}
+  turnStick: {fileID: 0}
   Angle: 0
 --- !u!54 &8879891200686925378
 Rigidbody:

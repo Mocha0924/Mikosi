@@ -12,7 +12,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector3 FrontPos;
     [SerializeField] private Vector3 RightPos;
     [SerializeField] private Vector3 LeftPos;
+    [SerializeField] private Quaternion FrontAngle;
+    [SerializeField] private Quaternion RightAngle;
+    [SerializeField] private Quaternion LeftAngle;
     [SerializeField] private float speed;
+    [SerializeField] private float Anglespeed;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -20,9 +24,13 @@ public class CameraController : MonoBehaviour
     {
         switch (Player.Angle)
         {
-            case player.playerType.Right: MainCamera.transform.localPosition = MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos, speed); break;
-            case player.playerType.Left: MainCamera.transform.localPosition = MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos, speed); break;
-            default: MainCamera.transform.localPosition = MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos, speed); break;
+            case player.playerType.Right:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos, speed);
+                MainCamera.transform.rotation = Quaternion.Lerp(MainCamera.transform.rotation, RightAngle, Anglespeed); break;
+            case player.playerType.Left:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos, speed);
+                MainCamera.transform.rotation = Quaternion.Lerp(MainCamera.transform.rotation, LeftAngle, Anglespeed); break;
+            default: MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos, speed);
+                MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
         }
+        
     }
 }
