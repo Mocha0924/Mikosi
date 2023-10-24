@@ -22,7 +22,11 @@ public class player : MonoBehaviour
     float old_Horizontal;
     float Input_Jump;
     float old_Jump;
-    [SerializeField]float Input_Jump_once;
+    public float Input_Jump_once;
+
+
+
+
 
     public bool turn_complete_R = false;
     public bool turn_complete_L = false;

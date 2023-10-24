@@ -7,7 +7,7 @@ public class Washoi_script : MonoBehaviour
 
     float Input_washoi;
     float old_washoi;
-    float Input_washoi_once;
+    public float Input_washoi_once;
     [SerializeField] float wasyoi_hankei = 5.0f;
 
     MikoshiCollisionDetection MCD;
@@ -29,9 +29,15 @@ public class Washoi_script : MonoBehaviour
         if (Input_washoi_once == 1)
         {
             Check_People();
+
+
         }
-        
+
+
+
+
     }
+
     private void FixedUpdate()
     {
         
