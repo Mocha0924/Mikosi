@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2329438704330785119}
   - component: {fileID: 8922347394007582302}
   - component: {fileID: 5435170167660742960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface35
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2702193444614462680}
   - component: {fileID: 4983475094045014997}
   - component: {fileID: 1507811111072940859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface36
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 3123583379775574630}
   - component: {fileID: 2535152821651660413}
   - component: {fileID: 6215952792234160837}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface38
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 5158788116594725217}
   - component: {fileID: 4269513902589973404}
   - component: {fileID: 7182957131467070050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,9 +342,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944610460717733918}
-  m_Layer: 0
-  m_Name: Person1
-  m_TagString: Untagged
+  - component: {fileID: -2160077291867296519}
+  m_Layer: 8
+  m_Name: AfterPerson
+  m_TagString: People
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,8 +359,8 @@ Transform:
   m_GameObject: {fileID: 1276616861821600420}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5013938, y: 0.80818033, z: 5.568549}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5961154610024178230}
   - {fileID: 5158788116594725217}
@@ -371,6 +372,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &-2160077291867296519
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276616861821600420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3170643388578760518
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +397,7 @@ GameObject:
   - component: {fileID: 8545808730239294991}
   - component: {fileID: 5596279802965892652}
   - component: {fileID: 7146983170756738735}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pTorus8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +480,7 @@ GameObject:
   - component: {fileID: 2576981770743256780}
   - component: {fileID: 1241141533744765452}
   - component: {fileID: 6415726010521455822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +563,7 @@ GameObject:
   - component: {fileID: 5961154610024178230}
   - component: {fileID: 3145498491696679515}
   - component: {fileID: 3962693821163049836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: polySurface13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
