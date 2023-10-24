@@ -16,7 +16,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
-    
+   
     [SerializeField] float slide_power = 2f;
     float Input_Horizontal;
     float old_Horizontal;
@@ -31,6 +31,7 @@ public class player : MonoBehaviour
 
     [SerializeField] private TurnSlider turnSlider;
     [SerializeField] private CameraController cameraController;
+    private MikoshiCollisionDetection mikoshiCollision;
 
     public enum playerType
     {
@@ -47,6 +48,7 @@ public class player : MonoBehaviour
     {
         my_Rigidbody = GetComponent<Rigidbody>();
         my_Transform = GetComponent<Transform>();
+        mikoshiCollision = GetComponent<MikoshiCollisionDetection>();
 
         pos = transform.position;
 
@@ -337,7 +339,7 @@ public class player : MonoBehaviour
             }
         }
         else
-            my_Transform.position += transform.forward * my_forward_speed;
+            my_Transform.position += transform.forward * (my_forward_speed );
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
 

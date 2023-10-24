@@ -273,7 +273,7 @@ MonoBehaviour:
   begin: {fileID: 3480607384160745225}
   Left: {fileID: 7041214373511118500}
   Right: {fileID: 1901086022595199852}
-  Load: {fileID: 8175076051680745164, guid: dae554a5abeb9784a8665ea3e7b167ce, type: 3}
+  Load: {fileID: 8175076051680745164, guid: bb88fb5493f478940a09eae2119dd129, type: 3}
   TurnLoad: {fileID: 8175076051680745164}
   RightEndTurnLoad: {fileID: 8175076051680745164, guid: a1b504b9b3bcf18478cc518f2d59c28d, type: 3}
   LeftEndTurnLoad: {fileID: 8175076051680745164, guid: 34d8192352aeb6f4dabb6f6600f46ec5, type: 3}
