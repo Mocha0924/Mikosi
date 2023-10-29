@@ -9,6 +9,8 @@ public class LoadController : MonoBehaviour
     public  GameObject begin;
     public  GameObject Left;
     public  GameObject Right;
+    [SerializeField] private GameObject RightLoadPoint;
+    [SerializeField] private GameObject LeftLoadPoint;
     [SerializeField] private GameObject Load;
     [SerializeField] private GameObject TurnLoad;
     [SerializeField] private GameObject RightEndTurnLoad;
@@ -70,15 +72,8 @@ public class LoadController : MonoBehaviour
                         LoadRotate = gameObject.transform.rotation;
                         Quaternion q = Quaternion.Euler(0f, 90f, 0f);
                         LoadRotate *= q;
-                        GameObject newLoad = RightEndTurnLoad;
-                        switch (Angle)
-                        {
-                            case LoadType.Up: newLoad = Instantiate(RightEndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, -20), LoadRotate); ; break;
-                            case LoadType.Right: newLoad = Instantiate(RightEndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
-                            case LoadType.Down: newLoad = Instantiate(RightEndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                            case LoadType.Left: newLoad = Instantiate(RightEndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                            default: Instantiate(RightEndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
-                        }
+                        GameObject newLoad = Instantiate(RightEndTurnLoad, RightLoadPoint.transform.position , LoadRotate);
+                     
                         EndCorner endCorner = newLoad.GetComponent<EndCorner>();
                         turnSlider.endCorner = endCorner;
                         endCorner.turntimes_complete = turnSlider.TurnTime_CompleteEnd;
@@ -99,15 +94,7 @@ public class LoadController : MonoBehaviour
                         LoadRotate = gameObject.transform.rotation;
                         Quaternion q = Quaternion.Euler(0f, -90f, 0f);
                         LoadRotate *= q;
-                        GameObject newLoad = LeftEndTurnLoad;
-                        switch (Angle)
-                        {
-                            case LoadType.Up: newLoad = Instantiate(LeftEndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                            case LoadType.Right: newLoad = Instantiate(LeftEndTurnLoad, end.gameObject.transform.position + new Vector3(20, 0, -20), LoadRotate); ; break;
-                            case LoadType.Down: newLoad = Instantiate(LeftEndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, -20), LoadRotate); ; break;
-                            case LoadType.Left: newLoad = Instantiate(LeftEndTurnLoad, end.gameObject.transform.position + new Vector3(-20, 0, 20), LoadRotate); ; break;
-                            default: Instantiate(LeftEndTurnLoad, end.gameObject.transform.position + new Vector3(0, 0, 0), LoadRotate); ; break;
-                        }
+                        GameObject newLoad = Instantiate(LeftEndTurnLoad, LeftLoadPoint.transform.position, LoadRotate);
                         EndCorner endCorner = newLoad.GetComponent<EndCorner>();
                         turnSlider.endCorner = endCorner;
                         endCorner.turntimes_complete = turnSlider.TurnTime_CompleteEnd;
@@ -127,6 +114,7 @@ public class LoadController : MonoBehaviour
                 }
                 else if (Director.turnCount >= 0)
                 {
+                    Debug.Log("a");
                     int rand = Random.Range(0, 2);
                     if (rand > 0)
                         Director.RightTurn = true;
