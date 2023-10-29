@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -24,9 +25,9 @@ public class CameraController : MonoBehaviour
         switch (Player.Angle)
         {
             case player.playerType.Right:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos, speed);
-                MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
+                MainCamera.transform.rotation = Quaternion.Lerp(MainCamera.transform.rotation, RightAngle, Anglespeed); break;
             case player.playerType.Left:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos, speed);
-                MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
+                MainCamera.transform.rotation = Quaternion.Lerp(MainCamera.transform.rotation, LeftAngle, Anglespeed); break;
             default: MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos, speed);
                 MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
         }
