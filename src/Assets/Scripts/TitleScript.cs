@@ -34,7 +34,7 @@ public class TitleScript : MonoBehaviour
 
         if (m_timer > fadeDuration + displayImageDuration)
         {
-            SceneManager.LoadScene("ez");
+            SceneManager.LoadScene("MainGame");
         }
     }
 }
