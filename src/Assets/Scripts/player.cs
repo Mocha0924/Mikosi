@@ -10,6 +10,7 @@ public class player : MonoBehaviour
     Vector3 force;
     Vector3 pos;
     LoadController load;
+    stamina stamina_script;
     string Horizon_move;
     public float my_Thrust = 20f;
     public float my_Thrust_Max = 20f;
@@ -53,6 +54,7 @@ public class player : MonoBehaviour
         my_Rigidbody = GetComponent<Rigidbody>();
         my_Transform = GetComponent<Transform>();
         mikoshiCollision = GetComponent<MikoshiCollisionDetection>();
+        stamina_script = GetComponent<stamina>();
 
         pos = transform.position;
 
@@ -299,7 +301,7 @@ public class player : MonoBehaviour
 
         force.y = -gravity;
 
-        if (Input_Jump_once == 1 && transform.position.y <= 2)
+        if (Input_Jump_once == 1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
         {
             float now_velocity_x = my_Rigidbody.velocity.x;
             float now_velocity_z = my_Rigidbody.velocity.z;

@@ -7,7 +7,7 @@ public class stamina : MonoBehaviour
 
     const int stamina_number_first = 3;
     int[] stamina_value;
-    int stamina_number_now = stamina_number_first - 1;
+    public int stamina_number_now = stamina_number_first - 1;
     int stamina_heal_needTime = 5;
     int time = 0;
 
