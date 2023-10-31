@@ -301,7 +301,7 @@ public class player : MonoBehaviour
 
         force.y = -gravity;
 
-        if (Input_Jump_once == 1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
+        if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
         {
             float now_velocity_x = my_Rigidbody.velocity.x;
             float now_velocity_z = my_Rigidbody.velocity.z;
@@ -352,7 +352,7 @@ public class player : MonoBehaviour
             }
         }
         else
-            my_Transform.position += transform.forward * (my_forward_speed );
+            my_Transform.position += transform.forward * (my_forward_speed*((mikoshiCollision.peopleCount/10)*0.05f+1) );
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
 

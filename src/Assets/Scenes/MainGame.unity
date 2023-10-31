@@ -644,7 +644,7 @@ MonoBehaviour:
   LeftSliser: {fileID: 1455768675}
   turnStick: {fileID: 0}
   endCorner: {fileID: 0}
-  TurnTime_CompleteEnd: 0
+  TurnTime_CompleteEnd: 10
 --- !u!1001 &869427098
 PrefabInstance:
   m_ObjectHideFlags: 0
