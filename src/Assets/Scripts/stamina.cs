@@ -11,7 +11,7 @@ public class stamina : MonoBehaviour
     public int stamina_number_now;
     int image_number = 0;
     [SerializeField]int stamina_heal_needTime = 5;
-    Vector3 stamina_image_pos = new Vector3(1840,80,0);
+    Vector3 stamina_image_pos = new Vector3(800,-400,0);
 
 
     [SerializeField] Image stamina_image;
@@ -28,6 +28,10 @@ public class stamina : MonoBehaviour
         image_clone = new Image[stamina_number_first] ;
         stamina_number_now = stamina_number_first;
 
+        
+
+       Vector3 vectorCanvas = canvas.localPosition + stamina_image_pos * canvas.localScale.x; //キャンパスのScaleに合わせる。
+
 
         foreach (int stamina in stamina_value)
         {
@@ -37,9 +41,12 @@ public class stamina : MonoBehaviour
         for(int i = 0; i < stamina_number_first; i++)
         {
 
-            image_clone[i] =  Instantiate(stamina_image, stamina_image_pos, Quaternion.identity, canvas);
+            image_clone[i] =  Instantiate(stamina_image, vectorCanvas, Quaternion.identity, canvas);
 
-            stamina_image_pos.x -= 100;
+            vectorCanvas.x -= 100 * canvas.localScale.x;
+
+
+            Debug.Log(stamina_image_pos);
 
         }
     }
