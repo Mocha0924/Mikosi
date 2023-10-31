@@ -10,6 +10,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] GameObject AfterPeople;
     [SerializeField] GameObject[] aPeopleParents;
     [SerializeField] GameObject aPeopleParent;
+    [SerializeField] GameObject Parents;
 
     [SerializeField] int touchFoodDecrPeople;
     public int peopleCount;
@@ -85,13 +86,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void GenerateParent(float initCorre)
     {
-        int childCount = this.transform.childCount - 2;
+        int childCount = Parents.transform.childCount;
         Array.Resize(ref aPeopleParents, aPeopleParents.Length + 1);
         parentPos.z = initCorre * (-0.7f - 0.6f * childCount);
 
         GameObject cloneParent = Instantiate(aPeopleParent, Vector3.zero, Quaternion.identity);
         cloneParent.name = "Parent" + childCount;
-        cloneParent.transform.parent = this.transform;
+        cloneParent.transform.parent = Parents.transform;
         cloneParent.transform.localPosition = parentPos;
         cloneParent.transform.localRotation = Quaternion.identity;
 
@@ -100,9 +101,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void DestroyParent()
     {
-        int childCount = this.transform.childCount - 1;
+        int childCount = Parents.transform.childCount - 1;
 
-        Destroy(this.transform.GetChild(childCount).gameObject);
+        Destroy(Parents.transform.GetChild(childCount).gameObject);
 
         Array.Resize(ref aPeopleParents, aPeopleParents.Length - 1);
     }
