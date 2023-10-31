@@ -11,11 +11,13 @@ public class Washoi_script : MonoBehaviour
     [SerializeField] float wasyoi_hankei = 5.0f;
 
     MikoshiCollisionDetection MCD;
+    stamina stamina_script;
 
     // Start is called before the first frame update
     void Start()
     {
         MCD = GetComponent<MikoshiCollisionDetection>();
+        stamina_script = GetComponent<stamina>();
     }
 
     // Update is called once per frame
@@ -26,8 +28,15 @@ public class Washoi_script : MonoBehaviour
 
         old_washoi = Input_washoi;
 
-        if (Input_washoi_once == 1)
+        if (Input_washoi_once == 1 && stamina_script.stamina_number_now != 0)
         {
+
+           stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
+
+            if (stamina_script.stamina_number_now != 0) {stamina_script.stamina_number_now--; }
+
+
+
             Check_People();
 
 

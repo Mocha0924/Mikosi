@@ -5,26 +5,21 @@ using UnityEngine;
 public class stamina : MonoBehaviour
 {
 
-    const int stamina_number_first = 3;
-    int[] stamina_value;
-    public int stamina_number_now = stamina_number_first - 1;
-    int stamina_heal_needTime = 5;
+    [SerializeField] int stamina_number_first = 3;
+    public int[] stamina_value;
+    public int stamina_number_now;
+    [SerializeField]int stamina_heal_needTime = 5;
     int time = 0;
-
-    Washoi_script washoi_Script;
-    player player;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        stamina_value = new int[stamina_number_first + 1] ;
+        stamina_number_now = stamina_number_first;
 
-        washoi_Script = GetComponent<Washoi_script>();
-        player = GetComponent<player>();
 
-        stamina_value = new int[stamina_number_first] ;
-        
-        foreach(int stamina in stamina_value)
+        foreach (int stamina in stamina_value)
         {
             stamina_value[stamina] = 0;
         }
@@ -33,24 +28,8 @@ public class stamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.Input_Jump_once == 1)
-        {
-            stamina_value[stamina_number_now] = 0;
-
-            if (stamina_number_now != 0) { stamina_number_now--; }
-        }
-
-        if (washoi_Script.Input_washoi_once == 1)
-        {
-            stamina_value[stamina_number_now] -= stamina_heal_needTime;
-
-            if (stamina_number_now != 0) { stamina_number_now--; }
 
 
-        }
-
-
-        Debug.Log(stamina_value[stamina_number_now] + "=" + stamina_number_now) ;
 
     }
 
@@ -65,7 +44,7 @@ public class stamina : MonoBehaviour
 
             if (stamina_value[stamina_number_now] == stamina_heal_needTime)
             {              
-                if (stamina_number_now < 2)
+                if (stamina_number_now < stamina_number_first)
                 {
                     stamina_value[stamina_number_now] = 0;
                     stamina_number_now++;
