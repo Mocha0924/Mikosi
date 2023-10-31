@@ -1855,12 +1855,13 @@ MonoBehaviour:
   Director: {fileID: 0}
   ObjectList: []
   TurnStartLoad: {fileID: 0}
-  PeopleGenerationMin: 5
-  PeopleGenerationMax: 10
-  FoodGenerationMin: 1
-  FoodGenerationMax: 3
+  PeopleGenerationMin: 20
+  PeopleGenerationMax: 35
+  FoodGenerationMin: 15
+  FoodGenerationMax: 20
   turnSlider: {fileID: 0}
   turnStick: {fileID: 0}
+  randObject: 1
   Angle: 0
 --- !u!54 &8879891200686925378
 Rigidbody:
