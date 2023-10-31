@@ -31,6 +31,7 @@ public class LoadController : MonoBehaviour
     private bool HitCheck = true;
     [SerializeField] private TurnSlider turnSlider;
     [SerializeField] private TurnStick turnStick;
+    [SerializeField] private bool randObject = false;
     public enum LoadType
     { 
         Up,
@@ -46,8 +47,12 @@ public class LoadController : MonoBehaviour
         Director = GameObject.Find("LoadDirector").GetComponent<LoadDirector>();
         turnSlider = GameObject.Find("UICanvas").GetComponent<TurnSlider>();
         Director.LoadPlus(this.gameObject);
-        PeopleListGenerator();
-        Generation();
+        if(randObject)
+        {
+            PeopleListGenerator();
+            Generation();
+        }
+         
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -112,7 +117,7 @@ public class LoadController : MonoBehaviour
 
 
                 }
-                else if (Director.turnCount >= 0)
+                else if (Director.turnCount >= Director.MaxTurnCount)
                 {
                     Debug.Log("a");
                     int rand = Random.Range(0, 2);
@@ -135,7 +140,8 @@ public class LoadController : MonoBehaviour
                 else
                 {
                     LoadRotate = gameObject.transform.rotation;
-                    GameObject newLoad = Instantiate(Load, end.gameObject.transform.position, LoadRotate);
+                    //GameObject newLoad = Instantiate(Load, end.gameObject.transform.position, LoadRotate);
+                    GameObject newLoad = Instantiate(Director.Cource_List[Director.CourseCount], end.gameObject.transform.position, LoadRotate);
                     LoadController loadcontroller = newLoad.GetComponent<LoadController>();
                     loadcontroller.Angle = Angle;
                     Director.turnCount++;

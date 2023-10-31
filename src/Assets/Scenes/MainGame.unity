@@ -458,7 +458,6 @@ GameObject:
   m_Component:
   - component: {fileID: 658140445}
   - component: {fileID: 658140444}
-  - component: {fileID: 658140443}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -466,14 +465,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &658140443
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658140442}
-  m_Enabled: 1
 --- !u!20 &658140444
 Camera:
   m_ObjectHideFlags: 0
@@ -653,7 +644,7 @@ MonoBehaviour:
   LeftSliser: {fileID: 1455768675}
   turnStick: {fileID: 0}
   endCorner: {fileID: 0}
-  TurnTime_CompleteEnd: 5
+  TurnTime_CompleteEnd: 0
 --- !u!1001 &869427098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1245,6 +1236,22 @@ MonoBehaviour:
   turnSlider: {fileID: 757922513}
   cameraController: {fileID: 0}
   Angle: 0
+--- !u!114 &1175940715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175940708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e401aa5596337bc4795637e297c3f4e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stamina_number_first: 3
+  stamina_value: 
+  stamina_number_now: 2
+  stamina_heal_needTime: 5
 --- !u!1 &1218058946
 GameObject:
   m_ObjectHideFlags: 0
@@ -2490,9 +2497,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7269321914943020945, guid: e08a9b246df9ee04e94dd7840a803fa5, type: 3}
     - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: MaxTurnCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
       propertyPath: _LoadController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[0]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: 472243bdf0068fe46bf015a04e90d9f7, type: 3}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[1]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: a2a0d707b8b534646be6def58eddc71e, type: 3}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[2]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: c7acd7dac3d67744ba5b53bcfec3400d, type: 3}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[3]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: 5e5c0de1587dc5742b004d0cff7c5588, type: 3}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[4]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: bb88fb5493f478940a09eae2119dd129, type: 3}
     - target: {fileID: 3288854397620575963, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
       propertyPath: m_RootOrder
       value: 3
