@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] int scaleCorrection;
     int behindPeopleCount;
     int behindPeopleRow;
-    int rowMax;
     int behindMax;
+    int behind0Max;
 
     Vector3 pos;
+    Vector3 parentPos;
 
     // Start is called before the first frame update
     void Start()
@@ -31,26 +33,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
         isFever = false;
 
         pos = new Vector3(0.0f, -0.25f, 0.0f);
+        parentPos = new Vector3(0.0f, -0.25f, 0.0f);
         behindPeopleCount = 0;
         behindPeopleRow = 0;
         behindMax = 9;
-        rowMax = (clearConditions - 18) / 9;
-        //余りがある場合、もう1列分追加
-        if ((clearConditions - 18) % 9 != 0) { rowMax++; }
-        aPeopleParents= new GameObject[rowMax];
-
+        behind0Max = 12;
         //人の列の親生成
-        for (int i = 0; i < rowMax; i++)
-        {
-            GameObject cloneParent = Instantiate(aPeopleParent, Vector3.zero, Quaternion.identity);
-            cloneParent.name = "Parent" + i;
-            cloneParent.transform.parent = this.transform;
-            cloneParent.transform.localPosition = pos;
-            cloneParent.transform.localRotation = Quaternion.identity;
-
-            pos.z = -1.3f - 0.6f * i;
-            aPeopleParents[i] = cloneParent;
-        }
+        GenerateParent(0);
     }
 
     //神輿との判定
@@ -62,6 +51,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log("People Touch");
 
             peopleCount++;
+            behindPeopleCount = peopleCount - 18;
+            if (behindPeopleCount % 9 == 1)
+            {
+                //列に9人いる時、列を増やす
+                GenerateParent(1);
+            }
+
             Destroy(other.gameObject);
 
             Debug.Log(peopleCount);
@@ -85,6 +81,30 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
+    }
+
+    void GenerateParent(float initCorre)
+    {
+        int childCount = this.transform.childCount - 2;
+        Array.Resize(ref aPeopleParents, aPeopleParents.Length + 1);
+        parentPos.z = initCorre * (-0.7f - 0.6f * childCount);
+
+        GameObject cloneParent = Instantiate(aPeopleParent, Vector3.zero, Quaternion.identity);
+        cloneParent.name = "Parent" + childCount;
+        cloneParent.transform.parent = this.transform;
+        cloneParent.transform.localPosition = parentPos;
+        cloneParent.transform.localRotation = Quaternion.identity;
+
+        aPeopleParents[childCount] = cloneParent;
+    }
+
+    void DestroyParent()
+    {
+        int childCount = this.transform.childCount - 1;
+
+        Destroy(this.transform.GetChild(childCount).gameObject);
+
+        Array.Resize(ref aPeopleParents, aPeopleParents.Length - 1);
     }
 
     //人の生成
@@ -113,7 +133,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             else { pos.z = -0.75f * scaleCorrection; }
         }
         //神輿の後ろの人
-        else if (peopleCount > 18 && peopleCount <= clearConditions)
+        else if (peopleCount > 18)
         {
             behindPeopleCount = peopleCount - 18;
 
@@ -170,26 +190,75 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("Food Touch");
 
-        int childCount = aPeopleParents[behindPeopleRow].transform.childCount - 1;
+        int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
+        Vector3 destroyObj = Vector3.zero;
 
         for (int i = 0; i < touchFoodDecrPeople; i++)
         {
+            if (childCount % 2 == 0) { rl = 1; }
+            else { rl = -1; }
+
+            if (peopleCount > 18) 
+            { 
+                destroyObj.x = 0.6f * (childCount / 2) * rl * scaleCorrection;
+                destroyObj.z = 0.0f;
+            }
+            else 
+            {
+                if (peopleCount > 6 && peopleCount <= 12)
+                {
+                    if (peopleCount % 2 == 0) { destroyObj.x = -1.6f * scaleCorrection; }
+                    else { destroyObj.x = 1.6f * scaleCorrection; }
+                }
+                else if (peopleCount > 12 && peopleCount <= 18)
+                {
+                    if (peopleCount % 2 == 0) { destroyObj.x = -2.2f * scaleCorrection; }
+                    else { destroyObj.x = 2.2f * scaleCorrection; }
+                }
+
+                if (peopleCount == 7 || peopleCount == 8 ||
+                    peopleCount == 13 || peopleCount == 14) { destroyObj.z = 0.5f * scaleCorrection; }
+                else if (peopleCount == 9 || peopleCount == 10 ||
+                    peopleCount == 15 || peopleCount == 16) { destroyObj.z = -0.1f * scaleCorrection; }
+                else { destroyObj.z = -0.75f * scaleCorrection; }
+            }
+
             if (peopleCount > 6)
             {
-                Debug.Log("childCount:"+childCount);
+                for (int j = 0; j < childCount; j++)
+                {
+                    Transform childTransform = aPeopleParents[behindPeopleRow].transform.GetChild(j);
+                    Vector3 childObj = childTransform.localPosition;
 
-                Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(childCount).gameObject);
-                peopleCount--;
-                Debug.Log(peopleCount);
-                if (childCount == 0) 
-                { 
-                    if(behindPeopleRow>0) { behindPeopleRow--; }
-                    if(behindPeopleRow==0) { childCount = 11; }
-                    else { childCount = behindMax - 1; }
+                    //Debug.Log("destroyObj:" + destroyObj);
+                    //Debug.Log("childObj" + childObj);
+
+                    if (childObj == destroyObj) /*(childObj.x == destroyObj.x && childObj.z == destroyObj.z)*/
+                    {
+                        Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                        peopleCount--;
+                        childCount--;
+                        break;
+                    }
                 }
-                else { childCount--; }
+
+                //子が0になったら1つ前の親に
+                if (childCount == 0)
+                {
+                    if (behindPeopleRow > 0) { behindPeopleRow--; }
+                    if (behindPeopleRow == 0) { childCount = behind0Max; }
+                    else { childCount = behindMax; }
+
+                    DestroyParent();
+                }
+            }
+            else 
+            { 
+                GameOver();
+                break;
             }
         }
+        Debug.Log("peopleCount:" + peopleCount);
     }
 
     public void RightHit()
