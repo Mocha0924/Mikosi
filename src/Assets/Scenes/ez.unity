@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearConditions: 100
-  AfterPeople: {fileID: 999420051843794743, guid: dae0bcd378ed8714abc2eaeefd432e74, type: 3}
+  AfterPeople: {fileID: 1683750296543731954, guid: 670fe4a462c86c04c89252daade88438, type: 3}
   aPeopleParents: []
   aPeopleParent: {fileID: 4856096215076513259, guid: fd591c1ba5986de449073e1e2db29088, type: 3}
   touchFoodDecrPeople: 6
@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2047846129
 BoxCollider:
   m_ObjectHideFlags: 0
