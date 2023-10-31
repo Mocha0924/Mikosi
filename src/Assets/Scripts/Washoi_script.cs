@@ -30,8 +30,10 @@ public class Washoi_script : MonoBehaviour
 
         if (Input_washoi_once == 1 && stamina_script.stamina_number_now != 0)
         {
+            
+            stamina_script.image_clone[stamina_script.stamina_number_now - 1 ].color = new Color(0.5f, 0.5f, 0);
 
-           stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
+            stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
 
             if (stamina_script.stamina_number_now != 0) {stamina_script.stamina_number_now--; }
 

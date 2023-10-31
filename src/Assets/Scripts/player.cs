@@ -306,8 +306,8 @@ public class player : MonoBehaviour
             float now_velocity_x = my_Rigidbody.velocity.x;
             float now_velocity_z = my_Rigidbody.velocity.z;
             my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
-
-
+           
+            stamina_script.image_clone[stamina_script.stamina_number_now - 1].color = new Color(0.5f, 0.5f, 0);
             stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
 
             if (stamina_script.stamina_number_now != 0) {stamina_script.stamina_number_now--; }
