@@ -301,13 +301,13 @@ public class player : MonoBehaviour
 
         force.y = -gravity;
 
-        if (Input_Jump_once == 1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
+        if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
         {
             float now_velocity_x = my_Rigidbody.velocity.x;
             float now_velocity_z = my_Rigidbody.velocity.z;
             my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
-
-
+           
+            stamina_script.image_clone[stamina_script.stamina_number_now - 1].color = new Color(0.5f, 0.5f, 0);
             stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
 
             if (stamina_script.stamina_number_now != 0) {stamina_script.stamina_number_now--; }
@@ -352,7 +352,7 @@ public class player : MonoBehaviour
             }
         }
         else
-            my_Transform.position += transform.forward * (my_forward_speed );
+            my_Transform.position += transform.forward * (my_forward_speed*((mikoshiCollision.peopleCount/10)*0.05f+1) );
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
 
