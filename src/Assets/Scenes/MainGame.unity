@@ -1252,6 +1252,9 @@ MonoBehaviour:
   stamina_value: 
   stamina_number_now: 2
   stamina_heal_needTime: 5
+  stamina_image: {fileID: 6805831829185022211, guid: a030fa9649fb00448803d5cad41c8797, type: 3}
+  image_clone: []
+  canvas: {fileID: 757922512}
 --- !u!1 &1218058946
 GameObject:
   m_ObjectHideFlags: 0
