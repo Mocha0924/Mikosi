@@ -4,6 +4,7 @@ using UnityEngine;
 //using System;
 public class LoadController : MonoBehaviour
 {
+    [SerializeField] private float People_Space;
     [SerializeField] private GameObject center;
     public  GameObject end;
     public  GameObject begin;

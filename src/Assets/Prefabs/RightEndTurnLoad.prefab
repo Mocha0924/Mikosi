@@ -1857,8 +1857,8 @@ MonoBehaviour:
   TurnStartLoad: {fileID: 0}
   PeopleGenerationMin: 20
   PeopleGenerationMax: 35
-  FoodGenerationMin: 15
-  FoodGenerationMax: 20
+  FoodGenerationMin: 0
+  FoodGenerationMax: 0
   turnSlider: {fileID: 0}
   turnStick: {fileID: 0}
   randObject: 1

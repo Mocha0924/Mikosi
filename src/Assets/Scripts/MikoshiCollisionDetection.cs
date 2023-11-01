@@ -25,6 +25,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     Vector3 pos;
     Vector3 parentPos;
 
+    public int ColumnCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +87,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void GenerateParent(float initCorre)
     {
+        ColumnCount++;
         int childCount = Parents.transform.childCount;
         Array.Resize(ref aPeopleParents, aPeopleParents.Length + 1);
         parentPos.z = initCorre * (-0.7f - 0.6f * childCount);
@@ -101,6 +103,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void DestroyParent()
     {
+        ColumnCount--;
         int childCount = Parents.transform.childCount - 1;
 
         Destroy(Parents.transform.GetChild(childCount).gameObject);
