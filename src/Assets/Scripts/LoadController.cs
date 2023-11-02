@@ -224,7 +224,7 @@ public class LoadController : MonoBehaviour
             {
                 for (int j = 0; j < LoadZ.Count; j++)
                 {
-                    CoodinateList.Add(new Vector3(LoadX[i], this.transform.position.y+1.3f, LoadZ[j]));
+                    CoodinateList.Add(new Vector3(LoadX[i], this.transform.position.y+3.43f, LoadZ[j]));
                 }
             }
         }
@@ -234,7 +234,7 @@ public class LoadController : MonoBehaviour
             {
                 for (int j = 0; j < LoadX.Count; j++)
                 {
-                    CoodinateList.Add(new Vector3(LoadZ[i], this.transform.position.y+1.3f, LoadX[j]));
+                    CoodinateList.Add(new Vector3(LoadZ[i], this.transform.position.y + 3.43f, LoadX[j]));
                 }
             }
         }
@@ -254,13 +254,14 @@ public class LoadController : MonoBehaviour
         int Peoplerand = Random.Range(PeopleGenerationMin, PeopleGenerationMax+1);
         for (int i = 0; i < Peoplerand; i++)
         {
-           GameObject PeoplePre =  Instantiate(people, CoodinateList[i], Quaternion.identity);
+            Debug.Log("angle"+(float)Angle);
+            GameObject PeoplePre = Instantiate(people, CoodinateList[i], new Quaternion(0,180+ ((float)Angle*90),0,0));
            ObjectList.Add(PeoplePre);
         }
         int Foodrand = Random.Range(FoodGenerationMin,FoodGenerationMax + 1);
         for (int i = Peoplerand ; i < Peoplerand+Foodrand; i++)
         {
-            GameObject FoodPre = Instantiate(food, CoodinateList[i], Quaternion.identity);
+            GameObject FoodPre = Instantiate(food, CoodinateList[i], new Quaternion(0, 180 + ((float)Angle * 90), 0, 0));
             ObjectList.Add(FoodPre);
         }
     }
