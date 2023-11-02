@@ -25,10 +25,17 @@ public class MikoshiCollisionDetection : MonoBehaviour
     Vector3 pos;
     Vector3 parentPos;
 
+    private AudioSource audioSource;
+
     public int ColumnCount = 0;
+
+    [SerializeField] private AudioClip PeopleRecoverySound;
+    [SerializeField] private AudioClip FoodHitSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         peopleCount = 6;
         AfterPeople.transform.localPosition = Vector3.zero;
 
@@ -50,6 +57,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         //人との接触
         if (other.gameObject.tag == "People")
         {
+            audioSource.PlayOneShot(PeopleRecoverySound);
             Debug.Log("People Touch");
 
             peopleCount++;
@@ -193,7 +201,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-
+        audioSource.PlayOneShot(FoodHitSound);
         int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
         Vector3 destroyObj = Vector3.zero;
 

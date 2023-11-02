@@ -12,10 +12,12 @@ public class Washoi_script : MonoBehaviour
 
     MikoshiCollisionDetection MCD;
     stamina stamina_script;
-
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip[] WasshoiSounds;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         MCD = GetComponent<MikoshiCollisionDetection>();
         stamina_script = GetComponent<stamina>();
     }
@@ -30,7 +32,10 @@ public class Washoi_script : MonoBehaviour
 
         if (Input_washoi_once == -1 && stamina_script.stamina_number_now != 0)
         {
-            
+            for (int i = 0; i < 2; i++)
+            {
+                audioSource.PlayOneShot(WasshoiSounds[i]);
+            }
             stamina_script.image_clone[stamina_script.stamina_number_now - 1 ].color = new Color(0.5f, 0.5f, 0);
 
             stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;

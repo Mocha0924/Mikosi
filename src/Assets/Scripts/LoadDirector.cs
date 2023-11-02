@@ -18,6 +18,7 @@ public class LoadDirector : MonoBehaviour
     [SerializeField] private List<GameObject> Patarn_List;
     public List<GameObject> Cource_List;
     public int CourseCount = 0;
+    public SEController SE;
 
     private void Start()
     {

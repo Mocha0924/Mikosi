@@ -71,6 +71,7 @@ public class LoadController : MonoBehaviour
                 }
                 if (Director.turnCheck)
                 {
+                    Director.SE.Caveat();
                     if (Director.RightTurn)
                     {
                         TurnStartLoad = this.gameObject;
@@ -120,7 +121,6 @@ public class LoadController : MonoBehaviour
                 }
                 else if (Director.turnCount >= Director.MaxTurnCount)
                 {
-                    Debug.Log("a");
                     int rand = Random.Range(0, 2);
                     if (rand > 0)
                         Director.RightTurn = true;

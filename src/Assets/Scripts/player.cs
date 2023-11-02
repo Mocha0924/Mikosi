@@ -38,6 +38,12 @@ public class player : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     private MikoshiCollisionDetection mikoshiCollision;
 
+    private AudioSource audioSource;
+    [SerializeField] private SEController SE;
+    [SerializeField] private AudioClip[] JumpSounds;
+    [SerializeField] private AudioClip TurnSound;
+
+    private bool turnSoundCheck = false;
     public enum playerType
     {
         Up,
@@ -51,6 +57,7 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         my_Rigidbody = GetComponent<Rigidbody>();
         my_Transform = GetComponent<Transform>();
         mikoshiCollision = GetComponent<MikoshiCollisionDetection>();
@@ -303,6 +310,11 @@ public class player : MonoBehaviour
 
         if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
         {
+            for(int i = 0;i<2;i++)
+            {
+                audioSource.PlayOneShot(JumpSounds[i]);
+            }
+           
             float now_velocity_x = my_Rigidbody.velocity.x;
             float now_velocity_z = my_Rigidbody.velocity.z;
             my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
@@ -329,6 +341,12 @@ public class player : MonoBehaviour
     {
         if (turn_complete_R)
         {
+            if(!turnSoundCheck)
+            {
+                SE.StopSound();
+                turnSoundCheck = true;
+                audioSource.PlayOneShot(TurnSound);
+            }
             turn_times += Turn_speed;
 
             transform.rotation = Quaternion.Euler(0, turn_times, 0);
@@ -336,11 +354,18 @@ public class player : MonoBehaviour
             if (turn_times % 90 == 0)
             {
                 turn_complete_R = false;
+                turnSoundCheck = false;
                 turnSlider.RightTurnEnd();
             }
         }
         else if (turn_complete_L)
         {
+            if (!turnSoundCheck)
+            {
+                SE.StopSound();
+                turnSoundCheck = true;
+                audioSource.PlayOneShot(TurnSound);
+            }
             turn_times -= Turn_speed;
 
             transform.rotation = Quaternion.Euler(0, turn_times, 0);
@@ -348,6 +373,7 @@ public class player : MonoBehaviour
             if (turn_times % 90 == 0)
             {
                 turn_complete_L = false;
+                turnSoundCheck = false;
                 turnSlider.LeftTurnEnd();
             }
         }
