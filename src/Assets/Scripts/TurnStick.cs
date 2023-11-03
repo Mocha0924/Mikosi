@@ -10,10 +10,12 @@ public class TurnStick : MonoBehaviour
     public bool in_corner = false;
     public int turn_times = 0;
     [SerializeField] private TurnSlider turnSlider;
+    private MikoshiCollisionDetection MikoshiCollision;
     // Start is called before the first frame update
     void Start()
     {
         turnSlider = GameObject.Find("UICanvas").GetComponent<TurnSlider>();
+        MikoshiCollision = GameObject.Find("Player").GetComponent<MikoshiCollisionDetection>();
     }
 
     // Update is called once per frame
@@ -37,7 +39,11 @@ public class TurnStick : MonoBehaviour
         {
             Debug.Log("trigger");
             in_corner = true;
-            turn_times = 0;
+            if (MikoshiCollision.playerMode != MikoshiCollisionDetection.PlayerMode.Play)
+                turn_times = turnSlider.TurnTime_CompleteEnd;
+            else
+                turn_times = 0;
+
         }
        
     }

@@ -17,6 +17,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
+    [SerializeField] private float BonusMagnification;
    
     [SerializeField] float slide_power = 2f;
     float Input_Horizontal;
@@ -71,6 +72,7 @@ public class player : MonoBehaviour
 
     void Update()
     {
+     
         Input_Horizontal = Input.GetAxis("Horizontal");
         Input_Jump = Input.GetAxis("Jump");
 
@@ -328,11 +330,16 @@ public class player : MonoBehaviour
 
         }
 
-        force *= Time.deltaTime;
-        my_Rigidbody.AddForce(force, ForceMode.Acceleration);
+        if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play||
+            mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+        {
+            force *= Time.deltaTime;
+            my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
-        old_Horizontal = Input_Horizontal;
-        old_Jump = Input_Jump;
+            old_Horizontal = Input_Horizontal;
+            old_Jump = Input_Jump;
+        }
+       
 
 
     }
@@ -377,8 +384,11 @@ public class player : MonoBehaviour
                 turnSlider.LeftTurnEnd();
             }
         }
-        else
-            my_Transform.position += transform.forward * (my_forward_speed*((mikoshiCollision.peopleCount/10)*0.05f+1) );
+        else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+            my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
+        else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
+            my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
+
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
 
