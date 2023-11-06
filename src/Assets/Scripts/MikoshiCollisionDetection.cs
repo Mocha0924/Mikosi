@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using TMPro;
 public class MikoshiCollisionDetection : MonoBehaviour
 {
     public int clearConditions;
@@ -38,8 +38,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
+    [SerializeField] private GameObject Wait;
+    [SerializeField]private TextMeshProUGUI WaitText;
+    [SerializeField] private int MaxWaitTime;
     public enum PlayerMode
     { 
+        Before,
         Wait,
         Play,
         Bonus,
@@ -47,7 +51,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Gameover
     }
 
-    public PlayerMode playerMode = PlayerMode.Play;
+    public PlayerMode playerMode = PlayerMode.Before;
 
 
     // Start is called before the first frame update
@@ -67,6 +71,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
         behind0Max = 12;
         //人の列の親生成
         GenerateParent(0);
+    }
+
+    private void Update()
+    {
+        if (Input.anyKeyDown&&playerMode == PlayerMode.Before)
+            WaitStart();
     }
 
     //神輿との判定
@@ -101,6 +111,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
         }
     }
 
+    public void WaitStart()
+    {
+        playerMode = PlayerMode.Wait;
+        Wait.SetActive(true);
+        WaitText.text = MaxWaitTime.ToString("0");
+        StartCoroutine("WaitGame");
+    }
     public void FeverTime()
     {
         Debug.Log("Fever");
@@ -119,6 +136,22 @@ public class MikoshiCollisionDetection : MonoBehaviour
         GameoverResult.SetActive(true);
     }
 
+    public void GameStart()
+    {
+        playerMode = PlayerMode.Play;
+        Wait.SetActive(false);
+    }
+    private IEnumerator WaitGame()
+    {
+        Debug.Log("wait");
+        for (int WaitTime = 0;WaitTime < MaxWaitTime;WaitTime++)
+        {
+            WaitText.text = (MaxWaitTime-WaitTime).ToString("0");
+            yield return new WaitForSeconds(1);
+            Debug.Log("1秒立った");
+        }
+        GameStart();
+    }
     private IEnumerator GameClear()
     {
         yield return new WaitForSeconds(BonusTime);

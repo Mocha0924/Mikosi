@@ -310,29 +310,30 @@ public class player : MonoBehaviour
 
         force.y = -gravity;
 
-        if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
-        {
-            for(int i = 0;i<2;i++)
-            {
-                audioSource.PlayOneShot(JumpSounds[i]);
-            }
-           
-            float now_velocity_x = my_Rigidbody.velocity.x;
-            float now_velocity_z = my_Rigidbody.velocity.z;
-            my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
-           
-            stamina_script.image_clone[stamina_script.stamina_number_now - 1].color = new Color(0.5f, 0.5f, 0);
-            stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
-
-            if (stamina_script.stamina_number_now != 0) {stamina_script.stamina_number_now--; }
-
-
-
-        }
+       
 
         if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play||
             mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
         {
+            if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    audioSource.PlayOneShot(JumpSounds[i]);
+                }
+
+                float now_velocity_x = my_Rigidbody.velocity.x;
+                float now_velocity_z = my_Rigidbody.velocity.z;
+                my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
+
+                stamina_script.image_clone[stamina_script.stamina_number_now - 1].color = new Color(0.5f, 0.5f, 0);
+                stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
+
+                if (stamina_script.stamina_number_now != 0) { stamina_script.stamina_number_now--; }
+
+
+
+            }
             force *= Time.deltaTime;
             my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 

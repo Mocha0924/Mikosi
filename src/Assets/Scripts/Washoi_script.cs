@@ -14,6 +14,7 @@ public class Washoi_script : MonoBehaviour
     stamina stamina_script;
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] WasshoiSounds;
+    [SerializeField] private MikoshiCollisionDetection MikoshiCollision;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class Washoi_script : MonoBehaviour
 
         old_washoi = Input_washoi;
 
-        if (Input_washoi_once == -1 && stamina_script.stamina_number_now != 0)
+        if (Input_washoi_once == -1 && stamina_script.stamina_number_now != 0&&MikoshiCollision.playerMode==MikoshiCollisionDetection.PlayerMode.Play|| MikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
         {
             for (int i = 0; i < 2; i++)
             {
