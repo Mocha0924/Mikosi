@@ -34,7 +34,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public int ColumnCount = 0;
 
     [SerializeField] private AudioClip PeopleRecoverySound;
+    [SerializeField] private AudioClip SubSound;
     [SerializeField] private AudioClip FoodHitSound;
+    [SerializeField] private AudioClip StartSound;
 
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
@@ -138,6 +140,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void GameStart()
     {
+        MainBGMAudio.Play();
+        m_audioSource.PlayOneShot(StartSound);
         playerMode = PlayerMode.Play;
         Wait.SetActive(false);
     }
@@ -146,9 +150,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Debug.Log("wait");
         for (int WaitTime = 0;WaitTime < MaxWaitTime;WaitTime++)
         {
+            m_audioSource.PlayOneShot(SubSound);
             WaitText.text = (MaxWaitTime-WaitTime).ToString("0");
             yield return new WaitForSeconds(1);
-            Debug.Log("1秒立った");
         }
         GameStart();
     }

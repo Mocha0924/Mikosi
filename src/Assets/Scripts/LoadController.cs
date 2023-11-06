@@ -254,14 +254,21 @@ public class LoadController : MonoBehaviour
         int Peoplerand = Random.Range(PeopleGenerationMin, PeopleGenerationMax+1);
         for (int i = 0; i < Peoplerand; i++)
         {
-            Debug.Log("angle"+(float)Angle);
-            GameObject PeoplePre = Instantiate(people, CoodinateList[i], new Quaternion(0,180+ ((float)Angle*90),0,0));
-           ObjectList.Add(PeoplePre);
+            GameObject PeoplePre = Instantiate(people, CoodinateList[i],Quaternion.identity);
+            switch (Angle)
+            {
+                case LoadType.Up: PeoplePre.transform.eulerAngles = new Vector3(0, 180, 0);break;
+                case LoadType.Right: PeoplePre.transform.eulerAngles = new Vector3(0, 270, 0); break;
+                case LoadType.Down: PeoplePre.transform.eulerAngles = new Vector3(0, 0, 0); break;
+                case LoadType.Left: PeoplePre.transform.eulerAngles = new Vector3(0, 90, 0); break;
+            }
+
+            ObjectList.Add(PeoplePre);
         }
         int Foodrand = Random.Range(FoodGenerationMin,FoodGenerationMax + 1);
         for (int i = Peoplerand ; i < Peoplerand+Foodrand; i++)
         {
-            GameObject FoodPre = Instantiate(food, CoodinateList[i], new Quaternion(0, 180 + ((float)Angle * 90), 0, 0));
+            GameObject FoodPre = Instantiate(food, CoodinateList[i], Quaternion.identity);
             ObjectList.Add(FoodPre);
         }
     }
