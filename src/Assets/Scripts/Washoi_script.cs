@@ -31,7 +31,8 @@ public class Washoi_script : MonoBehaviour
 
         old_washoi = Input_washoi;
 
-        if (Input_washoi_once == -1 && stamina_script.stamina_number_now != 0&&MikoshiCollision.playerMode==MikoshiCollisionDetection.PlayerMode.Play|| MikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+        if (Input_washoi_once == -1 && stamina_script.stamina_number_now != 0&&MikoshiCollision.playerMode==MikoshiCollisionDetection.PlayerMode.Play||
+            Input_washoi_once == -1 && MikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
         {
             for (int i = 0; i < 2; i++)
             {
