@@ -71,31 +71,34 @@ public class Washoi_script : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            audioSource.PlayOneShot(PeopleRecoverySound);
-            Debug.Log("People Touch");
 
-            MCD.peopleCount++;
-            MCD.PeopleNumText.text = (MCD.peopleCount - 6).ToString("000") + "人神輿";
-            MCD.behindPeopleCount = MCD.peopleCount - 18;
-            if (MCD.behindPeopleCount % 9 == 1)
+            if (hit.collider.tag == "Peoson")
             {
-                //列に9人いる時、列を増やす
-                MCD.GenerateParent(1);
+                audioSource.PlayOneShot(PeopleRecoverySound);
+                Debug.Log("People Touch");
+
+                MCD.peopleCount++;
+                MCD.PeopleNumText.text = (MCD.peopleCount - 6).ToString("000") + "人神輿";
+                MCD.behindPeopleCount = MCD.peopleCount - 18;
+                if (MCD.behindPeopleCount % 9 == 1)
+                {
+                    //列に9人いる時、列を増やす
+                    MCD.GenerateParent(1);
+                }
+
+                Destroy(hit.collider.gameObject);
+
+                Debug.Log(MCD.peopleCount);
+
+                //人の生成
+                MCD.GenerateMikoshiPeople();
+
+                if (MCD.peopleCount >= MCD.clearConditions && MCD.isFever == false)
+                {
+                    MCD.isFever = true;
+                    MCD.FeverTime();
+                }
             }
-
-            Destroy(hit.collider.gameObject);
-
-            Debug.Log(MCD.peopleCount);
-
-            //人の生成
-            MCD.GenerateMikoshiPeople();
-
-            if (MCD.peopleCount >= MCD.clearConditions && MCD.isFever == false)
-            {
-                MCD.isFever = true;
-                MCD.FeverTime();
-            }
-
 
         }
 

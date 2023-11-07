@@ -18,7 +18,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private float BonusTime;
 
     [SerializeField] int scaleCorrection;
-    int behindPeopleCount;
+    public int behindPeopleCount;
     int behindPeopleRow;
     int behindMax;
     int behind0Max;
@@ -44,7 +44,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
     [SerializeField]private TextMeshProUGUI WaitText;
-    [SerializeField] private TextMeshProUGUI PeopleNumText;
+    [SerializeField] public TextMeshProUGUI PeopleNumText;
     [SerializeField] private int MaxWaitTime;
     public enum PlayerMode
     { 
@@ -173,7 +173,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         PeopleNum.SetActive(false);
     }
 
-    void GenerateParent(float initCorre)
+    public void GenerateParent(float initCorre)
     {
         ColumnCount++;
         int childCount = Parents.transform.childCount;
