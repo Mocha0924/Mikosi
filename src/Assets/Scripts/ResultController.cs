@@ -6,6 +6,7 @@ public class ResultController : MonoBehaviour
 {
     [SerializeField] private List<Button> buttons;
     [SerializeField]private int ButtonNum = 0;
+    [SerializeField] private GameObject Select;
     public enum ButtonType
     {
         Normal,
@@ -23,15 +24,17 @@ public class ResultController : MonoBehaviour
         {
             ButtonNum--;
             buttonType = ButtonType.Up;
+            Select.transform.localPosition += new Vector3(0,136,0);
         }
         if ((lsh <= -0.8f) && buttonType == ButtonType.Normal && ButtonNum < buttons.Count-1)
         {
             ButtonNum++;
             buttonType = ButtonType.Down;
+            Select.transform.localPosition += new Vector3(0, -136, 0);
         }
-        if ((lsh <= -0.8f) && buttonType == ButtonType.Up)
+        if ((lsh == 0) && buttonType == ButtonType.Up)
             buttonType = ButtonType.Normal;
-        if ((lsh >= 0.8f) && buttonType == ButtonType.Down)
+        if ((lsh == 0) && buttonType == ButtonType.Down)
             buttonType = ButtonType.Normal;
 
         if (Input.GetKeyDown("joystick button 0"))
