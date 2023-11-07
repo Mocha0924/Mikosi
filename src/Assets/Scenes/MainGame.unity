@@ -3461,11 +3461,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stamina_number_first: 3
-  stamina_value: 
+  stamina_value: []
   stamina_number_now: 2
+  slide_value: 0
   stamina_heal_needTime: 5
-  stamina_image: {fileID: 6805831829185022211, guid: a030fa9649fb00448803d5cad41c8797, type: 3}
-  image_clone: []
+  stamina_slider: {fileID: 5197942306419588906, guid: 35d927d6f85a69145809eeadaa811428, type: 3}
+  slider_clone: []
   canvas: {fileID: 757922512}
 --- !u!82 &1175940716
 AudioSource:

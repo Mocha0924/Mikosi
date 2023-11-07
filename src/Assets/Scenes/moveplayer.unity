@@ -451,6 +451,7 @@ MonoBehaviour:
   my_forward_speed: 0
   jumpVector: 20
   gravity: 1000
+  BonusMagnification: 0
   slide_power: 150
   Input_Jump_once: 0
   turn_complete_R: 0
@@ -458,6 +459,9 @@ MonoBehaviour:
   Turn_speed: 1
   turnSlider: {fileID: 0}
   cameraController: {fileID: 0}
+  SE: {fileID: 0}
+  JumpSounds: []
+  TurnSound: {fileID: 0}
   Angle: 0
 --- !u!114 &828795811
 MonoBehaviour:
@@ -491,6 +495,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Input_washoi_once: 0
   wasyoi_hankei: 8
+  WasshoiSounds: []
+  MikoshiCollision: {fileID: 0}
 --- !u!114 &828795813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,11 +510,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stamina_number_first: 3
-  stamina_value: 
+  stamina_value: []
   stamina_number_now: 2
+  slide_value: 0
   stamina_heal_needTime: 2
-  stamina_image: {fileID: 6805831829185022211, guid: a030fa9649fb00448803d5cad41c8797, type: 3}
-  image_clone: []
+  stamina_slider: {fileID: 5197942306419588906, guid: 35d927d6f85a69145809eeadaa811428, type: 3}
+  slider_clone: []
   canvas: {fileID: 962573753}
 --- !u!1001 &867321414
 PrefabInstance:
