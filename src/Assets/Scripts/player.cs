@@ -17,6 +17,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
+    [SerializeField] private float BonusMagnification;
    
     [SerializeField] float slide_power = 2f;
     float Input_Horizontal;
@@ -38,6 +39,12 @@ public class player : MonoBehaviour
     [SerializeField] private CameraController cameraController;
     private MikoshiCollisionDetection mikoshiCollision;
 
+    private AudioSource audioSource;
+    [SerializeField] private SEController SE;
+    [SerializeField] private AudioClip[] JumpSounds;
+    [SerializeField] private AudioClip TurnSound;
+
+    private bool turnSoundCheck = false;
     public enum playerType
     {
         Up,
@@ -51,6 +58,7 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         my_Rigidbody = GetComponent<Rigidbody>();
         my_Transform = GetComponent<Transform>();
         mikoshiCollision = GetComponent<MikoshiCollisionDetection>();
@@ -64,6 +72,7 @@ public class player : MonoBehaviour
 
     void Update()
     {
+     
         Input_Horizontal = Input.GetAxis("Horizontal");
         Input_Jump = Input.GetAxis("Jump");
 
@@ -301,26 +310,37 @@ public class player : MonoBehaviour
 
         force.y = -gravity;
 
-        if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
+       
+
+        if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play||
+            mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
         {
-            float now_velocity_x = my_Rigidbody.velocity.x;
-            float now_velocity_z = my_Rigidbody.velocity.z;
-            my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
-           
-            stamina_script.image_clone[stamina_script.stamina_number_now - 1].color = new Color(0.5f, 0.5f, 0);
-            stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
+            if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    audioSource.PlayOneShot(JumpSounds[i]);
+                }
 
-            if (stamina_script.stamina_number_now != 0) {stamina_script.stamina_number_now--; }
+                float now_velocity_x = my_Rigidbody.velocity.x;
+                float now_velocity_z = my_Rigidbody.velocity.z;
+                my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
+
+                stamina_script.image_clone[stamina_script.stamina_number_now - 1].color = new Color(0.5f, 0.5f, 0);
+                stamina_script.stamina_value[stamina_script.stamina_number_now] = 0;
+
+                if (stamina_script.stamina_number_now != 0) { stamina_script.stamina_number_now--; }
 
 
 
+            }
+            force *= Time.deltaTime;
+            my_Rigidbody.AddForce(force, ForceMode.Acceleration);
+
+            old_Horizontal = Input_Horizontal;
+            old_Jump = Input_Jump;
         }
-
-        force *= Time.deltaTime;
-        my_Rigidbody.AddForce(force, ForceMode.Acceleration);
-
-        old_Horizontal = Input_Horizontal;
-        old_Jump = Input_Jump;
+       
 
 
     }
@@ -329,6 +349,12 @@ public class player : MonoBehaviour
     {
         if (turn_complete_R)
         {
+            if(!turnSoundCheck)
+            {
+                SE.StopSound();
+                turnSoundCheck = true;
+                audioSource.PlayOneShot(TurnSound);
+            }
             turn_times += Turn_speed;
 
             transform.rotation = Quaternion.Euler(0, turn_times, 0);
@@ -336,11 +362,22 @@ public class player : MonoBehaviour
             if (turn_times % 90 == 0)
             {
                 turn_complete_R = false;
+                turnSoundCheck = false;
                 turnSlider.RightTurnEnd();
             }
+            if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
+            else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
+                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
         }
         else if (turn_complete_L)
         {
+            if (!turnSoundCheck)
+            {
+                SE.StopSound();
+                turnSoundCheck = true;
+                audioSource.PlayOneShot(TurnSound);
+            }
             turn_times -= Turn_speed;
 
             transform.rotation = Quaternion.Euler(0, turn_times, 0);
@@ -348,11 +385,19 @@ public class player : MonoBehaviour
             if (turn_times % 90 == 0)
             {
                 turn_complete_L = false;
+                turnSoundCheck = false;
                 turnSlider.LeftTurnEnd();
             }
+            if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
+            else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
+                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
         }
-        else
-            my_Transform.position += transform.forward * (my_forward_speed*((mikoshiCollision.peopleCount/10)*0.05f+1) );
+        else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+            my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
+        else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
+            my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
+
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
 

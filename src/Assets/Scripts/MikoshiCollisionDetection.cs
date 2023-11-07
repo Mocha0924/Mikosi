@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using TMPro;
 public class MikoshiCollisionDetection : MonoBehaviour
 {
     public int clearConditions;
@@ -15,6 +15,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] int touchFoodDecrPeople;
     public int peopleCount;
     public bool isFever;
+    [SerializeField] private float BonusTime;
 
     [SerializeField] int scaleCorrection;
     int behindPeopleCount;
@@ -25,9 +26,40 @@ public class MikoshiCollisionDetection : MonoBehaviour
     Vector3 pos;
     Vector3 parentPos;
 
+    private AudioSource m_audioSource;
+    [SerializeField] private AudioSource MainBGMAudio;
+    [SerializeField] private AudioSource BonusBGMAudio;
+    [SerializeField] private AudioSource ClearBGMAudio;
+    [SerializeField] private AudioSource GameoverBGMAudio;
+    public int ColumnCount = 0;
+
+    [SerializeField] private AudioClip PeopleRecoverySound;
+    [SerializeField] private AudioClip SubSound;
+    [SerializeField] private AudioClip FoodHitSound;
+    [SerializeField] private AudioClip StartSound;
+
+    [SerializeField] private GameObject ClearResult;
+    [SerializeField] private GameObject GameoverResult;
+    [SerializeField] private GameObject Wait;
+    [SerializeField]private TextMeshProUGUI WaitText;
+    [SerializeField] private int MaxWaitTime;
+    public enum PlayerMode
+    { 
+        Before,
+        Wait,
+        Play,
+        Bonus,
+        Clear,
+        Gameover
+    }
+
+    public PlayerMode playerMode = PlayerMode.Before;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        m_audioSource = GetComponent<AudioSource>();
         peopleCount = 6;
         AfterPeople.transform.localPosition = Vector3.zero;
 
@@ -43,12 +75,19 @@ public class MikoshiCollisionDetection : MonoBehaviour
         GenerateParent(0);
     }
 
+    private void Update()
+    {
+        if (Input.anyKeyDown&&playerMode == PlayerMode.Before)
+            WaitStart();
+    }
+
     //神輿との判定
     void OnTriggerEnter(Collider other)
     {
         //人との接触
         if (other.gameObject.tag == "People")
         {
+            m_audioSource.PlayOneShot(PeopleRecoverySound);
             Debug.Log("People Touch");
 
             peopleCount++;
@@ -74,18 +113,61 @@ public class MikoshiCollisionDetection : MonoBehaviour
         }
     }
 
+    public void WaitStart()
+    {
+        playerMode = PlayerMode.Wait;
+        Wait.SetActive(true);
+        WaitText.text = MaxWaitTime.ToString("0");
+        StartCoroutine("WaitGame");
+    }
     public void FeverTime()
     {
         Debug.Log("Fever");
+        playerMode = PlayerMode.Bonus;
+        MainBGMAudio.Stop();
+        BonusBGMAudio.Play();
+        StartCoroutine("GameClear");
     }
 
     public void GameOver()
     {
         Debug.Log("Game Over");
+        MainBGMAudio.Stop();
+        GameoverBGMAudio.Play();
+        playerMode = PlayerMode.Gameover;
+        GameoverResult.SetActive(true);
+    }
+
+    public void GameStart()
+    {
+        MainBGMAudio.Play();
+        m_audioSource.PlayOneShot(StartSound);
+        playerMode = PlayerMode.Play;
+        Wait.SetActive(false);
+    }
+    private IEnumerator WaitGame()
+    {
+        Debug.Log("wait");
+        for (int WaitTime = 0;WaitTime < MaxWaitTime;WaitTime++)
+        {
+            m_audioSource.PlayOneShot(SubSound);
+            WaitText.text = (MaxWaitTime-WaitTime).ToString("0");
+            yield return new WaitForSeconds(1);
+        }
+        GameStart();
+    }
+    private IEnumerator GameClear()
+    {
+        yield return new WaitForSeconds(BonusTime);
+        BonusBGMAudio.Stop();
+        ClearBGMAudio.Play();
+        ClearResult.SetActive(true);
+        playerMode = PlayerMode.Clear;
     }
 
     void GenerateParent(float initCorre)
     {
+        ColumnCount++;
         int childCount = Parents.transform.childCount;
         Array.Resize(ref aPeopleParents, aPeopleParents.Length + 1);
         parentPos.z = initCorre * (-0.7f - 0.6f * childCount);
@@ -101,6 +183,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void DestroyParent()
     {
+        ColumnCount--;
         int childCount = Parents.transform.childCount - 1;
 
         Destroy(Parents.transform.GetChild(childCount).gameObject);
@@ -190,76 +273,80 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-
-        int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
-        Vector3 destroyObj = Vector3.zero;
-
-        for (int i = 0; i < touchFoodDecrPeople; i++)
+        if(playerMode == PlayerMode.Play)
         {
-            if (childCount % 2 == 0) { rl = 1; }
-            else { rl = -1; }
+            m_audioSource.PlayOneShot(FoodHitSound);
+            int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
+            Vector3 destroyObj = Vector3.zero;
 
-            if (peopleCount > 18) 
-            { 
-                destroyObj.x = 0.6f * (childCount / 2) * rl * scaleCorrection;
-                destroyObj.z = 0.0f;
-            }
-            else 
+            for (int i = 0; i < touchFoodDecrPeople; i++)
             {
-                if (peopleCount > 6 && peopleCount <= 12)
+                if (childCount % 2 == 0) { rl = 1; }
+                else { rl = -1; }
+
+                if (peopleCount > 18)
                 {
-                    if (peopleCount % 2 == 0) { destroyObj.x = -1.6f * scaleCorrection; }
-                    else { destroyObj.x = 1.6f * scaleCorrection; }
+                    destroyObj.x = 0.6f * (childCount / 2) * rl * scaleCorrection;
+                    destroyObj.z = 0.0f;
                 }
-                else if (peopleCount > 12 && peopleCount <= 18)
+                else
                 {
-                    if (peopleCount % 2 == 0) { destroyObj.x = -2.2f * scaleCorrection; }
-                    else { destroyObj.x = 2.2f * scaleCorrection; }
-                }
-
-                if (peopleCount == 7 || peopleCount == 8 ||
-                    peopleCount == 13 || peopleCount == 14) { destroyObj.z = 0.5f * scaleCorrection; }
-                else if (peopleCount == 9 || peopleCount == 10 ||
-                    peopleCount == 15 || peopleCount == 16) { destroyObj.z = -0.1f * scaleCorrection; }
-                else { destroyObj.z = -0.75f * scaleCorrection; }
-            }
-
-            if (peopleCount > 6)
-            {
-                for (int j = 0; j < childCount; j++)
-                {
-                    Transform childTransform = aPeopleParents[behindPeopleRow].transform.GetChild(j);
-                    Vector3 childObj = childTransform.localPosition;
-
-                    //Debug.Log("destroyObj:" + destroyObj);
-                    //Debug.Log("childObj" + childObj);
-
-                    if (childObj == destroyObj) /*(childObj.x == destroyObj.x && childObj.z == destroyObj.z)*/
+                    if (peopleCount > 6 && peopleCount <= 12)
                     {
-                        Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
-                        peopleCount--;
-                        childCount--;
-                        break;
+                        if (peopleCount % 2 == 0) { destroyObj.x = -1.6f * scaleCorrection; }
+                        else { destroyObj.x = 1.6f * scaleCorrection; }
+                    }
+                    else if (peopleCount > 12 && peopleCount <= 18)
+                    {
+                        if (peopleCount % 2 == 0) { destroyObj.x = -2.2f * scaleCorrection; }
+                        else { destroyObj.x = 2.2f * scaleCorrection; }
+                    }
+
+                    if (peopleCount == 7 || peopleCount == 8 ||
+                        peopleCount == 13 || peopleCount == 14) { destroyObj.z = 0.5f * scaleCorrection; }
+                    else if (peopleCount == 9 || peopleCount == 10 ||
+                        peopleCount == 15 || peopleCount == 16) { destroyObj.z = -0.1f * scaleCorrection; }
+                    else { destroyObj.z = -0.75f * scaleCorrection; }
+                }
+
+                if (peopleCount > 6)
+                {
+                    for (int j = 0; j < childCount; j++)
+                    {
+                        Transform childTransform = aPeopleParents[behindPeopleRow].transform.GetChild(j);
+                        Vector3 childObj = childTransform.localPosition;
+
+                        //Debug.Log("destroyObj:" + destroyObj);
+                        //Debug.Log("childObj" + childObj);
+
+                        if (childObj == destroyObj) /*(childObj.x == destroyObj.x && childObj.z == destroyObj.z)*/
+                        {
+                            Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                            peopleCount--;
+                            childCount--;
+                            break;
+                        }
+                    }
+
+                    //子が0になったら1つ前の親に
+                    if (childCount == 0)
+                    {
+                        if (behindPeopleRow > 0) { behindPeopleRow--; }
+                        if (behindPeopleRow == 0) { childCount = behind0Max; }
+                        else { childCount = behindMax; }
+
+                        DestroyParent();
                     }
                 }
-
-                //子が0になったら1つ前の親に
-                if (childCount == 0)
+                else
                 {
-                    if (behindPeopleRow > 0) { behindPeopleRow--; }
-                    if (behindPeopleRow == 0) { childCount = behind0Max; }
-                    else { childCount = behindMax; }
-
-                    DestroyParent();
+                    GameOver();
+                    break;
                 }
             }
-            else 
-            { 
-                GameOver();
-                break;
-            }
+            Debug.Log("peopleCount:" + peopleCount);
         }
-        Debug.Log("peopleCount:" + peopleCount);
+       
     }
 
     public void RightHit()

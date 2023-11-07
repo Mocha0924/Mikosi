@@ -4,6 +4,7 @@ using UnityEngine;
 //using System;
 public class LoadController : MonoBehaviour
 {
+    [SerializeField] private float People_Space;
     [SerializeField] private GameObject center;
     public  GameObject end;
     public  GameObject begin;
@@ -70,6 +71,7 @@ public class LoadController : MonoBehaviour
                 }
                 if (Director.turnCheck)
                 {
+                    Director.SE.Caveat();
                     if (Director.RightTurn)
                     {
                         TurnStartLoad = this.gameObject;
@@ -119,7 +121,6 @@ public class LoadController : MonoBehaviour
                 }
                 else if (Director.turnCount >= Director.MaxTurnCount)
                 {
-                    Debug.Log("a");
                     int rand = Random.Range(0, 2);
                     if (rand > 0)
                         Director.RightTurn = true;
@@ -223,7 +224,7 @@ public class LoadController : MonoBehaviour
             {
                 for (int j = 0; j < LoadZ.Count; j++)
                 {
-                    CoodinateList.Add(new Vector3(LoadX[i], this.transform.position.y+1.3f, LoadZ[j]));
+                    CoodinateList.Add(new Vector3(LoadX[i], this.transform.position.y+3.43f, LoadZ[j]));
                 }
             }
         }
@@ -233,7 +234,7 @@ public class LoadController : MonoBehaviour
             {
                 for (int j = 0; j < LoadX.Count; j++)
                 {
-                    CoodinateList.Add(new Vector3(LoadZ[i], this.transform.position.y+1.3f, LoadX[j]));
+                    CoodinateList.Add(new Vector3(LoadZ[i], this.transform.position.y + 3.43f, LoadX[j]));
                 }
             }
         }
@@ -253,8 +254,16 @@ public class LoadController : MonoBehaviour
         int Peoplerand = Random.Range(PeopleGenerationMin, PeopleGenerationMax+1);
         for (int i = 0; i < Peoplerand; i++)
         {
-           GameObject PeoplePre =  Instantiate(people, CoodinateList[i], Quaternion.identity);
-           ObjectList.Add(PeoplePre);
+            GameObject PeoplePre = Instantiate(people, CoodinateList[i],Quaternion.identity);
+            switch (Angle)
+            {
+                case LoadType.Up: PeoplePre.transform.eulerAngles = new Vector3(0, 180, 0);break;
+                case LoadType.Right: PeoplePre.transform.eulerAngles = new Vector3(0, 270, 0); break;
+                case LoadType.Down: PeoplePre.transform.eulerAngles = new Vector3(0, 0, 0); break;
+                case LoadType.Left: PeoplePre.transform.eulerAngles = new Vector3(0, 90, 0); break;
+            }
+
+            ObjectList.Add(PeoplePre);
         }
         int Foodrand = Random.Range(FoodGenerationMin,FoodGenerationMax + 1);
         for (int i = Peoplerand ; i < Peoplerand+Foodrand; i++)

@@ -7,6 +7,7 @@ public class TurnSlider : MonoBehaviour
 {
     [SerializeField] private GameObject RightSliderObj;
     [SerializeField] private GameObject LeftSliderObj;
+    [SerializeField] private MikoshiCollisionDetection MikosiCollision;
     public Slider RightSliser;
     public Slider LeftSliser;
     public TurnStick turnStick;
@@ -17,6 +18,8 @@ public class TurnSlider : MonoBehaviour
         RightSliderObj.SetActive(true);
         RightSliser.value = 0;
         RightSliser.maxValue = TurnTime_CompleteEnd;
+        if (MikosiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+            RightSliser.value = RightSliser.maxValue;
     }
     public void RightTurnEnd()
     {
@@ -27,6 +30,8 @@ public class TurnSlider : MonoBehaviour
         LeftSliderObj.SetActive(true);
         LeftSliser.value = 0;
         LeftSliser.maxValue = TurnTime_CompleteEnd;
+        if (MikosiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
+            LeftSliser.value = LeftSliser.maxValue;
     }
     public void LeftTurnEnd()
     {
