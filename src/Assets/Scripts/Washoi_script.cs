@@ -91,6 +91,8 @@ public class Washoi_script : MonoBehaviour
 
             }
         }
+
+        
     }
 
 }

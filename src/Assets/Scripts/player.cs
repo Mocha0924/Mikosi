@@ -12,6 +12,7 @@ public class player : MonoBehaviour
     LoadController load;
     stamina stamina_script;
     string Horizon_move;
+    string Vertical_move;
     public float my_Thrust = 20f;
     public float my_Thrust_Max = 20f;
     public float my_forward_speed = 1f;
@@ -22,11 +23,13 @@ public class player : MonoBehaviour
     [SerializeField] float slide_power = 2f;
     float Input_Horizontal;
     float old_Horizontal;
+    float Input_Vertical;
+    float old_Vertical;
     float Input_Jump;
     float old_Jump;
     public float Input_Jump_once;
 
-
+    float forward_or_back_speed;
 
 
 
@@ -55,6 +58,7 @@ public class player : MonoBehaviour
     public playerType Angle;
 
     int Horizontal_controll;
+    int Vertical_controll;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +78,7 @@ public class player : MonoBehaviour
     {
      
         Input_Horizontal = Input.GetAxis("Horizontal");
+        Input_Vertical = Input.GetAxis("Vertical");
         Input_Jump = Input.GetAxis("Jump");
 
         Input_Jump_once = old_Jump - Input_Jump;
@@ -83,9 +88,20 @@ public class player : MonoBehaviour
         else if (Input_Horizontal - old_Horizontal < 0) { Horizontal_controll = -1; }
         else if ((Input_Horizontal < 1 && Input_Horizontal > -1)) { Horizontal_controll = 0; }
 
-        //Debug.Log(Horizon_move);
+        if (Input_Vertical - old_Vertical > 0) { Vertical_controll = 1; }
+        else if (Input_Vertical - old_Vertical < 0) { Vertical_controll = -1; }
+        else if ((Input_Vertical < 1 && old_Vertical > -1)) { Vertical_controll = 0; }
+
+ 
 
         Horizon_move = Horizontal_Contlroll(old_Horizontal, Input_Horizontal);
+        Vertical_move = Vertical_Contlroll(old_Vertical, Input_Vertical);
+
+        if(Vertical_move == "forwardmove"){ forward_or_back_speed = 1.25f;}
+        else if(Vertical_move == "backmove") {forward_or_back_speed = 0.75f;}
+        else { forward_or_back_speed = 1.0f; }
+
+        Debug.Log(forward_or_back_speed);
 
         if(!turn_complete_R&&!turn_complete_L)
         {
@@ -335,6 +351,7 @@ public class player : MonoBehaviour
             my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
             old_Horizontal = Input_Horizontal;
+            old_Vertical = Input_Vertical;
             old_Jump = Input_Jump;
         }
        
@@ -391,9 +408,9 @@ public class player : MonoBehaviour
                 my_Transform.position += transform.forward * (my_forward_speed * 0.5f);
         }
         else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
-            my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
         else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
-            my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
 
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
@@ -426,6 +443,35 @@ public class player : MonoBehaviour
         }
 
         return Horizon_move;
+
+
+    }
+
+    string Vertical_Contlroll(float old, float input)
+    {
+
+        string Vertical_move = "0";
+
+
+        if (old > Input_Vertical)
+        {
+            if (Input_Vertical > 0) { Vertical_move = "dontmove"; }
+            else { Vertical_move = "backmove"; }
+        }
+        else if (old < Input_Vertical)
+        {
+            if (Input_Vertical < 0) { Vertical_move = "dontmove"; }
+            else { Vertical_move = "forwardmove"; }
+        }
+        else if (old == Input_Vertical)
+        {
+            if (input == 0) { Vertical_move = "dontmove"; }
+            else if (input < 0) { Vertical_move = "backmove"; }
+            else if (input > 0) { Vertical_move = "forwardmove"; }
+
+        }
+
+        return Vertical_move;
 
 
     }
