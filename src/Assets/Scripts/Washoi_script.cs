@@ -14,6 +14,7 @@ public class Washoi_script : MonoBehaviour
     stamina stamina_script;
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] WasshoiSounds;
+    [SerializeField] private AudioClip PeopleRecoverySound;
     [SerializeField] private MikoshiCollisionDetection MikoshiCollision;
     // Start is called before the first frame update
     void Start()
@@ -70,29 +71,35 @@ public class Washoi_script : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            if (hit.collider.tag == "People")
+            audioSource.PlayOneShot(PeopleRecoverySound);
+            Debug.Log("People Touch");
+
+            MCD.peopleCount++;
+            MCD.PeopleNumText.text = (MCD.peopleCount - 6).ToString("000") + "人神輿";
+            MCD.behindPeopleCount = MCD.peopleCount - 18;
+            if (MCD.behindPeopleCount % 9 == 1)
             {
-                Debug.Log($"検出されたオブジェクト {hit.collider.name}");
-
-                MCD.peopleCount++;
-                Destroy(hit.collider.gameObject);
-
-                Debug.Log(MCD.peopleCount);
-
-                //人の生成
-                MCD.GenerateMikoshiPeople();
-
-                if (MCD.peopleCount >= MCD.clearConditions && MCD.isFever == false)
-                {
-                    MCD.isFever = true;
-                    MCD.FeverTime();
-                }
-
-
+                //列に9人いる時、列を増やす
+                MCD.GenerateParent(1);
             }
+
+            Destroy(hit.collider.gameObject);
+
+            Debug.Log(MCD.peopleCount);
+
+            //人の生成
+            MCD.GenerateMikoshiPeople();
+
+            if (MCD.peopleCount >= MCD.clearConditions && MCD.isFever == false)
+            {
+                MCD.isFever = true;
+                MCD.FeverTime();
+            }
+
+
         }
 
-        
+
     }
 
 }
