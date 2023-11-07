@@ -42,7 +42,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject GameoverResult;
     [SerializeField] private GameObject Wait;
     [SerializeField] private GameObject BeforePlay;
+    [SerializeField] private GameObject PeopleNum;
     [SerializeField]private TextMeshProUGUI WaitText;
+    [SerializeField] private TextMeshProUGUI PeopleNumText;
     [SerializeField] private int MaxWaitTime;
     public enum PlayerMode
     { 
@@ -60,6 +62,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PeopleNumText.text = 0.ToString("000")+"人神輿";
         m_audioSource = GetComponent<AudioSource>();
         peopleCount = 6;
         AfterPeople.transform.localPosition = Vector3.zero;
@@ -92,6 +95,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log("People Touch");
 
             peopleCount++;
+            PeopleNumText.text = (peopleCount-6).ToString("000") + "人神輿";
             behindPeopleCount = peopleCount - 18;
             if (behindPeopleCount % 9 == 1)
             {
@@ -116,6 +120,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void WaitStart()
     {
+        PeopleNum.SetActive(true); 
         BeforePlay.SetActive(false);
         playerMode = PlayerMode.Wait;
         Wait.SetActive(true);
@@ -165,6 +170,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         ClearBGMAudio.Play();
         ClearResult.SetActive(true);
         playerMode = PlayerMode.Clear;
+        PeopleNum.SetActive(false);
     }
 
     void GenerateParent(float initCorre)
@@ -346,7 +352,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
                     break;
                 }
             }
-            Debug.Log("peopleCount:" + peopleCount);
+        PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+        Debug.Log("peopleCount:" + peopleCount);
         //}
        
     }
