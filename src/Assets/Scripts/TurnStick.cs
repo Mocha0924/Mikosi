@@ -54,8 +54,8 @@ public class TurnStick : MonoBehaviour
         
         
 
-        Input_Horizontal = Input.GetAxis("Horizontal");
-        Input_Vertical = Input.GetAxis("Vertical");
+        Input_Horizontal = Input.GetAxis("Submit1");
+        Input_Vertical = Input.GetAxis("Submit2");
 
         if (RorL)
         {
