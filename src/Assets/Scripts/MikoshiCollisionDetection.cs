@@ -321,7 +321,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                         //Debug.Log("destroyObj:" + destroyObj);
                         //Debug.Log("childObj" + childObj);
 
-                        if (childObj == destroyObj) /*(childObj.x == destroyObj.x && childObj.z == destroyObj.z)*/
+                        if (childObj == destroyObj)
                         {
                             Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
                             peopleCount--;
@@ -362,7 +362,40 @@ public class MikoshiCollisionDetection : MonoBehaviour
         DecrPeople(isR, ref decrCount);
 
         //減った部分に後ろから人を補充する
+        for (int i = behindPeopleRow; i >= 0; i--)
+        {
+            int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
+            Vector3 moveObj = Vector3.zero;
+            GameObject moveObject = null;
+            int moveRow = 0, moveChild = 0;
+            bool isFirst = true;
 
+            for (int j = 0; j < childCount; j++)
+            {
+                Transform childTransform = aPeopleParents[i].transform.GetChild(j);
+                Vector3 compaObj = childTransform.localPosition;
+
+                //各列最初の対応するオブジェクトの場合はそれを保存、それ以降は保存してある座標より外側かどうか判定
+                if (isFirst == true)
+                {
+                    if ((isR == false) && (compaObj.x >= 1.2f * scaleCorrection) ||
+                    (isR == true) && (compaObj.x <= -1.2f * scaleCorrection))
+                    {
+                        moveRow = behindPeopleRow;
+                        moveChild= j;
+                        moveObject = aPeopleParents[moveRow].transform.GetChild(moveChild).gameObject;
+                    }
+                }
+                else
+                {
+
+                }
+            }
+
+            AfterPeopleMoveScript afterPeopleMoveScript = moveObject.GetComponent<AfterPeopleMoveScript>();
+            afterPeopleMoveScript.Move(moveObj);
+
+        }
     }
 
     public void LeftHit()
