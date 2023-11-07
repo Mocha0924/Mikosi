@@ -504,11 +504,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stamina_number_first: 3
-  stamina_value: []
+  stamina_value: 
   stamina_number_now: 2
-  stamina_heal_needTime: 3
-  stamina_slider: {fileID: 7548526161019400109, guid: 962533609b75b0548aa4b45a3c1686d9, type: 3}
-  slider_clone: []
+  stamina_heal_needTime: 2
+  stamina_image: {fileID: 6805831829185022211, guid: a030fa9649fb00448803d5cad41c8797, type: 3}
+  image_clone: []
   canvas: {fileID: 962573753}
 --- !u!1001 &867321414
 PrefabInstance:
