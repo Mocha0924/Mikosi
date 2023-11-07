@@ -110,7 +110,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             //人の生成
             GenerateMikoshiPeople();
 
-            if (peopleCount >= clearConditions&& isFever == false)
+            if (peopleCount-6 >= clearConditions&& isFever == false)
             {
                 isFever = true;
                 FeverTime();
@@ -281,8 +281,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-        //if(playerMode == PlayerMode.Play)
-        //{
+        if(playerMode == PlayerMode.Play)
+        {
             m_audioSource.PlayOneShot(FoodHitSound);
             int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
             Vector3 destroyObj = Vector3.zero;
@@ -354,7 +354,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             }
         PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
         Debug.Log("peopleCount:" + peopleCount);
-        //}
+        }
        
     }
 
