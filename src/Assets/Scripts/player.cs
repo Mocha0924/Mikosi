@@ -366,9 +366,9 @@ public class player : MonoBehaviour
                 turnSlider.RightTurnEnd();
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
-                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
+                my_Transform.position += transform.forward * (my_forward_speed  * 0.5f);
             else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
-                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
+                my_Transform.position += transform.forward * (my_forward_speed * 0.5f);
         }
         else if (turn_complete_L)
         {
@@ -389,9 +389,9 @@ public class player : MonoBehaviour
                 turnSlider.LeftTurnEnd();
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
-                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
+                my_Transform.position += transform.forward * (my_forward_speed *  0.4f);
             else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
-                my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1) * 0.5f);
+                my_Transform.position += transform.forward * (my_forward_speed * 0.5f);
         }
         else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
             my_Transform.position += transform.forward * (my_forward_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);

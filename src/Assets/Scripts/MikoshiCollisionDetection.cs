@@ -41,6 +41,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
     [SerializeField] private GameObject Wait;
+    [SerializeField] private GameObject BeforePlay;
     [SerializeField]private TextMeshProUGUI WaitText;
     [SerializeField] private int MaxWaitTime;
     public enum PlayerMode
@@ -115,6 +116,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void WaitStart()
     {
+        BeforePlay.SetActive(false);
         playerMode = PlayerMode.Wait;
         Wait.SetActive(true);
         WaitText.text = MaxWaitTime.ToString("0");
