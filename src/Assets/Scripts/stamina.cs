@@ -7,15 +7,19 @@ public class stamina : MonoBehaviour
 {
 
     [SerializeField] int stamina_number_first = 3;
-    public int[] stamina_value;
+    public float[] stamina_value;
     public int stamina_number_now;
     int image_number = 0;
     [SerializeField]int stamina_heal_needTime = 5;
     Vector3 stamina_image_pos = new Vector3(800,-400,0);
 
+    float slide_sec_value;
+    public float slide_value = 1.0f;
 
-    [SerializeField] Image stamina_image;
-    public Image[] image_clone;
+    [SerializeField] Slider stamina_slider;
+    //[SerializeField] Image stamina_image;
+    //public Image[] image_clone;
+    public Slider[] slider_clone;
     [SerializeField] Transform canvas;
 
     int time = 0;
@@ -24,29 +28,38 @@ public class stamina : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stamina_value = new int[stamina_number_first + 1] ;
-        image_clone = new Image[stamina_number_first] ;
+        stamina_value = new float[stamina_number_first + 1] ;
+        //image_clone = new Image[stamina_number_first] ;
+        slider_clone = new Slider[stamina_number_first] ;
         stamina_number_now = stamina_number_first;
 
+        slide_sec_value = 1.0f / stamina_heal_needTime;
         
 
-       Vector3 vectorCanvas = canvas.localPosition + stamina_image_pos * canvas.localScale.x; //キャンパスのScaleに合わせる。
+
+        Vector3 vectorCanvas = canvas.localPosition + stamina_image_pos * canvas.localScale.x; //キャンパスのScaleに合わせる。
 
 
-        foreach (int stamina in stamina_value)
-        {
-            stamina_value[stamina] = 0;
-        }
+        
 
         for(int i = 0; i < stamina_number_first; i++)
         {
 
-            image_clone[i] =  Instantiate(stamina_image, vectorCanvas, Quaternion.identity, canvas);
+            //image_clone[i] =  Instantiate(stamina_image, vectorCanvas, Quaternion.identity, canvas);
+            slider_clone[i] = Instantiate(stamina_slider, vectorCanvas, Quaternion.identity, canvas);
 
             vectorCanvas.x -= 100 * canvas.localScale.x;
 
 
-            Debug.Log(stamina_image_pos);
+            
+
+        }
+        
+        foreach (int stamina in stamina_value)
+        {
+            stamina_value[stamina] = 1;
+
+            
 
         }
     }
@@ -54,8 +67,12 @@ public class stamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach (int stamina in stamina_value)
+        {
+            
+            //Debug.Log(stamina_number_now);
+        }
 
-        
 
     }
 
@@ -63,18 +80,34 @@ public class stamina : MonoBehaviour
     {
         time++;
 
-        if(time >= 50 )
-        {
-            
-            stamina_value[stamina_number_now] += 1;
+        for (int i = 2; i >= stamina_number_now; i--) { Debug.Log(i); slider_clone[i].value = 1; }
 
-            if (stamina_value[stamina_number_now] == stamina_heal_needTime)
-            {              
+        if (time >= 50 )
+        {
+
+
+            slide_value += slide_sec_value;
+
+
+            slider_clone[stamina_number_now - 1].value = 1 - slide_value;
+
+           
+            
+
+
+           if(slide_value >= 1 && stamina_number_now != 3) { slide_value = 0; }
+
+
+            
+
+
+            if (slider_clone[stamina_number_now - 1].value <= 0)
+            {
+
                 if (stamina_number_now < stamina_number_first)
                 {
 
-                    image_clone[stamina_number_now ].color = new Color(1,1,0);
-                    stamina_value[stamina_number_now] = 0;
+                 
                     stamina_number_now++;
                    
                 }

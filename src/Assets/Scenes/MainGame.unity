@@ -1207,6 +1207,7 @@ MonoBehaviour:
   AfterPeople: {fileID: 999420051843794743, guid: dae0bcd378ed8714abc2eaeefd432e74, type: 3}
   aPeopleParents: []
   aPeopleParent: {fileID: 4856096215076513259, guid: fd591c1ba5986de449073e1e2db29088, type: 3}
+  Parents: {fileID: 0}
   touchFoodDecrPeople: 6
   peopleCount: 0
   isFever: 0
@@ -1249,11 +1250,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stamina_number_first: 3
-  stamina_value: 
+  stamina_value: []
   stamina_number_now: 2
   stamina_heal_needTime: 5
-  stamina_image: {fileID: 6805831829185022211, guid: a030fa9649fb00448803d5cad41c8797, type: 3}
-  image_clone: []
+  stamina_slider: {fileID: 6997373755031200489, guid: 8731f26452a844b4ebdcd6d9083004d6, type: 3}
+  slider_clone: []
   canvas: {fileID: 757922512}
 --- !u!1 &1218058946
 GameObject:
