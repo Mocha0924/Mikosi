@@ -11,7 +11,7 @@ public class stamina : MonoBehaviour
     public int stamina_number_now;
     int image_number = 0;
     float slide_sec_value;
-    public float slide_value;
+    public float slide_value = 1.0f;
     [SerializeField]int stamina_heal_needTime = 5;
     Vector3 stamina_image_pos = new Vector3(800,-400,0);
 
