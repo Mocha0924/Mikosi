@@ -426,7 +426,7 @@ RectTransform:
   m_Children:
   - {fileID: 791676812}
   m_Father: {fileID: 724757673}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -673,7 +673,7 @@ RectTransform:
   m_Children:
   - {fileID: 445075317}
   m_Father: {fileID: 724757673}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1668,6 +1668,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 803285106}
+  - {fileID: 1130687289}
   - {fileID: 1849885853}
   - {fileID: 1210806485}
   - {fileID: 93080184}
@@ -1698,7 +1699,7 @@ MonoBehaviour:
   - {fileID: 93080185}
   - {fileID: 761331398}
   ButtonNum: 0
-  Select: {fileID: 1391314926}
+  Select: {fileID: 1130687286}
   buttonType: 0
 --- !u!1 &731213926
 GameObject:
@@ -1963,7 +1964,7 @@ MonoBehaviour:
   LeftSliser: {fileID: 1455768675}
   turnStick: {fileID: 0}
   endCorner: {fileID: 0}
-  TurnTime_CompleteEnd: 2
+  TurnTime_CompleteEnd: 8
 --- !u!114 &757922514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2009,7 +2010,7 @@ RectTransform:
   m_Children:
   - {fileID: 1473070708}
   m_Father: {fileID: 724757673}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3379,6 +3380,82 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1130687286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130687289}
+  - component: {fileID: 1130687288}
+  - component: {fileID: 1130687287}
+  m_Layer: 5
+  m_Name: select
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1130687287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130687286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.85116386, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1130687288
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130687286}
+  m_CullTransparentMesh: 1
+--- !u!224 &1130687289
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130687286}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6.475681, y: 1.3802401, z: 1.00008}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 724757673}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -184.00021}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1175940708 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c4a268c9de8ae8449fd9281c0446704, type: 3}
@@ -3459,6 +3536,7 @@ MonoBehaviour:
   isFever: 0
   BonusTime: 15
   scaleCorrection: 4
+  behindPeopleCount: 0
   MainBGMAudio: {fileID: 1718180064}
   BonusBGMAudio: {fileID: 1756974209}
   ClearBGMAudio: {fileID: 808770826}
@@ -3494,9 +3572,10 @@ MonoBehaviour:
   my_forward_speed: 3
   jumpVector: 20
   gravity: 1000
-  BonusMagnification: 1.5
+  BonusMagnification: 1.2
   slide_power: 2
   Input_Jump_once: 0
+  forward_or_back_speed: 0
   turn_complete_R: 0
   turn_complete_L: 0
   Turn_speed: 1
@@ -3790,7 +3869,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 724757673}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5454,7 +5533,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 724757673}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
