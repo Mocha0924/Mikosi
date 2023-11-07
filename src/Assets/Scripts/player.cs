@@ -29,7 +29,7 @@ public class player : MonoBehaviour
     float old_Jump;
     public float Input_Jump_once;
 
-    float forward_or_back_speed;
+    public float forward_or_back_speed;
 
 
 
@@ -98,7 +98,7 @@ public class player : MonoBehaviour
         Vertical_move = Vertical_Contlroll(old_Vertical, Input_Vertical);
 
         if(Vertical_move == "forwardmove"){ forward_or_back_speed = 1.25f;}
-        else if(Vertical_move == "backmove") {forward_or_back_speed = 0.75f;}
+        else if(Vertical_move == "backmove") {forward_or_back_speed = 0.8f;}
         else { forward_or_back_speed = 1.0f; }
 
         Debug.Log(forward_or_back_speed);

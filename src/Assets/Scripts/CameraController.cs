@@ -27,11 +27,11 @@ public class CameraController : MonoBehaviour
         int Colum = ColumLimit < mikosiCollision.ColumnCount ? ColumLimit : mikosiCollision.ColumnCount;
         switch (Player.Angle)
         {
-            case player.playerType.Right:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos- new Vector3(0,0,(Colum * adjustment)), speed);
+            case player.playerType.Right:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos- new Vector3(0,0,(Colum * adjustment)+(Player.forward_or_back_speed-1)), speed);
                 MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
-            case player.playerType.Left:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Colum * adjustment)), speed);
+            case player.playerType.Left:MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1)), speed);
                 MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
-            default: MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment)), speed);
+            default: MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1)), speed);
                 MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
         }
         
