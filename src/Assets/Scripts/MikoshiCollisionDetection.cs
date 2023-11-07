@@ -275,8 +275,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-        if(playerMode == PlayerMode.Play)
-        {
+        //if(playerMode == PlayerMode.Play)
+        //{
             m_audioSource.PlayOneShot(FoodHitSound);
             int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
             Vector3 destroyObj = Vector3.zero;
@@ -347,7 +347,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 }
             }
             Debug.Log("peopleCount:" + peopleCount);
-        }
+        //}
        
     }
 

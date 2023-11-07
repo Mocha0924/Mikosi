@@ -375,14 +375,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearConditions: 100
-  AfterPeople: {fileID: 1683750296543731954, guid: 670fe4a462c86c04c89252daade88438, type: 3}
+  AfterPeople: {fileID: 1276616861821600420, guid: 95489918d89ecd040898896e5a8e63a8, type: 3}
   aPeopleParents: []
   aPeopleParent: {fileID: 4856096215076513259, guid: fd591c1ba5986de449073e1e2db29088, type: 3}
   Parents: {fileID: 153403307}
   touchFoodDecrPeople: 6
   peopleCount: 0
   isFever: 0
+  BonusTime: 0
   scaleCorrection: 4
+  MainBGMAudio: {fileID: 0}
+  BonusBGMAudio: {fileID: 0}
+  ClearBGMAudio: {fileID: 0}
+  GameoverBGMAudio: {fileID: 0}
+  ColumnCount: 0
+  PeopleRecoverySound: {fileID: 0}
+  SubSound: {fileID: 0}
+  FoodHitSound: {fileID: 0}
+  StartSound: {fileID: 0}
+  ClearResult: {fileID: 0}
+  GameoverResult: {fileID: 0}
+  Wait: {fileID: 0}
+  BeforePlay: {fileID: 0}
+  WaitText: {fileID: 0}
+  MaxWaitTime: 0
+  playerMode: 0
 --- !u!4 &600461323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6826446957737162213, guid: a316187608f6e1644aeaac40ed773f40, type: 3}

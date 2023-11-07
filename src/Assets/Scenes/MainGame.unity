@@ -3392,7 +3392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearConditions: 100
-  AfterPeople: {fileID: 999420051843794743, guid: dae0bcd378ed8714abc2eaeefd432e74, type: 3}
+  AfterPeople: {fileID: 1276616861821600420, guid: 95489918d89ecd040898896e5a8e63a8, type: 3}
   aPeopleParents: []
   aPeopleParent: {fileID: 4856096215076513259, guid: fd591c1ba5986de449073e1e2db29088, type: 3}
   Parents: {fileID: 2055980632}
