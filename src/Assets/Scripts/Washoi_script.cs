@@ -72,7 +72,7 @@ public class Washoi_script : MonoBehaviour
         foreach (var hit in hits)
         {
 
-            if (hit.collider.tag == "Peoson")
+            if (hit.collider.tag == "People")
             {
                 audioSource.PlayOneShot(PeopleRecoverySound);
                 Debug.Log("People Touch");
