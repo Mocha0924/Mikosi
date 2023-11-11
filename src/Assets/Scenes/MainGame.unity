@@ -3527,6 +3527,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 21380c5b38c3b8346af9ef87d00c25f0, type: 3}
   PeopleRecoverySound: {fileID: 0}
   MikoshiCollision: {fileID: 1175940713}
+  Washoi_hani: {fileID: 4856040205824048733, guid: 61d88261694a7de4cadc6e8cf598c463, type: 3}
 --- !u!114 &1175940713
 MonoBehaviour:
   m_ObjectHideFlags: 0

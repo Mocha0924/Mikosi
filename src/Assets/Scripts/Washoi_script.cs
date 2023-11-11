@@ -16,12 +16,20 @@ public class Washoi_script : MonoBehaviour
     [SerializeField] private AudioClip[] WasshoiSounds;
     [SerializeField] private AudioClip PeopleRecoverySound;
     [SerializeField] private MikoshiCollisionDetection MikoshiCollision;
+    [SerializeField] private GameObject Washoi_hani;
+    [SerializeField] private float Washoi_Duration = 0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         MCD = GetComponent<MikoshiCollisionDetection>();
         stamina_script = GetComponent<stamina>();
+
+        Washoi_hani.transform.localScale =  new Vector3(wasyoi_hankei,wasyoi_hankei,wasyoi_hankei);
+
+        Debug.Log(this.transform);
+        
     }
 
     // Update is called once per frame
@@ -39,7 +47,8 @@ public class Washoi_script : MonoBehaviour
             {
                 audioSource.PlayOneShot(WasshoiSounds[i]);
             }
-          
+
+            Destroy(Instantiate(Washoi_hani, this.transform, false), Washoi_Duration);
 
             stamina_script.slider_clone[stamina_script.stamina_number_now - 1].value = 1 - stamina_script.slide_value;
 
