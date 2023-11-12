@@ -331,7 +331,7 @@ public class player : MonoBehaviour
         if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play||
             mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
         {
-            if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_number_now != 0)
+            if (Input_Jump_once == -1 && transform.position.y <= 2 && stamina_script.stamina_rest > 0)
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -343,6 +343,7 @@ public class player : MonoBehaviour
                 my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
 
                 stamina_script.slider_clone[stamina_script.stamina_number_now - 1].value = 1 - stamina_script.slide_value;
+                stamina_script.stamina_rest--;
 
                 if (stamina_script.stamina_number_now != 1) { stamina_script.stamina_number_now--; }
 

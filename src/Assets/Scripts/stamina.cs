@@ -14,6 +14,7 @@ public class stamina : MonoBehaviour
     public float slide_value = 1.0f;
     [SerializeField]int stamina_heal_needTime = 5;
     Vector3 stamina_image_pos = new Vector3(800,-400,0);
+    public int stamina_rest;
 
 
 
@@ -51,7 +52,7 @@ public class stamina : MonoBehaviour
 
 
             Debug.Log(stamina_image_pos);
-
+            stamina_rest = stamina_number_first;
         }
     }
 
@@ -65,34 +66,40 @@ public class stamina : MonoBehaviour
 
     private void FixedUpdate()
     {
-        time++;
-
-        for (int i = 2; i >= stamina_number_now; i--) { Debug.Log(i); slider_clone[i].value = 1; }
-
-        if (time >= 50)
+        if(stamina_rest < 3)
         {
+            time++;
 
-            slide_value += slide_sec_value;
+            for (int i = 2; i >= stamina_number_now; i--) { Debug.Log(i); slider_clone[i].value = 1; }
 
-            slider_clone[stamina_number_now - 1].value = 1 - slide_value;
-
-            if (slide_value >= 1 && stamina_number_now != 3) { slide_value = 0; }
-
-            if (slider_clone[stamina_number_now - 1].value <= 0)
+            if (time >= 50)
             {
 
-                if (stamina_number_now < stamina_number_first)
+                slide_value += slide_sec_value;
+
+                slider_clone[stamina_number_now - 1].value = 1 - slide_value;
+
+                if (slide_value >= 1 && stamina_number_now != 3) { slide_value = 0; }
+
+                if (slider_clone[stamina_number_now - 1].value <= 0)
                 {
 
+                    if (stamina_number_now < stamina_number_first)
+                    {
 
-                    stamina_number_now++;
+
+                        stamina_number_now++;
+                        stamina_rest++;
+
+                    }
 
                 }
 
+                time = 0;
             }
-
-            time = 0;
         }
+       else
+            time = 0;
 
 
 

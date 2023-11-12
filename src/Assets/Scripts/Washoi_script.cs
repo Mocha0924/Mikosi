@@ -26,7 +26,7 @@ public class Washoi_script : MonoBehaviour
         MCD = GetComponent<MikoshiCollisionDetection>();
         stamina_script = GetComponent<stamina>();
 
-        Washoi_hani.transform.localScale =  new Vector3(wasyoi_hankei,wasyoi_hankei,wasyoi_hankei);
+        Washoi_hani.transform.localScale =  new Vector3(wasyoi_hankei,0.01f,wasyoi_hankei);
 
         Debug.Log(this.transform);
         
@@ -40,7 +40,7 @@ public class Washoi_script : MonoBehaviour
 
         old_washoi = Input_washoi;
 
-        if (Input_washoi_once == -1 && stamina_script.stamina_number_now != 0&&MikoshiCollision.playerMode==MikoshiCollisionDetection.PlayerMode.Play||
+        if (Input_washoi_once == -1 && stamina_script.stamina_rest > 0&&MikoshiCollision.playerMode==MikoshiCollisionDetection.PlayerMode.Play||
             Input_washoi_once == -1 && MikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
         {
             for (int i = 0; i < 2; i++)
@@ -51,6 +51,7 @@ public class Washoi_script : MonoBehaviour
             Destroy(Instantiate(Washoi_hani, this.transform, false), Washoi_Duration);
 
             stamina_script.slider_clone[stamina_script.stamina_number_now - 1].value = 1 - stamina_script.slide_value;
+            stamina_script.stamina_rest--;
 
             if (stamina_script.stamina_number_now != 1) { stamina_script.stamina_number_now--; }
 
