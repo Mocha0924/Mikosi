@@ -387,6 +387,7 @@ MonoBehaviour:
   in_corner: 0
   turn_times: 0
   turnSlider: {fileID: 0}
+  StickSound: {fileID: 8300000, guid: 21380c5b38c3b8346af9ef87d00c25f0, type: 3}
 --- !u!1 &7681746196569115169
 GameObject:
   m_ObjectHideFlags: 0

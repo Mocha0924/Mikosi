@@ -9,10 +9,15 @@ public class TitleScript : MonoBehaviour
     [SerializeField] float fadeDuration = 1f;
     [SerializeField] float displayImageDuration = 1f;
     [SerializeField] CanvasGroup canvasGroup;
-
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip ClickSound;
     float m_timer;
 
     // Update is called once per frame
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     void Update()
     {
         if (toStage)
@@ -23,6 +28,7 @@ public class TitleScript : MonoBehaviour
 
     public void ClickStartButton()
     {
+        _audioSource.PlayOneShot(ClickSound);
         toStage = true;
     }
 

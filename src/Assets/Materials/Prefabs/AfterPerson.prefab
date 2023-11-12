@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276616861821600420}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.2, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -112,9 +112,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3887185075125053422, guid: cf5d4384b9d859340a5844b299209f4a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f5b805e6f67012348a7953abcc06ec11, type: 2}
+    - target: {fileID: -3887185075125053422, guid: cf5d4384b9d859340a5844b299209f4a, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 6034957751646507721, guid: 232053fdd19630c46b298470370fba76, type: 3}
+    - target: {fileID: -3887185075125053422, guid: cf5d4384b9d859340a5844b299209f4a, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 5561349426305759274, guid: ab18dc4a580bebf47964d6fa848618c7, type: 3}
+      objectReference: {fileID: 2100000, guid: 19533cc921cf23243bddb918ef9b6ddd, type: 2}
+    - target: {fileID: -3887185075125053422, guid: cf5d4384b9d859340a5844b299209f4a, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 19533cc921cf23243bddb918ef9b6ddd, type: 2}
     - target: {fileID: 919132149155446097, guid: cf5d4384b9d859340a5844b299209f4a, type: 3}
       propertyPath: m_Name
       value: shinsoku stand

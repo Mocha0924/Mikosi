@@ -11,9 +11,12 @@ public class TurnStick : MonoBehaviour
     public int turn_times = 0;
     [SerializeField] private TurnSlider turnSlider;
     private MikoshiCollisionDetection MikoshiCollision;
+    private AudioSource m_audioSource;
+    [SerializeField] private AudioClip StickSound;
     // Start is called before the first frame update
     void Start()
     {
+        m_audioSource = GameObject.Find("Player").GetComponent<AudioSource>();
         turnSlider = GameObject.Find("UICanvas").GetComponent<TurnSlider>();
         MikoshiCollision = GameObject.Find("Player").GetComponent<MikoshiCollisionDetection>();
     }
@@ -91,6 +94,7 @@ public class TurnStick : MonoBehaviour
             stick_up = false;
             stick_right = true;
             turn_times += 1;
+            m_audioSource.PlayOneShot(StickSound);
             turnSlider.RightSliser.value = turn_times;
         }
     }
