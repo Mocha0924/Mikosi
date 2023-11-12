@@ -191,12 +191,17 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void DestroyParent()
     {
-        ColumnCount--;
+       
         int childCount = Parents.transform.childCount - 1;
+        if(Parents.name == "Parent0")
+        {
+            ColumnCount--;
 
-        Destroy(Parents.transform.GetChild(childCount).gameObject);
+            Destroy(Parents.transform.GetChild(childCount).gameObject);
 
-        Array.Resize(ref aPeopleParents, aPeopleParents.Length - 1);
+            Array.Resize(ref aPeopleParents, aPeopleParents.Length - 1);
+        }
+       
     }
 
     //人の生成
