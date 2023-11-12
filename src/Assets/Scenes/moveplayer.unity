@@ -454,6 +454,7 @@ MonoBehaviour:
   BonusMagnification: 0
   slide_power: 150
   Input_Jump_once: 0
+  forward_or_back_speed: 0
   turn_complete_R: 0
   turn_complete_L: 0
   Turn_speed: 1
@@ -496,7 +497,9 @@ MonoBehaviour:
   Input_washoi_once: 0
   wasyoi_hankei: 8
   WasshoiSounds: []
+  PeopleRecoverySound: {fileID: 0}
   MikoshiCollision: {fileID: 0}
+  Washoi_hani: {fileID: 4856040205824048733, guid: 61d88261694a7de4cadc6e8cf598c463, type: 3}
 --- !u!114 &828795813
 MonoBehaviour:
   m_ObjectHideFlags: 0

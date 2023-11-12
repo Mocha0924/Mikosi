@@ -1850,6 +1850,7 @@ GameObject:
   - component: {fileID: 757922509}
   - component: {fileID: 757922513}
   - component: {fileID: 757922514}
+  - component: {fileID: 757922515}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -1975,6 +1976,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bd1b0e43690eb444965b777e55b94ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &757922515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757922508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef6cd36f797d0d4c8b6c0407f7c3a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &761331396
@@ -2613,7 +2626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c4a268c9de8ae8449fd9281c0446704, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 39.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c4a268c9de8ae8449fd9281c0446704, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3514,6 +3527,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 21380c5b38c3b8346af9ef87d00c25f0, type: 3}
   PeopleRecoverySound: {fileID: 0}
   MikoshiCollision: {fileID: 1175940713}
+  Washoi_hani: {fileID: 4856040205824048733, guid: 61d88261694a7de4cadc6e8cf598c463, type: 3}
 --- !u!114 &1175940713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6528,7 +6542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
       propertyPath: Patarn_List.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
       propertyPath: Patarn_List.Array.data[0]
@@ -6548,6 +6562,14 @@ PrefabInstance:
       objectReference: {fileID: 8175076051680745164, guid: 5e5c0de1587dc5742b004d0cff7c5588, type: 3}
     - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
       propertyPath: Patarn_List.Array.data[4]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: 3db1c7ef83f8f044baae704257433e19, type: 3}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[5]
+      value: 
+      objectReference: {fileID: 8175076051680745164, guid: bb88fb5493f478940a09eae2119dd129, type: 3}
+    - target: {fileID: 883537989762449399, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
+      propertyPath: Patarn_List.Array.data[6]
       value: 
       objectReference: {fileID: 8175076051680745164, guid: bb88fb5493f478940a09eae2119dd129, type: 3}
     - target: {fileID: 3288854397620575963, guid: 0b6afd82ddf7a7740b3174fe75890dec, type: 3}
