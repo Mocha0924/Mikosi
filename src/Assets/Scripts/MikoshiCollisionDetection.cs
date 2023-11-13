@@ -22,7 +22,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behindPeopleRow;
     int behindMax;
     int behind0Max;
+    int behindMoveCount;
+    int behind0MoveCount;
 
+    Vector3[] behindMovePoint;
+    Vector3[] behind0MovePoint;
     Vector3 pos;
     Vector3 parentPos;
 
@@ -69,12 +73,30 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         isFever = false;
 
-        pos = new Vector3(0.0f, -0.25f, 0.0f);
-        parentPos = new Vector3(0.0f, -0.25f, 0.0f);
         behindPeopleCount = 0;
         behindPeopleRow = 0;
         behindMax = 9;
         behind0Max = 12;
+        behindMoveCount = behindMax - 6;
+        behind0MoveCount = behind0Max / 2;
+
+        pos = new Vector3(0.0f, -0.25f, 0.0f);
+        parentPos = new Vector3(0.0f, -0.25f, 0.0f);
+
+        behindMovePoint = new Vector3[behindMoveCount];
+        for (int i = 0; i < behindMoveCount; i++) { behindMovePoint[i].x = (1.2f + 0.6f * i) * scaleCorrection; }
+
+        behind0MovePoint = new Vector3[behind0MoveCount];
+        for (int i = 0; i < behind0MoveCount; i++)
+        {
+            if (i < behind0MoveCount / 2) { behind0MovePoint[i].x = 1.6f * scaleCorrection; }
+            else { behind0MovePoint[i].x = 2.2f * scaleCorrection; }
+
+            if (i == 0 || i == 3) { behind0MovePoint[i].z = 0.5f * scaleCorrection; }
+            else if (i == 1 || i == 4) { behind0MovePoint[i].z = -0.1f * scaleCorrection; }
+            else { behind0MovePoint[i].z = -0.75f * scaleCorrection; }
+        }
+
         //人の列の親生成
         GenerateParent(0);
     }
@@ -275,6 +297,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                     break;
             }
         }
+        Debug.Log("length:" + aPeopleParents.Length + " count:" + behindPeopleRow);
         var parent = aPeopleParents[behindPeopleRow].transform;
 
         AfterPeople.name = peopleCount.ToString();
@@ -353,12 +376,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 }
                 else
                 {
-                    GameOver();
+                    //GameOver();
                     break;
                 }
             }
         PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
         Debug.Log("peopleCount:" + peopleCount);
+            if (peopleCount <= 6) { GameOver(); }
         }
        
     }
@@ -370,44 +394,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
         bool isR = true;
 
         int decrCount = 0;
+        int[] rowDecrCount = new int[behindPeopleRow + 1];
 
-        DecrPeople(isR, ref decrCount);
+        DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        //減った部分に後ろから人を補充する
-        for (int i = behindPeopleRow; i >= 0; i--)
-        {
-            int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
-            Vector3 moveObj = Vector3.zero;
-            GameObject moveObject = null;
-            int moveRow = 0, moveChild = 0;
-            bool isFirst = true;
-
-            for (int j = 0; j < childCount; j++)
-            {
-                Transform childTransform = aPeopleParents[i].transform.GetChild(j);
-                Vector3 compaObj = childTransform.localPosition;
-
-                //各列最初の対応するオブジェクトの場合はそれを保存、それ以降は保存してある座標より外側かどうか判定
-                if (isFirst == true)
-                {
-                    if ((isR == false) && (compaObj.x >= 1.2f * scaleCorrection) ||
-                    (isR == true) && (compaObj.x <= -1.2f * scaleCorrection))
-                    {
-                        moveRow = behindPeopleRow;
-                        moveChild= j;
-                        moveObject = aPeopleParents[moveRow].transform.GetChild(moveChild).gameObject;
-                    }
-                }
-                else
-                {
-
-                }
-            }
-
-            AfterPeopleMoveScript afterPeopleMoveScript = moveObject.GetComponent<AfterPeopleMoveScript>();
-            afterPeopleMoveScript.Move(moveObj);
-
-        }
+        //MovePeople(isR, ref decrCount, rowDecrCount);
     }
 
     public void LeftHit()
@@ -417,11 +408,14 @@ public class MikoshiCollisionDetection : MonoBehaviour
         bool isR = false;
 
         int decrCount = 0;
+        int[] rowDecrCount = new int[behindPeopleRow + 1];
 
-        DecrPeople(isR, ref decrCount);
+        DecrPeople(isR, ref decrCount, ref rowDecrCount);
+
+        //MovePeople(isR, ref decrCount, rowDecrCount);
     }
 
-    void DecrPeople(bool isR, ref int decrCount)
+    void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)
     {
         for (int i = behindPeopleRow; i >= 0; i--)
         {
@@ -434,16 +428,229 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
                 float x = childObj.x;
 
-                if ((isR == true) && (x >= 1.2f * scaleCorrection) || 
+                if ((isR == true) && (x >= 1.2f * scaleCorrection) ||
                     (isR == false) && (x <= -1.2f * scaleCorrection))
                 {
                     Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
                     peopleCount--;
                     decrCount++;
+                    rowDecrCount[i]++;
                 }
             }
         }
         Debug.Log("peopleCount:" + peopleCount);
         Debug.Log("decrCount:" + decrCount);
+    }
+
+    void MovePeople(bool isR, ref int decrCount, int[] rowDecrCount)
+    {
+        //減った部分に後ろから人を補充する
+        int destroyChildCount = 0;
+        int bPRowHold = behindPeopleRow;
+        int childCount = aPeopleParents[bPRowHold].transform.childCount;
+
+        int allRDCount = 0, arrayCount = 0;
+        for (int i = 0; i < rowDecrCount.Length; i++)
+        { allRDCount += rowDecrCount[i]; }
+
+        GameObject[] moveObject = new GameObject[allRDCount];
+        int[] canMoveRowPeople = new int[behindPeopleRow + 1];
+        int cMRPeopleCount = 0;
+
+        while (true)
+        {
+            if (decrCount == 0) { break; }
+            Vector3 moveObjPoint = Vector3.zero;
+            Vector3 compaObjPoint = Vector3.zero;
+
+            bool isSkip = false, corrSkip;
+
+            for (int i = 0; i < childCount; i++)
+            {
+                int pC = childCount - rowDecrCount[bPRowHold] - destroyChildCount;
+                corrSkip = false;
+
+                if (bPRowHold > 0)
+                {
+                    switch (pC)
+                    {
+                        case 1:
+                            compaObjPoint.x = 0.0f;
+                            corrSkip = true;
+                            break;
+
+                        case 2:
+                            compaObjPoint.x = 0.6f * scaleCorrection;
+                            corrSkip = true;
+                            break;
+
+                        case 3:
+                            compaObjPoint.x = -0.6f * scaleCorrection;
+                            corrSkip = true;
+                            break;
+
+                        case 4:
+                            compaObjPoint.x = 1.2f * scaleCorrection;
+                            break;
+
+                        case 5:
+                            compaObjPoint.x = 1.8f * scaleCorrection;
+                            break;
+
+                        case 6:
+                            compaObjPoint.x = 2.4f * scaleCorrection;
+                            break;
+
+                        default:
+                            isSkip = true;
+                            break;
+                    }
+                }
+                else if (bPRowHold == 0)
+                {
+                    switch (pC)
+                    {
+                        case 1:
+                            compaObjPoint = behind0MovePoint[0];
+                            break;
+
+                        case 2:
+                            compaObjPoint = behind0MovePoint[1];
+                            break;
+
+                        case 3:
+                            compaObjPoint = behind0MovePoint[2];
+                            break;
+
+                        case 4:
+                            compaObjPoint = behind0MovePoint[3];
+                            break;
+
+                        case 5:
+                            compaObjPoint = behind0MovePoint[4];
+                            break;
+
+                        case 6:
+                            compaObjPoint = behind0MovePoint[5];
+                            break;
+
+                        default:
+                            isSkip = true;
+                            break;
+                    }
+                }
+
+                if (isSkip == true) { break; }
+
+                if ((isR == true) && (corrSkip == false)) { compaObjPoint.x *= -1; }
+
+                Transform childTransform = aPeopleParents[bPRowHold].transform.GetChild(i);
+                moveObjPoint = childTransform.localPosition;
+
+                //判定
+                if (compaObjPoint == moveObjPoint)
+                {
+                    //Debug.Log("arrCount:" + arrayCount + " allDCount:" + allRDCount);
+                    moveObject[arrayCount] = aPeopleParents[bPRowHold].transform.GetChild(i).gameObject;
+                    //Debug.Log("moveObject:" + moveObject[arrayCount]);
+
+                    arrayCount++;
+                    decrCount--;
+                    destroyChildCount++;
+                    break;
+                }
+            }
+
+            if (isSkip == true || decrCount == 0)
+            {
+                //Debug.Log("cMRPC:" + cMRPeopleCount + " childC:" + childCount + " bPRH:" + bPRowHold + " rDC:" + rowDecrCount[bPRowHold]);
+                canMoveRowPeople[cMRPeopleCount] = childCount - rowDecrCount[bPRowHold];//その列で移動できる人
+                //Debug.Log("canMovePeople:" + canMoveRowPeople[cMRPeopleCount]);
+
+                cMRPeopleCount++;
+                destroyChildCount = 0;
+                bPRowHold--;
+
+                if (bPRowHold < 0) { break; }
+                childCount = aPeopleParents[bPRowHold].transform.childCount;
+            }
+        }
+
+        int moveNumber = 0, toMoveRow = 0;
+        int a = 0, hold = 0;
+        cMRPeopleCount = 0;/*canMoveRowPeople.Length - 1;*/
+        arrayCount = 0;
+        for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
+        for (int i = 0; i < rowDecrCount.Length; i++)
+        {
+            //前のループで動ける人が残っている場合
+            if (hold > 0)
+            {
+                //hold
+                ToMove(ref moveObject, isR, ref arrayCount, hold, ref moveNumber, ref toMoveRow);
+
+                rowDecrCount[i] -= hold;
+            }
+
+            Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + " Count:" + rowDecrCount[i]);
+
+            a = canMoveRowPeople[cMRPeopleCount] - rowDecrCount[i];
+            if (a >= 0)
+            {
+                //rowDecrCount[i]
+                ToMove(ref moveObject, isR, ref arrayCount, rowDecrCount[i], ref moveNumber, ref toMoveRow);
+
+                hold = a;
+                if (a == 0)
+                { cMRPeopleCount++; }
+            }
+            else
+            {
+                //canMoveRowPeople[cMRPCount]
+                if (behindPeopleRow - cMRPeopleCount == i)
+                {
+
+                }
+                else { ToMove(ref moveObject, isR, ref arrayCount, canMoveRowPeople[cMRPeopleCount], ref moveNumber, ref toMoveRow); }
+
+                cMRPeopleCount++;
+            }
+        }
+    }
+
+    void ToMove(ref GameObject[] moveObject, bool isR, ref int arrayCount, int numOfRoop, ref int moveNumber, ref int toMoveRow)
+    {
+        Vector3 toMovePoint = Vector3.zero;
+
+        for (int i = 0; i < numOfRoop; i++)
+        {
+            AfterPeopleMoveScript afterPeopleMoveScript = moveObject[arrayCount].GetComponent<AfterPeopleMoveScript>();
+            moveObject[arrayCount].transform.SetParent(aPeopleParents[toMoveRow].transform);
+            Debug.Log("moveObject:" + moveObject[arrayCount]);
+
+            //移動先の座標を求める
+            if (toMoveRow == 0) { ToMoveAssign(ref toMovePoint, behind0MovePoint, behind0MoveCount, ref moveNumber, ref toMoveRow); }
+            else { ToMoveAssign(ref toMovePoint, behindMovePoint, behindMoveCount, ref moveNumber, ref toMoveRow); }
+
+            if (isR == false) { toMovePoint.x *= -1; }
+
+            arrayCount++;
+
+            afterPeopleMoveScript.Move(toMovePoint);
+        }
+    }
+
+
+    void ToMoveAssign(ref Vector3 toMovePoint, Vector3[] movePoint, int bMoveCount, ref int moveNumber, ref int toMoveRow)
+    {
+        toMovePoint = movePoint[moveNumber];
+
+        moveNumber++;
+
+        if (moveNumber == bMoveCount)
+        {
+            moveNumber = 0;
+            toMoveRow++;
+        }
     }
 }

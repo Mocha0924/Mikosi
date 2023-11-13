@@ -19,5 +19,6 @@ public class AfterPeopleMoveScript : MonoBehaviour
     public void Move(Vector3 destination)
     {
         Debug.Log("Move:" + destination);
+        this.transform.localPosition = destination;
     }
 }
