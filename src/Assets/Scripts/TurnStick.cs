@@ -124,6 +124,7 @@ public class TurnStick : MonoBehaviour
 
             
             turn_times += 1;
+            m_audioSource.PlayOneShot(StickSound);
             turnSlider.LeftSliser.value = turn_times;
 
         }
