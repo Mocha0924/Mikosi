@@ -59,6 +59,7 @@ public class player : MonoBehaviour
 
     int Horizontal_controll;
     int Vertical_controll;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +70,8 @@ public class player : MonoBehaviour
         stamina_script = GetComponent<stamina>();
 
         pos = transform.position;
+
+       
 
     }
 
@@ -337,7 +340,6 @@ public class player : MonoBehaviour
                 {
                     audioSource.PlayOneShot(JumpSounds[i]);
                 }
-
                 float now_velocity_x = my_Rigidbody.velocity.x;
                 float now_velocity_z = my_Rigidbody.velocity.z;
                 my_Rigidbody.velocity = new Vector3(now_velocity_x, jumpVector, now_velocity_z);
@@ -348,6 +350,7 @@ public class player : MonoBehaviour
                 if (stamina_script.stamina_number_now != 1) { stamina_script.stamina_number_now--; }
 
             }
+           
             force *= Time.deltaTime;
             my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
