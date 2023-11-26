@@ -1968,7 +1968,7 @@ MonoBehaviour:
   LeftSliser: {fileID: 1455768675}
   turnStick: {fileID: 0}
   endCorner: {fileID: 0}
-  TurnTime_CompleteEnd: 0
+  TurnTime_CompleteEnd: 8
 --- !u!114 &757922514
 MonoBehaviour:
   m_ObjectHideFlags: 0
