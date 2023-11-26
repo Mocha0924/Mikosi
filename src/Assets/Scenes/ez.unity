@@ -384,6 +384,7 @@ MonoBehaviour:
   isFever: 0
   BonusTime: 0
   scaleCorrection: 4
+  behindPeopleCount: 0
   MainBGMAudio: {fileID: 0}
   BonusBGMAudio: {fileID: 0}
   ClearBGMAudio: {fileID: 0}
@@ -391,13 +392,15 @@ MonoBehaviour:
   ColumnCount: 0
   PeopleRecoverySound: {fileID: 0}
   SubSound: {fileID: 0}
-  FoodHitSound: {fileID: 0}
+  FoodHitSound: {fileID: 8300000, guid: b1b9302ac4e37d0448b8ce457ceb8585, type: 3}
   StartSound: {fileID: 0}
   ClearResult: {fileID: 0}
   GameoverResult: {fileID: 0}
   Wait: {fileID: 0}
   BeforePlay: {fileID: 0}
+  PeopleNum: {fileID: 0}
   WaitText: {fileID: 0}
+  PeopleNumText: {fileID: 0}
   MaxWaitTime: 0
   playerMode: 0
 --- !u!4 &600461323 stripped
@@ -668,7 +671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &2047846129
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -740,7 +743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047846128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 280, y: 1.5, z: -188.2}
+  m_LocalPosition: {x: 280, y: 1.5, z: -96}
   m_LocalScale: {x: 2.5, y: 1.5, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
