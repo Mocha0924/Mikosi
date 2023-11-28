@@ -24,6 +24,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behind0Max;
     int behindMoveCount;
     int behind0MoveCount;
+    int sortRow;
+    bool isSort;
 
     Vector3[] behindMovePoint;
     Vector3[] behind0MovePoint;
@@ -79,6 +81,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
         behind0Max = 12;
         behindMoveCount = behindMax - 6;
         behind0MoveCount = behind0Max / 2;
+        sortRow = 0;
+        isSort = false;
 
         pos = new Vector3(0.0f, -0.25f, 0.0f);
         parentPos = new Vector3(0.0f, -0.25f, 0.0f);
@@ -105,6 +109,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         if (Input.anyKeyDown&&playerMode == PlayerMode.Before)
             WaitStart();
+
+        if (isSort == true)
+        {
+            //関数
+            isSort = false;
+        }
     }
 
     //神輿との判定
@@ -398,7 +408,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        //MovePeople(isR, ref decrCount, rowDecrCount);
+        MovePeople(isR, ref decrCount, rowDecrCount);
     }
 
     public void LeftHit()
@@ -412,7 +422,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        //MovePeople(isR, ref decrCount, rowDecrCount);
+        MovePeople(isR, ref decrCount, rowDecrCount);
     }
 
     void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)
@@ -594,7 +604,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + " Count:" + rowDecrCount[i]);
 
-            a = canMoveRowPeople[cMRPeopleCount] - rowDecrCount[i];
+            a = canMoveRowPeople[cMRPeopleCount] - rowDecrCount[i];//各列で移動できる人-各列で補充しないといけない人数
             if (a >= 0)
             {
                 //rowDecrCount[i]
@@ -609,7 +619,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 //canMoveRowPeople[cMRPCount]
                 if (behindPeopleRow - cMRPeopleCount == i)
                 {
-
+                    //移動できる人の列と補充しないといけない列が同じなら、ループを終わらせてその列だけ並び替えをさせる
+                    sortRow = i;
+                    isSort = true;
+                    break;
                 }
                 else { ToMove(ref moveObject, isR, ref arrayCount, canMoveRowPeople[cMRPeopleCount], ref moveNumber, ref toMoveRow); }
 
@@ -652,5 +665,16 @@ public class MikoshiCollisionDetection : MonoBehaviour
             moveNumber = 0;
             toMoveRow++;
         }
+    }
+
+    void Sort(int sortrow)
+    {
+        int childCount = aPeopleParents[sortrow].transform.childCount;
+        for (int i = 0; i < childCount; i++)
+        {
+            GameObject child = aPeopleParents[sortrow].transform.GetChild(i).gameObject;
+            AfterPeopleMoveScript afterPeopleMoveScript = child.GetComponent<AfterPeopleMoveScript>();
+        }
+
     }
 }
