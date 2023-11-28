@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3725538982079854820}
   - component: {fileID: 2396579325442016948}
   - component: {fileID: 789266790574126472}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 377441996516192275}
   - component: {fileID: 5595472497131122207}
   - component: {fileID: 5178814838203194109}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4323715526545145190}
   - component: {fileID: 6556270069380835035}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: apple
   m_TagString: Food
   m_Icon: {fileID: 0}
