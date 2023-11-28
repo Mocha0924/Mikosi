@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
@@ -19,8 +20,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private MikoshiCollisionDetection mikosiCollision;
     [SerializeField] private float adjustment;
     [SerializeField] private int ColumLimit;
+    private bool Air = false;
     // Start is called before the first frame update
-
+ 
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -42,6 +44,7 @@ public class CameraController : MonoBehaviour
         }
         else if(Player.JumpCheck)
         {
+            Air = true;
             switch (Player.Angle)
             {
                 case player.playerType.Right:
@@ -54,6 +57,14 @@ public class CameraController : MonoBehaviour
                     MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
                     MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
             }
+        }
+        else if (Air && transform.localPosition.y <= 10)
+        {
+            transform.DOComplete();
+            transform.DOShakePosition(0.1f * Time.deltaTime, 10000);
+            transform.DOShakeRotation(0.1f * Time.deltaTime, 10000);
+            Air = false;
+            Debug.Log("—h‚ê‚Ü‚µ‚½");
         }
         else
         {
@@ -70,6 +81,7 @@ public class CameraController : MonoBehaviour
                     MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
             }
         }
+        
      
         
     }
