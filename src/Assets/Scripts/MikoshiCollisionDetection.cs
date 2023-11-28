@@ -24,6 +24,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behind0Max;
     int behindMoveCount;
     int behind0MoveCount;
+    int game_time_sec;
+    int game_time_min;
 
     Vector3[] behindMovePoint;
     Vector3[] behind0MovePoint;
@@ -47,7 +49,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject Wait;
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
-    [SerializeField]private TextMeshProUGUI WaitText;
+    [SerializeField] private GameObject TimeNum;
+    [SerializeField] private TextMeshProUGUI WaitText;
+    [SerializeField] private TextMeshProUGUI TimeNumText;
     [SerializeField] public TextMeshProUGUI PeopleNumText;
     [SerializeField] private int MaxWaitTime;
     public enum PlayerMode
@@ -107,6 +111,36 @@ public class MikoshiCollisionDetection : MonoBehaviour
             WaitStart();
     }
 
+    private void FixedUpdate()
+    {
+
+        if(TimeNum.activeInHierarchy == true)
+        {
+
+            game_time_sec += 2;
+
+            if (game_time_sec >= 6000)
+            {
+                game_time_sec = 0;
+                game_time_min++;
+
+            }
+
+            if(game_time_min > 0 )
+            {
+                TimeNumText.text = game_time_min + ","+ (game_time_sec / 10).ToString("00") + "," + (game_time_sec % 100).ToString("00");
+            }
+            else
+            {
+                TimeNumText.text = (game_time_sec / 100).ToString() + "," + (game_time_sec % 100).ToString("00");
+            }
+            
+               
+        }
+
+    }
+
+
     //神輿との判定
     void OnTriggerEnter(Collider other)
     {
@@ -156,6 +190,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         MainBGMAudio.Stop();
         BonusBGMAudio.Play();
         StartCoroutine("GameClear");
+        
     }
 
     public void GameOver()
@@ -165,6 +200,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         GameoverBGMAudio.Play();
         playerMode = PlayerMode.Gameover;
         GameoverResult.SetActive(true);
+        TimeNum.SetActive(false);
     }
 
     public void GameStart()
@@ -173,6 +209,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         m_audioSource.PlayOneShot(StartSound);
         playerMode = PlayerMode.Play;
         Wait.SetActive(false);
+        TimeNum.SetActive(true);
     }
     private IEnumerator WaitGame()
     {
@@ -193,6 +230,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         ClearResult.SetActive(true);
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
+        TimeNum.SetActive(false);
     }
 
     public void GenerateParent(float initCorre)
