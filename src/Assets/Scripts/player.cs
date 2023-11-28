@@ -47,6 +47,8 @@ public class player : MonoBehaviour
     [SerializeField] private AudioClip[] JumpSounds;
     [SerializeField] private AudioClip TurnSound;
 
+    public bool JumpCheck = false;
+
     private bool turnSoundCheck = false;
     public enum playerType
     {
@@ -59,6 +61,8 @@ public class player : MonoBehaviour
 
     int Horizontal_controll;
     int Vertical_controll;
+
+    [SerializeField]private Animator Wholeanimator;
 
     // Start is called before the first frame update
     void Start()
@@ -346,11 +350,13 @@ public class player : MonoBehaviour
 
                 stamina_script.slider_clone[stamina_script.stamina_number_now - 1].value = 1 - stamina_script.slide_value;
                 stamina_script.stamina_rest--;
-
+                JumpCheck = true;
                 if (stamina_script.stamina_number_now != 1) { stamina_script.stamina_number_now--; }
 
             }
-           
+            else if(transform.position.y < 1.26f&& JumpCheck)
+                JumpCheck = false;
+
             force *= Time.deltaTime;
             my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
@@ -431,18 +437,18 @@ public class player : MonoBehaviour
         if (old > Input_Horizontal)
         {
             if (Input_Horizontal > 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "leftmove"; }
+            else { Horizon_move = "leftmove";Wholeanimator.SetBool("Left",true); Wholeanimator.SetBool("Right", false); }
         }
         else if (old < Input_Horizontal)
         {
             if (Input_Horizontal < 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "rightmove"; }
+            else { Horizon_move = "rightmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", true); }
         }
         else if (old == Input_Horizontal)
         {
-            if (input == 0) { Horizon_move = "dontmove"; }
-            else if (input < 0) { Horizon_move = "leftmove"; }
-            else if (input > 0) { Horizon_move = "rightmove"; }
+            if (input == 0) { Horizon_move = "dontmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", false); }
+            else if (input < 0) { Horizon_move = "leftmove"; Wholeanimator.SetBool("Left", true); Wholeanimator.SetBool("Right", false); }
+            else if (input > 0) { Horizon_move = "rightmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", true); }
 
         }
 
