@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
+using UnityEditor.UI;
 public class MikoshiCollisionDetection : MonoBehaviour
 {
     public int clearConditions;
@@ -27,6 +28,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int game_time_sec;
     int game_time_min;
 
+
     Vector3[] behindMovePoint;
     Vector3[] behind0MovePoint;
     Vector3 pos;
@@ -44,16 +46,22 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private AudioClip FoodHitSound;
     [SerializeField] private AudioClip StartSound;
 
+    [SerializeField] UnityEngine.UI.Image ClearImage;
+
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
     [SerializeField] private GameObject Wait;
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
     [SerializeField] private GameObject TimeNum;
+    
     [SerializeField] private TextMeshProUGUI WaitText;
     [SerializeField] private TextMeshProUGUI TimeNumText;
     [SerializeField] public TextMeshProUGUI PeopleNumText;
+    [SerializeField] private Sprite Clear_Good_Sprite;
+    [SerializeField] private Sprite Clear_Bad_Sprite;
     [SerializeField] private int MaxWaitTime;
+    [SerializeField] private int Clear_Good_Time = 2;
     public enum PlayerMode
     { 
         Before,
@@ -128,7 +136,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             if(game_time_min > 0 )
             {
-                TimeNumText.text = game_time_min + ","+ (game_time_sec / 10).ToString("00") + "," + (game_time_sec % 100).ToString("00");
+                TimeNumText.text = game_time_min + ","+ (game_time_sec / 100).ToString("00") + "," + (game_time_sec % 100).ToString("00");
             }
             else
             {
@@ -231,6 +239,14 @@ public class MikoshiCollisionDetection : MonoBehaviour
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
         TimeNum.SetActive(false);
+        if( Clear_Good_Time > game_time_min )
+        {
+            ClearImage.sprite = Clear_Good_Sprite;
+        }
+        else
+        {
+            ClearImage.sprite= Clear_Bad_Sprite;
+        }
     }
 
     public void GenerateParent(float initCorre)
