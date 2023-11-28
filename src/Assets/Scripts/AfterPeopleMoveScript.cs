@@ -15,13 +15,18 @@ public class AfterPeopleMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Move();
     }
 
-    public void Move(Vector3 destination)
+    public void Move()
     {
-        Debug.Log("Move:" + destination);
-        goPoint = destination;
-        this.transform.localPosition = goPoint;
+        this.transform.localPosition = point;
+    }
+
+    public void Setpoint(Vector3 setPos)
+    {
+        Debug.Log(this.name + "setPos:" + setPos);
+        point = setPos;
+        Move();
     }
 }
