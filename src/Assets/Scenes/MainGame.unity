@@ -1977,7 +1977,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 732152158}
-  - component: {fileID: 732152157}
   m_Layer: 0
   m_Name: Whole
   m_TagString: Untagged
@@ -1985,27 +1984,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &732152157
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732152156}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2c064e48844e7634d8ea5f102e15b84d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &732152158
 Transform:
   m_ObjectHideFlags: 0
@@ -3151,7 +3129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924382029}
   m_LocalRotation: {x: 0.18223555, y: 0, z: 0, w: 0.9832549}
-  m_LocalPosition: {x: 0, y: 10, z: -12}
+  m_LocalPosition: {x: 0, y: 10, z: -18}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3224,9 +3202,9 @@ MonoBehaviour:
   MainCamera: {fileID: 924382029}
   PlayerObj: {fileID: 1363608237}
   Player: {fileID: 1363608242}
-  FrontPos: {x: 0, y: 10, z: -12}
-  RightPos: {x: -5, y: 9, z: -11}
-  LeftPos: {x: 5, y: 9, z: -11}
+  FrontPos: {x: 0, y: 10, z: -18}
+  RightPos: {x: -5, y: 10, z: -11}
+  LeftPos: {x: 5, y: 10, z: -11}
   FrontAngle: {x: 0.18223552, y: 0, z: 0, w: 0.9832549}
   RightAngle: {x: 0.17825325, y: 0.2044302, z: -0.0378889, w: 0.96176845}
   LeftAngle: {x: -0.17825328, y: 0.20443012, z: -0.03788889, w: -0.96176845}
@@ -4232,7 +4210,9 @@ MonoBehaviour:
   TurnSound: {fileID: 8300000, guid: ff1b8c9210717ca4b82b372bc4356f83, type: 3}
   JumpCheck: 0
   Angle: 0
-  Wholeanimator: {fileID: 732152157}
+  WholeObject: {fileID: 732152156}
+  BendSpeed: 60
+  ReturnSpeed: 30
 --- !u!114 &1363608243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4271,8 +4251,8 @@ MonoBehaviour:
   WasshoiSounds:
   - {fileID: 8300000, guid: 6bc0e9b856260b542bb958c3668ac052, type: 3}
   - {fileID: 8300000, guid: 21380c5b38c3b8346af9ef87d00c25f0, type: 3}
-  PeopleRecoverySound: {fileID: 0}
-  MikoshiCollision: {fileID: 0}
+  PeopleRecoverySound: {fileID: 8300000, guid: 878d4a771fb19224e980b27419dfcec1, type: 3}
+  MikoshiCollision: {fileID: 1363608241}
   Washoi_hani: {fileID: 4856040205824048733, guid: 61d88261694a7de4cadc6e8cf598c463, type: 3}
   Washoi_Duration: 0.2
 --- !u!4 &1363608245
