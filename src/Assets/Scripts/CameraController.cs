@@ -21,68 +21,88 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float adjustment;
     [SerializeField] private int ColumLimit;
     private bool Air = false;
+    [SerializeField] private Vector3 ClearPos;
+    [SerializeField] private Quaternion ClearAngle;
+    [SerializeField] private float ClearSpeed;
+    [SerializeField] private float ClearAngleSpeed;
+    private bool Clear = false;
     // Start is called before the first frame update
  
     // Update is called once per frame
     void FixedUpdate()
     {
-        int Colum = ColumLimit < mikosiCollision.ColumnCount ? ColumLimit : mikosiCollision.ColumnCount;
-        if(Player.turn_complete_R||Player.turn_complete_L)
+        if(Clear)
         {
-            switch (Player.Angle)
-            {
-                case player.playerType.Right:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1)+20), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
-                case player.playerType.Left:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1)+20), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
-                default:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1)+20), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
-            }
-        }
-        else if(Player.JumpCheck)
-        {
-            Air = true;
-            switch (Player.Angle)
-            {
-                case player.playerType.Right:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
-                case player.playerType.Left:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
-                default:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
-            }
-        }
-        else if (Air && transform.localPosition.y <= 10)
-        {
-            transform.DOComplete();
-            transform.DOShakePosition(0.1f * Time.deltaTime, 10000);
-            transform.DOShakeRotation(0.1f * Time.deltaTime, 10000);
-            Air = false;
-            Debug.Log("—h‚ê‚Ü‚µ‚½");
+           MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition,new Vector3(0,ClearPos.y,ClearPos.z), ClearSpeed);    
+           MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, ClearAngle, ClearAngleSpeed);
         }
         else
         {
-            switch (Player.Angle)
+            int Colum = ColumLimit < mikosiCollision.ColumnCount ? ColumLimit : mikosiCollision.ColumnCount;
+            if (Player.turn_complete_R || Player.turn_complete_L)
             {
-                case player.playerType.Right:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos - new Vector3(0, 0, (Player.forward_or_back_speed - 1)), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
-                case player.playerType.Left:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0,  (Player.forward_or_back_speed - 1)), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
-                default:
-                    MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Player.forward_or_back_speed - 1)), speed);
-                    MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
+                switch (Player.Angle)
+                {
+                    case player.playerType.Right:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 20), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
+                    case player.playerType.Left:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 20), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
+                    default:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 20), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
+                }
             }
+            else if (Player.JumpCheck)
+            {
+                Air = true;
+                switch (Player.Angle)
+                {
+                    case player.playerType.Right:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
+                    case player.playerType.Left:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
+                    default:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Colum * adjustment) + (Player.forward_or_back_speed - 1) + 10), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
+                }
+            }
+            else if (Air && transform.localPosition.y <= 10)
+            {
+                transform.DOComplete();
+                transform.DOShakePosition(0.1f * Time.deltaTime, 10000);
+                transform.DOShakeRotation(0.1f * Time.deltaTime, 10000);
+                Air = false;
+                Debug.Log("—h‚ê‚Ü‚µ‚½");
+            }
+            else
+            {
+                switch (Player.Angle)
+                {
+                    case player.playerType.Right:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightPos - new Vector3(0, 0, (Player.forward_or_back_speed - 1)), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightAngle, Anglespeed); break;
+                    case player.playerType.Left:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftPos - new Vector3(0, 0, (Player.forward_or_back_speed - 1)), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftAngle, Anglespeed); break;
+                    default:
+                        MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, FrontPos - new Vector3(0, 0, (Player.forward_or_back_speed - 1)), speed);
+                        MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
+                }
+            }
+            if (mikosiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Clear)
+            {
+                Clear = true;
+               
+            }
+               
+            
+
+
         }
-        
-     
-        
+
     }
 }

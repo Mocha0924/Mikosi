@@ -16,6 +16,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public int peopleCount;
     public bool isFever;
     [SerializeField] private float BonusTime;
+    [SerializeField] private float ClearWaitTime;   
 
     [SerializeField] int scaleCorrection;
     public int behindPeopleCount;
@@ -61,6 +62,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Play,
         Bonus,
         Clear,
+        Result,
         Gameover
     }
 
@@ -227,12 +229,16 @@ public class MikoshiCollisionDetection : MonoBehaviour
         yield return new WaitForSeconds(BonusTime);
         BonusBGMAudio.Stop();
         ClearBGMAudio.Play();
-        ClearResult.SetActive(true);
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
         TimeNum.SetActive(false);
+        StartCoroutine("Result");
     }
-
+    private IEnumerator Result()
+    {
+        yield return new WaitForSeconds(ClearWaitTime);
+        ClearResult.SetActive(true);
+    }
     public void GenerateParent(float initCorre)
     {
         ColumnCount++;
