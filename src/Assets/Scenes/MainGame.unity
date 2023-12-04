@@ -5883,7 +5883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1875662114
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6634,7 +6634,7 @@ PrefabInstance:
     - target: {fileID: 6345640649263041635, guid: e3e13488b4e8ebf43af8f5a3f9b71edd, type: 3}
       propertyPath: carHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1175940713}
+      objectReference: {fileID: 1363608241}
     - target: {fileID: 6345640649263041635, guid: e3e13488b4e8ebf43af8f5a3f9b71edd, type: 3}
       propertyPath: carHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LeftHit
@@ -6654,7 +6654,7 @@ PrefabInstance:
     - target: {fileID: 6345640649601233813, guid: e3e13488b4e8ebf43af8f5a3f9b71edd, type: 3}
       propertyPath: carHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1175940713}
+      objectReference: {fileID: 1363608241}
     - target: {fileID: 6345640649601233813, guid: e3e13488b4e8ebf43af8f5a3f9b71edd, type: 3}
       propertyPath: carHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GameOver
@@ -6662,7 +6662,7 @@ PrefabInstance:
     - target: {fileID: 6345640649917732962, guid: e3e13488b4e8ebf43af8f5a3f9b71edd, type: 3}
       propertyPath: carHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1175940713}
+      objectReference: {fileID: 1363608241}
     - target: {fileID: 6345640649917732962, guid: e3e13488b4e8ebf43af8f5a3f9b71edd, type: 3}
       propertyPath: carHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RightHit
