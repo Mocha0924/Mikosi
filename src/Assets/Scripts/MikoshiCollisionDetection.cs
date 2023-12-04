@@ -16,6 +16,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public int peopleCount;
     public bool isFever;
     [SerializeField] private float BonusTime;
+    [SerializeField] private float ClearWaitTime;   
 
     [SerializeField] int scaleCorrection;
     public int behindPeopleCount;
@@ -26,6 +27,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behind0MoveCount;
     int sortRow;
     bool isSort;
+    int game_time_sec;
+    int game_time_min;
 
     Vector3[] behindMovePoint;
     Vector3[] behindMoveAll;
@@ -50,7 +53,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject Wait;
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
-    [SerializeField]private TextMeshProUGUI WaitText;
+    [SerializeField] private GameObject TimeNum;
+    [SerializeField] private TextMeshProUGUI WaitText;
+    [SerializeField] private TextMeshProUGUI TimeNumText;
     [SerializeField] public TextMeshProUGUI PeopleNumText;
     [SerializeField] private int MaxWaitTime;
     public enum PlayerMode
@@ -60,6 +65,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Play,
         Bonus,
         Clear,
+        Result,
         Gameover
     }
 
@@ -129,6 +135,32 @@ public class MikoshiCollisionDetection : MonoBehaviour
         }
     }
 
+        if(TimeNum.activeInHierarchy == true)
+        {
+
+            game_time_sec += 2;
+
+            if (game_time_sec >= 6000)
+            {
+                game_time_sec = 0;
+                game_time_min++;
+
+            }
+
+            if(game_time_min > 0 )
+            {
+                TimeNumText.text = game_time_min + ","+ (game_time_sec / 10).ToString("00") + "," + (game_time_sec % 100).ToString("00");
+            }
+            else
+            {
+                TimeNumText.text = (game_time_sec / 100).ToString() + "," + (game_time_sec % 100).ToString("00");
+            }
+            
+               
+        }
+
+    }
+
     //神輿との判定
     void OnTriggerEnter(Collider other)
     {
@@ -179,6 +211,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         MainBGMAudio.Stop();
         BonusBGMAudio.Play();
         StartCoroutine("GameClear");
+        
     }
 
     public void GameOver()
@@ -188,6 +221,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         GameoverBGMAudio.Play();
         playerMode = PlayerMode.Gameover;
         GameoverResult.SetActive(true);
+        TimeNum.SetActive(false);
     }
 
     public void GameStart()
@@ -196,6 +230,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         m_audioSource.PlayOneShot(StartSound);
         playerMode = PlayerMode.Play;
         Wait.SetActive(false);
+        TimeNum.SetActive(true);
     }
     private IEnumerator WaitGame()
     {
@@ -213,11 +248,16 @@ public class MikoshiCollisionDetection : MonoBehaviour
         yield return new WaitForSeconds(BonusTime);
         BonusBGMAudio.Stop();
         ClearBGMAudio.Play();
-        ClearResult.SetActive(true);
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
+        TimeNum.SetActive(false);
+        StartCoroutine("Result");
     }
-
+    private IEnumerator Result()
+    {
+        yield return new WaitForSeconds(ClearWaitTime);
+        ClearResult.SetActive(true);
+    }
     public void GenerateParent(float initCorre)
     {
         ColumnCount++;
