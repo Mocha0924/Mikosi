@@ -5145,6 +5145,13 @@ MonoBehaviour:
   WholeObject: {fileID: 732152156}
   BendSpeed: 60
   ReturnSpeed: 30
+  HumansAnimation:
+  - {fileID: 39615560}
+  - {fileID: 932137786}
+  - {fileID: 1058716091}
+  - {fileID: 989258553}
+  - {fileID: 1665250343}
+  - {fileID: 1062033352}
 --- !u!114 &1363608243
 MonoBehaviour:
   m_ObjectHideFlags: 0
