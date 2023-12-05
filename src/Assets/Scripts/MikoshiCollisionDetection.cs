@@ -141,7 +141,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Sort(sortRow);
             isSort = false;
         }
-    }
+    
 
         if(TimeNum.activeInHierarchy == true)
         {
@@ -168,6 +168,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         }
 
     }
+            
 
     //神輿との判定
     void OnTriggerEnter(Collider other)
