@@ -17,6 +17,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public int peopleCount;
     public bool isFever;
     [SerializeField] private float BonusTime;
+    [SerializeField] private float ClearWaitTime;   
 
     [SerializeField] int scaleCorrection;
     public int behindPeopleCount;
@@ -25,11 +26,14 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behind0Max;
     int behindMoveCount;
     int behind0MoveCount;
+    int sortRow;
+    bool isSort;
     int game_time_sec;
     int game_time_min;
 
 
     Vector3[] behindMovePoint;
+    Vector3[] behindMoveAll;
     Vector3[] behind0MovePoint;
     Vector3 pos;
     Vector3 parentPos;
@@ -69,6 +73,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Play,
         Bonus,
         Clear,
+        Result,
         Gameover
     }
 
@@ -91,12 +96,21 @@ public class MikoshiCollisionDetection : MonoBehaviour
         behind0Max = 12;
         behindMoveCount = behindMax - 6;
         behind0MoveCount = behind0Max / 2;
+        sortRow = 0;
+        isSort = false;
 
         pos = new Vector3(0.0f, -0.25f, 0.0f);
         parentPos = new Vector3(0.0f, -0.25f, 0.0f);
 
         behindMovePoint = new Vector3[behindMoveCount];
         for (int i = 0; i < behindMoveCount; i++) { behindMovePoint[i].x = (1.2f + 0.6f * i) * scaleCorrection; }
+
+        behindMoveAll = new Vector3[behindMax];
+        for (int i = 1; i < behindMax; i++) 
+        {
+            if (i % 2 == 1) { behindMoveAll[i].x = 0.6f * (i / 2 + 1) * scaleCorrection; }
+            else { behindMoveAll[i].x = -1 * 0.6f * (i / 2) * scaleCorrection; }
+        }
 
         behind0MovePoint = new Vector3[behind0MoveCount];
         for (int i = 0; i < behind0MoveCount; i++)
@@ -121,6 +135,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isSort == true)
+        {
+            //関数
+            Sort(sortRow);
+            isSort = false;
+        }
+    }
 
         if(TimeNum.activeInHierarchy == true)
         {
@@ -148,7 +169,6 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     }
 
-
     //神輿との判定
     void OnTriggerEnter(Collider other)
     {
@@ -164,6 +184,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             if (behindPeopleCount % 9 == 1)
             {
                 //列に9人いる時、列を増やす
+                behindPeopleRow++;
                 GenerateParent(1);
             }
 
@@ -235,7 +256,6 @@ public class MikoshiCollisionDetection : MonoBehaviour
         yield return new WaitForSeconds(BonusTime);
         BonusBGMAudio.Stop();
         ClearBGMAudio.Play();
-        ClearResult.SetActive(true);
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
         TimeNum.SetActive(false);
@@ -247,8 +267,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
         {
             ClearImage.sprite= Clear_Bad_Sprite;
         }
+        StartCoroutine("Result");
     }
-
+    private IEnumerator Result()
+    {
+        yield return new WaitForSeconds(ClearWaitTime);
+        ClearResult.SetActive(true);
+    }
     public void GenerateParent(float initCorre)
     {
         ColumnCount++;
@@ -267,17 +292,17 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void DestroyParent()
     {
-       
+        Debug.Log("parentDestroy");
         int childCount = Parents.transform.childCount - 1;
-        if(Parents.name == "Parent0")
-        {
-            ColumnCount--;
 
-            Destroy(Parents.transform.GetChild(childCount).gameObject);
+        ColumnCount--;
 
-            Array.Resize(ref aPeopleParents, aPeopleParents.Length - 1);
-        }
-       
+        Destroy(Parents.transform.GetChild(childCount).gameObject);
+
+        Array.Resize(ref aPeopleParents, aPeopleParents.Length - 1);
+
+        behindPeopleRow--;
+
     }
 
     //人の生成
@@ -310,7 +335,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         {
             behindPeopleCount = peopleCount - 18;
 
-            behindPeopleRow = (behindPeopleCount - 1) / 9 + 1;
+            //behindPeopleRow = (behindPeopleCount - 1) / 9 + 1;
 
             switch (behindPeopleCount % 9)
             {
@@ -421,11 +446,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
                     //子が0になったら1つ前の親に
                     if (childCount == 0)
                     {
-                        if (behindPeopleRow > 0) { behindPeopleRow--; }
+                        //if (behindPeopleRow > 0) { behindPeopleRow--; }
+                        DestroyParent();
+
                         if (behindPeopleRow == 0) { childCount = behind0Max; }
                         else { childCount = behindMax; }
-
-                        DestroyParent();
                     }
                 }
                 else
@@ -452,7 +477,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        //MovePeople(isR, ref decrCount, rowDecrCount);
+        MovePeople(isR, ref decrCount, ref rowDecrCount);
     }
 
     public void LeftHit()
@@ -466,7 +491,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        //MovePeople(isR, ref decrCount, rowDecrCount);
+        MovePeople(isR, ref decrCount, ref rowDecrCount);
     }
 
     void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)
@@ -496,18 +521,16 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Debug.Log("decrCount:" + decrCount);
     }
 
-    void MovePeople(bool isR, ref int decrCount, int[] rowDecrCount)
+    void MovePeople(bool isR, ref int decrCount,ref int[] rowDecrCount)
     {
         //減った部分に後ろから人を補充する
         int destroyChildCount = 0;
         int bPRowHold = behindPeopleRow;
         int childCount = aPeopleParents[bPRowHold].transform.childCount;
 
-        int allRDCount = 0, arrayCount = 0;
-        for (int i = 0; i < rowDecrCount.Length; i++)
-        { allRDCount += rowDecrCount[i]; }
+        int dCHold = decrCount, arrayCount = 0;
 
-        GameObject[] moveObject = new GameObject[allRDCount];
+        GameObject[] moveObject = new GameObject[decrCount];
         int[] canMoveRowPeople = new int[behindPeopleRow + 1];
         int cMRPeopleCount = 0;
 
@@ -630,44 +653,53 @@ public class MikoshiCollisionDetection : MonoBehaviour
             }
         }
 
-        int moveNumber = 0, toMoveRow = 0;
-        int a = 0, hold = 0;
+        int moveNumber = 0, toMoveRow = 0, behindRowHold = behindPeopleRow;
+        int a = 0, row = 0;
         cMRPeopleCount = 0;/*canMoveRowPeople.Length - 1;*/
         arrayCount = 0;
-        for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
-        for (int i = 0; i < rowDecrCount.Length; i++)
+        decrCount = dCHold;
+        //for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
+        while (true) 
         {
-            //前のループで動ける人が残っている場合
-            if (hold > 0)
-            {
-                //hold
-                ToMove(ref moveObject, isR, ref arrayCount, hold, ref moveNumber, ref toMoveRow);
+            if (decrCount == 0) { break; }
 
-                rowDecrCount[i] -= hold;
-            }
+            Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + "behindRow:" + behindPeopleRow);
+            Debug.Log(" row:" + row + " Count:" + rowDecrCount[row]);
 
-            Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + " Count:" + rowDecrCount[i]);
-
-            a = canMoveRowPeople[cMRPeopleCount] - rowDecrCount[i];
+            a = canMoveRowPeople[cMRPeopleCount] - rowDecrCount[row];//各列で移動できる人-各列で補充しないといけない人数
             if (a >= 0)
             {
                 //rowDecrCount[i]
-                ToMove(ref moveObject, isR, ref arrayCount, rowDecrCount[i], ref moveNumber, ref toMoveRow);
+                ToMove(ref moveObject, isR, ref arrayCount, rowDecrCount[row], ref moveNumber, ref toMoveRow);
+                decrCount -= rowDecrCount[row];
 
-                hold = a;
+                row++;
                 if (a == 0)
-                { cMRPeopleCount++; }
+                {
+                    cMRPeopleCount++;
+                    DestroyParent();
+                }
+                else
+                {
+                    canMoveRowPeople[cMRPeopleCount] = a;
+                }
             }
             else
             {
                 //canMoveRowPeople[cMRPCount]
-                if (behindPeopleRow - cMRPeopleCount == i)
-                {
 
-                }
-                else { ToMove(ref moveObject, isR, ref arrayCount, canMoveRowPeople[cMRPeopleCount], ref moveNumber, ref toMoveRow); }
-
+                ToMove(ref moveObject, isR, ref arrayCount, canMoveRowPeople[cMRPeopleCount], ref moveNumber, ref toMoveRow);
+                decrCount -= canMoveRowPeople[cMRPeopleCount];
                 cMRPeopleCount++;
+                DestroyParent();
+            }
+
+            if (behindRowHold - cMRPeopleCount == row)
+            {
+                //移動できる人の列と補充しないといけない列が同じなら、ループを終わらせてその列だけ並び替えをさせる
+                sortRow = row;
+                isSort = true;
+                break;
             }
         }
     }
@@ -680,7 +712,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         {
             AfterPeopleMoveScript afterPeopleMoveScript = moveObject[arrayCount].GetComponent<AfterPeopleMoveScript>();
             moveObject[arrayCount].transform.SetParent(aPeopleParents[toMoveRow].transform);
-            Debug.Log("moveObject:" + moveObject[arrayCount]);
+            //Debug.Log("moveObject:" + moveObject[arrayCount]);
 
             //移動先の座標を求める
             if (toMoveRow == 0) { ToMoveAssign(ref toMovePoint, behind0MovePoint, behind0MoveCount, ref moveNumber, ref toMoveRow); }
@@ -690,7 +722,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             arrayCount++;
 
-            afterPeopleMoveScript.Move(toMovePoint);
+            afterPeopleMoveScript.Setpoint(toMovePoint);
         }
     }
 
@@ -705,6 +737,27 @@ public class MikoshiCollisionDetection : MonoBehaviour
         {
             moveNumber = 0;
             toMoveRow++;
+        }
+    }
+
+    void Sort(int sortrow)
+    {
+        Debug.Log("Sort");
+        Vector3 movePoint = Vector3.zero;
+        int childCount = aPeopleParents[sortrow].transform.childCount;
+        Debug.Log(childCount);
+        for (int i = 0; i < childCount; i++)
+        {
+            GameObject child = aPeopleParents[sortrow].transform.GetChild(i).gameObject;
+            AfterPeopleMoveScript afterPeopleMoveScript = child.GetComponent<AfterPeopleMoveScript>();
+            if (sortrow == 0)
+            { 
+                movePoint = behind0MovePoint[i / 2];
+                if (i % 2 == 1) { movePoint.x *= -1; }
+            }
+            else { movePoint = behindMoveAll[i]; }
+
+            afterPeopleMoveScript.Setpoint(movePoint);
         }
     }
 }

@@ -62,7 +62,9 @@ public class player : MonoBehaviour
     int Horizontal_controll;
     int Vertical_controll;
 
-    [SerializeField]private Animator Wholeanimator;
+    [SerializeField] private GameObject WholeObject;
+    [SerializeField] private float BendSpeed;
+    [SerializeField] private float ReturnSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -129,6 +131,7 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                          
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -142,6 +145,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
+                            
                         }
                         else
                         {
@@ -161,7 +165,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
                             }
-
+                           
                         }
 
                         break;
@@ -180,7 +184,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
-
+                            
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -193,8 +197,8 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                           
 
-                          
                         }
                         else
                         {
@@ -214,7 +218,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
                             }
-
+                           
                         }
 
                         break;
@@ -235,6 +239,7 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                           
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -248,6 +253,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
+                          
                         }
                         else
                         {
@@ -267,7 +273,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, my_Rigidbody.velocity.z * -slide_power);
                             }
-
+                           
                         }
 
                         break;
@@ -329,7 +335,14 @@ public class player : MonoBehaviour
                  
              
         }
-        
+        if (Horizon_move == "leftmove")
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed*Time.deltaTime);
+
+
+        else if (Horizon_move == "rightmove")
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime);
+        else
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime);
 
         force.y = -gravity;
 
@@ -436,19 +449,19 @@ public class player : MonoBehaviour
 
         if (old > Input_Horizontal)
         {
-            if (Input_Horizontal > 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "leftmove";Wholeanimator.SetBool("Left",true); Wholeanimator.SetBool("Right", false); }
+            if (Input_Horizontal > 0) { Horizon_move = "dontmove";}
+            else { Horizon_move = "leftmove";}
         }
         else if (old < Input_Horizontal)
         {
             if (Input_Horizontal < 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "rightmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", true); }
+            else { Horizon_move = "rightmove"; }
         }
         else if (old == Input_Horizontal)
         {
-            if (input == 0) { Horizon_move = "dontmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", false); }
-            else if (input < 0) { Horizon_move = "leftmove"; Wholeanimator.SetBool("Left", true); Wholeanimator.SetBool("Right", false); }
-            else if (input > 0) { Horizon_move = "rightmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", true); }
+            if (input == 0) { Horizon_move = "dontmove"; }
+            else if (input < 0) { Horizon_move = "leftmove";  }
+            else if (input > 0) { Horizon_move = "rightmove"; }
 
         }
 
