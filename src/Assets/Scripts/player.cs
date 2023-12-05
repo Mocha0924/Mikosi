@@ -18,6 +18,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
+    [SerializeField] private float PlusSpeed;
     [SerializeField] private float BonusMagnification;
    
     [SerializeField] float slide_power = 2f;
@@ -66,6 +67,7 @@ public class player : MonoBehaviour
     [SerializeField] private float BendSpeed;
     [SerializeField] private float ReturnSpeed;
 
+    [SerializeField] private Animator[] HumansAnimation;
     // Start is called before the first frame update
     void Start()
     {
@@ -391,6 +393,10 @@ public class player : MonoBehaviour
                 SE.StopSound();
                 turnSoundCheck = true;
                 audioSource.PlayOneShot(TurnSound);
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", true);
+                }
             }
             turn_times += Turn_speed;
 
@@ -401,6 +407,10 @@ public class player : MonoBehaviour
                 turn_complete_R = false;
                 turnSoundCheck = false;
                 turnSlider.RightTurnEnd();
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", false);
+                }
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
                 my_Transform.position += transform.forward * (my_forward_speed  * 0.5f);
@@ -414,6 +424,11 @@ public class player : MonoBehaviour
                 SE.StopSound();
                 turnSoundCheck = true;
                 audioSource.PlayOneShot(TurnSound);
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", true);
+                    Debug.Log("true");
+                }
             }
             turn_times -= Turn_speed;
 
@@ -424,6 +439,10 @@ public class player : MonoBehaviour
                 turn_complete_L = false;
                 turnSoundCheck = false;
                 turnSlider.LeftTurnEnd();
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", false);
+                }
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
                 my_Transform.position += transform.forward * (my_forward_speed *  0.4f);
@@ -431,9 +450,9 @@ public class player : MonoBehaviour
                 my_Transform.position += transform.forward * (my_forward_speed * 0.5f);
         }
         else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
-            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *(mikoshiCollision.ColumnCount * PlusSpeed + 1.5f)*BonusMagnification);
         else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
-            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * mikoshiCollision.ColumnCount * PlusSpeed + 1.5f);
 
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
