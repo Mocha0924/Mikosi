@@ -16,12 +16,11 @@ public class stamina : MonoBehaviour
     Vector3 stamina_image_pos = new Vector3(800,-400,0);
     public int stamina_rest;
 
-
-
     [SerializeField] Slider stamina_slider;
     public Slider[] slider_clone;
 
     [SerializeField] Transform canvas;
+    MikoshiCollisionDetection MCD;
 
     int time = 0;
 
@@ -36,6 +35,7 @@ public class stamina : MonoBehaviour
         slide_sec_value = 1.0f / stamina_heal_needTime;
 
        Vector3 vectorCanvas = canvas.localPosition + stamina_image_pos * canvas.localScale.x; //キャンパスのScaleに合わせる。
+        MCD = GetComponent<MikoshiCollisionDetection>();
 
 
         foreach (int stamina in stamina_value)
@@ -59,9 +59,12 @@ public class stamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
-
+        if(MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Gameover)
+  
+            foreach (int stamina in stamina_value)
+            {
+                Destroy(GameObject.Find("stamina_slider(Clone)"));
+            }
     }
 
     private void FixedUpdate()

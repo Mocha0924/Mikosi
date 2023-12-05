@@ -28,6 +28,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behind0MoveCount;
     int sortRow;
     bool isSort;
+    bool do_people_lose;
     int game_time_sec;
     int game_time_min;
 
@@ -51,6 +52,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private AudioClip StartSound;
 
     [SerializeField] UnityEngine.UI.Image ClearImage;
+    [SerializeField] UnityEngine.UI.Image[] MissionImage;
+    [SerializeField] private GameObject stamina_slider;
 
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
@@ -58,7 +61,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
     [SerializeField] private GameObject TimeNum;
-
+    
     [SerializeField] private TextMeshProUGUI WaitText;
     [SerializeField] private TextMeshProUGUI TimeNumText;
     [SerializeField] public TextMeshProUGUI PeopleNumText;
@@ -155,8 +158,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         if (TimeNum.activeInHierarchy == true)
         {
-
-            game_time_sec += 2;
+            if (playerMode == PlayerMode.Play)
+            {
+                game_time_sec += 2;
+            }
 
             if (game_time_sec >= 6000)
             {
@@ -271,14 +276,35 @@ public class MikoshiCollisionDetection : MonoBehaviour
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
         TimeNum.SetActive(false);
-        if (Clear_Good_Time > game_time_min)
+
+        if (peopleCount >= clearConditions - 6)
         {
-            ClearImage.sprite = Clear_Good_Sprite;
+            MissionImage[0].sprite = Clear_Good_Sprite;
         }
         else
         {
-            ClearImage.sprite = Clear_Bad_Sprite;
+            MissionImage[0].sprite = Clear_Bad_Sprite;
         }
+
+        if ( Clear_Good_Time > game_time_min )
+        {
+            MissionImage[1].sprite = Clear_Good_Sprite;
+        }
+        else
+        {
+            MissionImage[1].sprite= Clear_Bad_Sprite;
+        }
+
+        if(do_people_lose == false)
+        {
+            MissionImage[2].sprite = Clear_Good_Sprite;
+        }
+        else
+        {
+            MissionImage[2].sprite = Clear_Bad_Sprite;
+        }
+
+
         StartCoroutine("Result");
     }
     private IEnumerator Result()
@@ -400,7 +426,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-        if (playerMode == PlayerMode.Play)
+        do_people_lose = true;
+
+        if(playerMode == PlayerMode.Play)
         {
             m_audioSource.PlayOneShot(FoodHitSound);
             int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;

@@ -24,6 +24,9 @@ public class ResultController : MonoBehaviour
         //L Stick
         float lsh = Input.GetAxis("Vertical");
         Debug.Log(lsh);
+
+
+
         if ((lsh >= 0.8f)&&buttonType == ButtonType.Normal&&ButtonNum>0)
         {
             ButtonNum--;
