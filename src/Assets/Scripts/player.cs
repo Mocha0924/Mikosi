@@ -18,6 +18,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
+    [SerializeField] private float PlusSpeed;
     [SerializeField] private float BonusMagnification;
    
     [SerializeField] float slide_power = 2f;
@@ -431,9 +432,9 @@ public class player : MonoBehaviour
                 my_Transform.position += transform.forward * (my_forward_speed * 0.5f);
         }
         else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
-            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *(mikoshiCollision.ColumnCount * PlusSpeed + 1.5f)*BonusMagnification);
         else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
-            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * mikoshiCollision.ColumnCount * PlusSpeed + 1.5f);
 
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
