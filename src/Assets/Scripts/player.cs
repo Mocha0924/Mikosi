@@ -18,6 +18,7 @@ public class player : MonoBehaviour
     public float my_forward_speed = 1f;
     public float jumpVector = 100f;
     public float gravity = 20f;
+    [SerializeField] private float PlusSpeed;
     [SerializeField] private float BonusMagnification;
    
     [SerializeField] float slide_power = 2f;
@@ -62,8 +63,11 @@ public class player : MonoBehaviour
     int Horizontal_controll;
     int Vertical_controll;
 
-    [SerializeField]private Animator Wholeanimator;
+    [SerializeField] private GameObject WholeObject;
+    [SerializeField] private float BendSpeed;
+    [SerializeField] private float ReturnSpeed;
 
+    [SerializeField] private Animator[] HumansAnimation;
     // Start is called before the first frame update
     void Start()
     {
@@ -108,7 +112,7 @@ public class player : MonoBehaviour
         else if(Vertical_move == "backmove") {forward_or_back_speed = 0.8f;}
         else { forward_or_back_speed = 1.0f; }
 
-        Debug.Log(forward_or_back_speed);
+        //Debug.Log(forward_or_back_speed);
 
         if(!turn_complete_R&&!turn_complete_L)
         {
@@ -129,6 +133,7 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                          
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -142,6 +147,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
+                            
                         }
                         else
                         {
@@ -161,7 +167,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
                             }
-
+                           
                         }
 
                         break;
@@ -180,7 +186,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
-
+                            
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -193,8 +199,8 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                           
 
-                          
                         }
                         else
                         {
@@ -214,7 +220,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
                             }
-
+                           
                         }
 
                         break;
@@ -235,6 +241,7 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                           
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -248,6 +255,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
+                          
                         }
                         else
                         {
@@ -267,7 +275,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, my_Rigidbody.velocity.z * -slide_power);
                             }
-
+                           
                         }
 
                         break;
@@ -329,7 +337,14 @@ public class player : MonoBehaviour
                  
              
         }
-        
+        if (Horizon_move == "leftmove")
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed*Time.deltaTime);
+
+
+        else if (Horizon_move == "rightmove")
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime);
+        else
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime);
 
         force.y = -gravity;
 
@@ -378,6 +393,10 @@ public class player : MonoBehaviour
                 SE.StopSound();
                 turnSoundCheck = true;
                 audioSource.PlayOneShot(TurnSound);
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", true);
+                }
             }
             turn_times += Turn_speed;
 
@@ -388,6 +407,10 @@ public class player : MonoBehaviour
                 turn_complete_R = false;
                 turnSoundCheck = false;
                 turnSlider.RightTurnEnd();
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", false);
+                }
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
                 my_Transform.position += transform.forward * (my_forward_speed  * 0.5f);
@@ -401,6 +424,11 @@ public class player : MonoBehaviour
                 SE.StopSound();
                 turnSoundCheck = true;
                 audioSource.PlayOneShot(TurnSound);
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", true);
+                    Debug.Log("true");
+                }
             }
             turn_times -= Turn_speed;
 
@@ -411,6 +439,10 @@ public class player : MonoBehaviour
                 turn_complete_L = false;
                 turnSoundCheck = false;
                 turnSlider.LeftTurnEnd();
+                foreach (Animator Human in HumansAnimation)
+                {
+                    Human.SetBool("Turn", false);
+                }
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
                 my_Transform.position += transform.forward * (my_forward_speed *  0.4f);
@@ -418,9 +450,9 @@ public class player : MonoBehaviour
                 my_Transform.position += transform.forward * (my_forward_speed * 0.5f);
         }
         else if(mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
-            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *((mikoshiCollision.peopleCount / 10) * 0.05f + 1)*BonusMagnification);
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed *(mikoshiCollision.ColumnCount * PlusSpeed + 1.5f)*BonusMagnification);
         else if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Play)
-            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * ((mikoshiCollision.peopleCount / 10) * 0.05f + 1));
+            my_Transform.position += transform.forward * (my_forward_speed * forward_or_back_speed * mikoshiCollision.ColumnCount * PlusSpeed + 1.5f);
 
 
         //my_Transform.position += new Vector3(0, 0, my_forward_speed);
@@ -436,19 +468,19 @@ public class player : MonoBehaviour
 
         if (old > Input_Horizontal)
         {
-            if (Input_Horizontal > 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "leftmove";Wholeanimator.SetBool("Left",true); Wholeanimator.SetBool("Right", false); }
+            if (Input_Horizontal > 0) { Horizon_move = "dontmove";}
+            else { Horizon_move = "leftmove";}
         }
         else if (old < Input_Horizontal)
         {
             if (Input_Horizontal < 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "rightmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", true); }
+            else { Horizon_move = "rightmove"; }
         }
         else if (old == Input_Horizontal)
         {
-            if (input == 0) { Horizon_move = "dontmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", false); }
-            else if (input < 0) { Horizon_move = "leftmove"; Wholeanimator.SetBool("Left", true); Wholeanimator.SetBool("Right", false); }
-            else if (input > 0) { Horizon_move = "rightmove"; Wholeanimator.SetBool("Left", false); Wholeanimator.SetBool("Right", true); }
+            if (input == 0) { Horizon_move = "dontmove"; }
+            else if (input < 0) { Horizon_move = "leftmove";  }
+            else if (input > 0) { Horizon_move = "rightmove"; }
 
         }
 
