@@ -24,15 +24,12 @@ public class TurnStick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus
-            || MikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Clear)
-            turn_times = turnSlider.TurnTime_CompleteEnd;
-        
-            if (in_corner)
+
+        if (in_corner)
         {
 
             turnStick(tag == "R");
-           
+            
         }
 
 
