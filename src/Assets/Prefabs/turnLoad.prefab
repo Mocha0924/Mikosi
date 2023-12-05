@@ -617,7 +617,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &289169681009732625
 PrefabInstance:
@@ -713,7 +713,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &554730727484155209
 PrefabInstance:
@@ -809,7 +809,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &621134666019052095
 PrefabInstance:
@@ -900,7 +900,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1086510785041169876 stripped
 Transform:
@@ -996,7 +996,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1041170799260322240 stripped
 Transform:
@@ -1097,7 +1097,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1661485438049488182
 PrefabInstance:
@@ -1193,7 +1193,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1801473864374548944
 PrefabInstance:
@@ -1284,7 +1284,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2200755613977058875 stripped
 Transform:
@@ -1380,7 +1380,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1785341037034482605 stripped
 Transform:
@@ -1476,7 +1476,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &3296797324433420831 stripped
 Transform:
@@ -1577,7 +1577,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4006415690105398945
 PrefabInstance:
@@ -1673,7 +1673,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4339335593193602678
 PrefabInstance:
@@ -1764,7 +1764,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4301733442778700189 stripped
 Transform:
@@ -1860,7 +1860,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4227710758913285478 stripped
 Transform:
@@ -1956,7 +1956,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4093977173137837050 stripped
 Transform:
@@ -2057,7 +2057,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5090805636624069308
 PrefabInstance:
@@ -2153,7 +2153,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5375031180799350007
 PrefabInstance:
@@ -2244,7 +2244,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5556680098919019292 stripped
 Transform:
@@ -2340,7 +2340,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5290673160923224330 stripped
 Transform:
@@ -2441,7 +2441,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6068511264292267049
 PrefabInstance:
@@ -2537,7 +2537,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6715408438937886466
 PrefabInstance:
@@ -2628,7 +2628,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &6537912846736488681 stripped
 Transform:
@@ -2724,7 +2724,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &6353444385212424375 stripped
 Transform:
@@ -2825,7 +2825,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7297134549311600367
 PrefabInstance:
@@ -2921,7 +2921,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7577388227305230050
 PrefabInstance:
@@ -3012,7 +3012,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7972201537549904137 stripped
 Transform:
@@ -3108,7 +3108,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7865394896067761031 stripped
 Transform:
@@ -3204,7 +3204,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7696550584637170635 stripped
 Transform:
@@ -3305,7 +3305,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8661022919394231496
 PrefabInstance:
@@ -3396,7 +3396,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &9203276299219493667 stripped
 Transform:
@@ -3492,7 +3492,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &8855513081460241341 stripped
 Transform:
@@ -3588,7 +3588,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 16, y: 50, z: 10}
+  m_Size: {x: 16, y: 50, z: 8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &8707287047130646176 stripped
 Transform:

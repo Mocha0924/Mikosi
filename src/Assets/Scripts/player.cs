@@ -47,6 +47,8 @@ public class player : MonoBehaviour
     [SerializeField] private AudioClip[] JumpSounds;
     [SerializeField] private AudioClip TurnSound;
 
+    public bool JumpCheck = false;
+
     private bool turnSoundCheck = false;
     public enum playerType
     {
@@ -59,6 +61,10 @@ public class player : MonoBehaviour
 
     int Horizontal_controll;
     int Vertical_controll;
+
+    [SerializeField] private GameObject WholeObject;
+    [SerializeField] private float BendSpeed;
+    [SerializeField] private float ReturnSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -125,6 +131,7 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                          
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -138,6 +145,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
+                            
                         }
                         else
                         {
@@ -157,7 +165,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
                             }
-
+                           
                         }
 
                         break;
@@ -176,7 +184,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
-
+                            
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -189,8 +197,8 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                           
 
-                          
                         }
                         else
                         {
@@ -210,7 +218,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(my_Rigidbody.velocity.x * -slide_power, 0, 0);
                             }
-
+                           
                         }
 
                         break;
@@ -231,6 +239,7 @@ public class player : MonoBehaviour
                                 force = new Vector3(0, 0, 0);
 
                             }
+                           
                         }
                         else if (Horizon_move == "rightmove")
                         {
@@ -244,6 +253,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, 0);
                             }
+                          
                         }
                         else
                         {
@@ -263,7 +273,7 @@ public class player : MonoBehaviour
                             {
                                 force = new Vector3(0, 0, my_Rigidbody.velocity.z * -slide_power);
                             }
-
+                           
                         }
 
                         break;
@@ -325,7 +335,14 @@ public class player : MonoBehaviour
                  
              
         }
-        
+        if (Horizon_move == "leftmove")
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed*Time.deltaTime);
+
+
+        else if (Horizon_move == "rightmove")
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime);
+        else
+            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime);
 
         force.y = -gravity;
 
@@ -346,11 +363,13 @@ public class player : MonoBehaviour
 
                 stamina_script.slider_clone[stamina_script.stamina_number_now - 1].value = 1 - stamina_script.slide_value;
                 stamina_script.stamina_rest--;
-
+                JumpCheck = true;
                 if (stamina_script.stamina_number_now != 1) { stamina_script.stamina_number_now--; }
 
             }
-           
+            else if(transform.position.y < 1.26f&& JumpCheck)
+                JumpCheck = false;
+
             force *= Time.deltaTime;
             my_Rigidbody.AddForce(force, ForceMode.Acceleration);
 
@@ -430,8 +449,8 @@ public class player : MonoBehaviour
 
         if (old > Input_Horizontal)
         {
-            if (Input_Horizontal > 0) { Horizon_move = "dontmove"; }
-            else { Horizon_move = "leftmove"; }
+            if (Input_Horizontal > 0) { Horizon_move = "dontmove";}
+            else { Horizon_move = "leftmove";}
         }
         else if (old < Input_Horizontal)
         {
@@ -441,7 +460,7 @@ public class player : MonoBehaviour
         else if (old == Input_Horizontal)
         {
             if (input == 0) { Horizon_move = "dontmove"; }
-            else if (input < 0) { Horizon_move = "leftmove"; }
+            else if (input < 0) { Horizon_move = "leftmove";  }
             else if (input > 0) { Horizon_move = "rightmove"; }
 
         }
