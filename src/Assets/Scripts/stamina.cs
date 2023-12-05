@@ -59,7 +59,7 @@ public class stamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Gameover || MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Clear)
+        if(MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Gameover)
   
             foreach (int stamina in stamina_value)
             {
