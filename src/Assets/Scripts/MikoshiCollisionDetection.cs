@@ -53,6 +53,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     [SerializeField] UnityEngine.UI.Image ClearImage;
     [SerializeField] UnityEngine.UI.Image[] MissionImage;
+    [SerializeField] private GameObject stamina_slider;
 
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
@@ -60,6 +61,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
     [SerializeField] private GameObject TimeNum;
+
     
     [SerializeField] private TextMeshProUGUI WaitText;
     [SerializeField] private TextMeshProUGUI TimeNumText;
@@ -157,8 +159,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         if(TimeNum.activeInHierarchy == true)
         {
-
-            game_time_sec += 2;
+            if (playerMode == PlayerMode.Play)
+            {
+                game_time_sec += 2;
+            }
 
             if (game_time_sec >= 6000)
             {
