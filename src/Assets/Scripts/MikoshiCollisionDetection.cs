@@ -156,7 +156,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (TimeNum.activeInHierarchy == true)
         {
 
-            game_time_sec += 2;
+            if (playerMode == PlayerMode.Play)
+            {
+                game_time_sec += 2;
+            }
 
             if (game_time_sec >= 6000)
             {
