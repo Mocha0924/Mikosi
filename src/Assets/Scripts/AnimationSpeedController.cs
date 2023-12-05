@@ -21,7 +21,7 @@ public class AnimationSpeedController : MonoBehaviour
         {
             foreach (Animator Human in HumanAnimator)
             {
-                Human.SetFloat("speed", 2 + (Colum * 0.2f+1));
+                Human.SetFloat("speed", 2 + (Colum * 0.4f+1));
             }
             MikoshiAnimator.SetFloat("speed", 1 + (Colum * 0.2f+1));
         }
