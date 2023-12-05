@@ -79,6 +79,14 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public PlayerMode playerMode = PlayerMode.Before;
 
+    enum ColCarMode
+    {
+        None,
+        Center,
+        Right,
+        Left
+    }
+    ColCarMode ColCar = ColCarMode.None;
 
     // Start is called before the first frame update
     void Start()
@@ -125,6 +133,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         //人の列の親生成
         GenerateParent(0);
+
+        ColCar = ColCarMode.None;
     }
 
     private void Update()
@@ -226,6 +236,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
+        ColCar = ColCarMode.Center;
         MainBGMAudio.Stop();
         GameoverBGMAudio.Play();
         playerMode = PlayerMode.Gameover;
@@ -295,7 +306,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("parentDestroy");
         int childCount = Parents.transform.childCount - 1;
-
+        //Debug.Log("cc:" + childCount + " bpr:" + behindPeopleRow);
         ColumnCount--;
 
         Destroy(Parents.transform.GetChild(childCount).gameObject);
@@ -377,7 +388,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                     break;
             }
         }
-        Debug.Log("length:" + aPeopleParents.Length + " count:" + behindPeopleRow);
+        Debug.Log("aPeopleParents.length:" + aPeopleParents.Length + " behindPeopleRow:" + behindPeopleRow);
         var parent = aPeopleParents[behindPeopleRow].transform;
 
         AfterPeople.name = peopleCount.ToString();
@@ -471,28 +482,40 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("右側");
 
-        bool isR = true;
+        if (ColCar == ColCarMode.None)
+        {
+            ColCar = ColCarMode.Right;
+            bool isR = true;
 
-        int decrCount = 0;
-        int[] rowDecrCount = new int[behindPeopleRow + 1];
+            int decrCount = 0;
+            int[] rowDecrCount = new int[behindPeopleRow + 1];
 
-        DecrPeople(isR, ref decrCount, ref rowDecrCount);
+            DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        MovePeople(isR, ref decrCount, ref rowDecrCount);
+            MovePeople(isR, ref decrCount, ref rowDecrCount);
+
+            ColCar = ColCarMode.None;
+        }
     }
 
     public void LeftHit()
     {
         Debug.Log("左側");
 
-        bool isR = false;
+        if (ColCar == ColCarMode.None)
+        {
+            ColCar = ColCarMode.Left;
+            bool isR = false;
 
-        int decrCount = 0;
-        int[] rowDecrCount = new int[behindPeopleRow + 1];
+            int decrCount = 0;
+            int[] rowDecrCount = new int[behindPeopleRow + 1];
 
-        DecrPeople(isR, ref decrCount, ref rowDecrCount);
+            DecrPeople(isR, ref decrCount, ref rowDecrCount);
 
-        MovePeople(isR, ref decrCount, ref rowDecrCount);
+            MovePeople(isR, ref decrCount, ref rowDecrCount);
+
+            ColCar = ColCarMode.None;
+        }
     }
 
     void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)
@@ -678,7 +701,6 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 if (a == 0)
                 {
                     cMRPeopleCount++;
-                    DestroyParent();
                 }
                 else
                 {
@@ -691,8 +713,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
                 ToMove(ref moveObject, isR, ref arrayCount, canMoveRowPeople[cMRPeopleCount], ref moveNumber, ref toMoveRow);
                 decrCount -= canMoveRowPeople[cMRPeopleCount];
+                if (aPeopleParents[cMRPeopleCount].transform.childCount <= 0)
+                {
+                    Debug.Log("B");
+                    DestroyParent(); }
                 cMRPeopleCount++;
-                DestroyParent();
             }
 
             if (behindRowHold - cMRPeopleCount == row)
@@ -759,6 +784,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
             else { movePoint = behindMoveAll[i]; }
 
             afterPeopleMoveScript.Setpoint(movePoint);
+        }
+
+        //Sortより後ろの列があれば消す
+        for (int i = behindPeopleRow; i > sortrow; i--)
+        {
+            if (aPeopleParents[i].transform.childCount <= 0)
+            { Debug.Log("A" + i); DestroyParent(); }
         }
     }
 }

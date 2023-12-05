@@ -70,7 +70,7 @@ public class stamina : MonoBehaviour
         {
             time++;
 
-            for (int i = 2; i >= stamina_number_now; i--) { Debug.Log(i); slider_clone[i].value = 1; }
+            //for (int i = 2; i >= stamina_number_now; i--) { Debug.Log(i); slider_clone[i].value = 1; }
 
             if (time >= 50)
             {

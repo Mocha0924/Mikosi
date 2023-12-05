@@ -110,7 +110,7 @@ public class player : MonoBehaviour
         else if(Vertical_move == "backmove") {forward_or_back_speed = 0.8f;}
         else { forward_or_back_speed = 1.0f; }
 
-        Debug.Log(forward_or_back_speed);
+        //Debug.Log(forward_or_back_speed);
 
         if(!turn_complete_R&&!turn_complete_L)
         {
