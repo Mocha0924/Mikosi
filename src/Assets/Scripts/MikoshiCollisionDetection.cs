@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
-using UnityEditor.UI;
+
 public class MikoshiCollisionDetection : MonoBehaviour
 {
     public int clearConditions;
@@ -89,11 +89,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Left
     }
     ColCarMode ColCar = ColCarMode.None;
+  
 
     // Start is called before the first frame update
     void Start()
     {
-        PeopleNumText.text = 0.ToString("000") + "人神輿";
+        PeopleNumText.text = 0.ToString() + "人神輿";
         m_audioSource = GetComponent<AudioSource>();
         peopleCount = 6;
         AfterPeople.transform.localPosition = Vector3.zero;
@@ -195,7 +196,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log("People Touch");
 
             peopleCount++;
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
             behindPeopleCount = peopleCount - 18;
             if (behindPeopleCount % 9 == 1)
             {
@@ -503,7 +504,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                     break;
                 }
             }
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
             Debug.Log("peopleCount:" + peopleCount);
             if (peopleCount <= 6) { GameOver(); }
         }
@@ -526,7 +527,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             MovePeople(isR, ref decrCount, ref rowDecrCount);
 
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
         }
@@ -548,7 +549,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             MovePeople(isR, ref decrCount, ref rowDecrCount);
 
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
         }

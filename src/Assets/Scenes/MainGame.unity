@@ -6328,14 +6328,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924382029}
-  m_LocalRotation: {x: 0.18223555, y: 0, z: 0, w: 0.9832549}
-  m_LocalPosition: {x: 0, y: 10, z: -18}
+  m_LocalRotation: {x: -0.16239132, y: 0.27788985, z: -0.026995467, w: 0.94640243}
+  m_LocalPosition: {x: -14.7, y: -0.5, z: -18}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1363608245}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 21, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -17, y: 34, z: -8.5}
 --- !u!81 &924382031
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6402,6 +6402,7 @@ MonoBehaviour:
   MainCamera: {fileID: 924382029}
   PlayerObj: {fileID: 1363608237}
   Player: {fileID: 1363608242}
+  MikosiAnimator: {fileID: 1726234585}
   FrontPos: {x: 0, y: 10, z: -18}
   RightPos: {x: -5, y: 10, z: -11}
   LeftPos: {x: 5, y: 10, z: -11}
@@ -6413,8 +6414,10 @@ MonoBehaviour:
   mikosiCollision: {fileID: 1363608241}
   adjustment: 0.5
   ColumLimit: 6
-  ClearPos: {x: 0, y: 50, z: -500}
-  ClearAngle: {x: 0.09584575, y: 0, z: 0, w: 0.9953962}
+  BeforePos: {x: -14.7, y: -0.5, z: -18}
+  BeforeAngle: {x: -0.1623914, y: 0.2778899, z: -0.02699535, w: 0.9464024}
+  ClearPos: {x: -14.7, y: -0.5, z: -18}
+  ClearAngle: {x: 0.16239141, y: -0.27788982, z: 0.02699539, w: -0.94640243}
   ClearSpeed: 0.007
   ClearAngleSpeed: 0.007
 --- !u!95 &932137786 stripped
@@ -7640,7 +7643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aea05032335434a9dd472fb13a4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearConditions: 1
+  clearConditions: 100
   AfterPeople: {fileID: 1276616861821600420, guid: 95489918d89ecd040898896e5a8e63a8, type: 3}
   aPeopleParents: []
   aPeopleParent: {fileID: 4856096215076513259, guid: fd591c1ba5986de449073e1e2db29088, type: 3}
@@ -7712,7 +7715,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: afd9687662d9f584c99caeba50e0878a, type: 3}
   - {fileID: 8300000, guid: 21380c5b38c3b8346af9ef87d00c25f0, type: 3}
   TurnSound: {fileID: 8300000, guid: ff1b8c9210717ca4b82b372bc4356f83, type: 3}
-  JumpCheck: 0
   Angle: 0
   WholeObject: {fileID: 732152156}
   BendSpeed: 60
@@ -7724,6 +7726,7 @@ MonoBehaviour:
   - {fileID: 989258553}
   - {fileID: 1665250343}
   - {fileID: 1062033352}
+  MikosiAnimation: {fileID: 1726234585}
 --- !u!114 &1363608243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9396,6 +9399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74891119b1341f34990706c65b327dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpCheck: 0
 --- !u!1 &1756974208
 GameObject:
   m_ObjectHideFlags: 0
