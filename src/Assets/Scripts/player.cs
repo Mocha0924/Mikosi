@@ -11,7 +11,7 @@ public class player : MonoBehaviour
     Vector3 pos;
     LoadController load;
     stamina stamina_script;
-    string Horizon_move;
+    public string Horizon_move;
     string Vertical_move;
     public float my_Thrust = 20f;
     public float my_Thrust_Max = 20f;

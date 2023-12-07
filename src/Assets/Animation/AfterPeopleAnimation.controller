@@ -35,7 +35,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
+  - m_ConditionMode: 6
     m_ConditionEvent: Rand
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -88,14 +88,14 @@ AnimatorController:
   m_Name: AfterPeopleAnimation
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Rand
-    m_Type: 4
+  - m_Name: Speed
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Speed
-    m_Type: 1
+  - m_Name: Rand
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -121,9 +121,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
+  - m_ConditionMode: 6
     m_ConditionEvent: Rand
-    m_EventTreshold: 0
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6722738787456423381}
   m_Solo: 0
