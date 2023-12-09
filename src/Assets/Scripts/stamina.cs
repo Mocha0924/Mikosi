@@ -15,7 +15,7 @@ public class stamina : MonoBehaviour
     [SerializeField]int stamina_heal_needTime = 5;
     Vector3 stamina_image_pos = new Vector3(800,-400,0);
     public int stamina_rest;
-
+    private MikoshiCollisionDetection MCD;
 
 
     [SerializeField] Slider stamina_slider;
@@ -29,6 +29,7 @@ public class stamina : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MCD = GetComponent<MikoshiCollisionDetection>();
         stamina_value = new float[stamina_number_first + 1] ;
         slider_clone = new Slider[stamina_number_first] ;
         stamina_number_now = stamina_number_first;
@@ -60,7 +61,12 @@ public class stamina : MonoBehaviour
     void Update()
     {
 
-        
+        if(MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Gameover || MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Clear)
+  
+            foreach (int stamina in stamina_value)
+            {
+                Destroy(GameObject.Find("stamina_slider(Clone)"));
+            }
 
     }
 

@@ -6,7 +6,7 @@ public class MikosiPeopleAnimationController : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator animator;  // アニメーターコンポーネント取得用
-    [SerializeField] private MikosiAnomationController mikosianimationController;
+    [SerializeField] private MikosiAnimationController mikosianimationController;
     // Start is called before the first frame update
     void Start()
     {

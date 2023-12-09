@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject MainCamera;
     [SerializeField] private GameObject PlayerObj;
     [SerializeField] private player Player;
+    [SerializeField] private MikosiAnimationController MikosiAnimator;
     [SerializeField] private Vector3 FrontPos;
     [SerializeField] private Vector3 RightPos;
     [SerializeField] private Vector3 LeftPos;
@@ -21,6 +22,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float adjustment;
     [SerializeField] private int ColumLimit;
     private bool Air = false;
+    [SerializeField] private Vector3 BeforePos;
+    [SerializeField] private Quaternion BeforeAngle;
     [SerializeField] private Vector3 ClearPos;
     [SerializeField] private Quaternion ClearAngle;
     [SerializeField] private float ClearSpeed;
@@ -31,10 +34,15 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Clear)
+        if(mikosiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Before)
         {
-           MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition,new Vector3(0,ClearPos.y,ClearPos.z), ClearSpeed);    
-           MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, ClearAngle, ClearAngleSpeed);
+            MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, BeforePos, speed);
+            MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, BeforeAngle, Anglespeed);
+        }
+        else if(Clear)
+        {
+            MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, ClearPos, ClearSpeed);
+            MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, ClearAngle, ClearAngleSpeed);
         }
         else
         {
@@ -54,7 +62,7 @@ public class CameraController : MonoBehaviour
                         MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
                 }
             }
-            else if (Player.JumpCheck)
+            else if (MikosiAnimator.JumpCheck)
             {
                 Air = true;
                 switch (Player.Angle)
@@ -70,7 +78,7 @@ public class CameraController : MonoBehaviour
                         MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
                 }
             }
-            else if (Air && transform.localPosition.y <= 10)
+            else if (Air && !MikosiAnimator.JumpCheck)
             {
                 transform.DOComplete();
                 transform.DOShakePosition(0.1f * Time.deltaTime, 10000);

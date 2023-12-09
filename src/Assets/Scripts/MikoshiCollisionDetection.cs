@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
-using UnityEditor.UI;
+
 public class MikoshiCollisionDetection : MonoBehaviour
 {
     public int clearConditions;
@@ -28,6 +28,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     int behind0MoveCount;
     int sortRow;
     bool isSort;
+    bool do_people_lose;
     int game_time_sec;
     int game_time_min;
 
@@ -51,6 +52,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private AudioClip StartSound;
 
     [SerializeField] UnityEngine.UI.Image ClearImage;
+    [SerializeField] UnityEngine.UI.Image[] MissionImage;
 
     [SerializeField] private GameObject ClearResult;
     [SerializeField] private GameObject GameoverResult;
@@ -87,11 +89,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Left
     }
     ColCarMode ColCar = ColCarMode.None;
+  
 
     // Start is called before the first frame update
     void Start()
     {
-        PeopleNumText.text = 0.ToString("000") + "人神輿";
+        PeopleNumText.text = 0.ToString() + "人神輿";
         m_audioSource = GetComponent<AudioSource>();
         peopleCount = 6;
         AfterPeople.transform.localPosition = Vector3.zero;
@@ -156,7 +159,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (TimeNum.activeInHierarchy == true)
         {
 
-            game_time_sec += 2;
+            if (playerMode == PlayerMode.Play)
+            {
+                game_time_sec += 2;
+            }
 
             if (game_time_sec >= 6000)
             {
@@ -190,7 +196,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log("People Touch");
 
             peopleCount++;
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
             behindPeopleCount = peopleCount - 18;
             if (behindPeopleCount % 9 == 1)
             {
@@ -279,6 +285,34 @@ public class MikoshiCollisionDetection : MonoBehaviour
         {
             ClearImage.sprite = Clear_Bad_Sprite;
         }
+
+        if (peopleCount >= clearConditions - 6)
+        {
+            MissionImage[0].sprite = Clear_Good_Sprite;
+        }
+        else
+        {
+            MissionImage[0].sprite = Clear_Bad_Sprite;
+        }
+
+        if (Clear_Good_Time > game_time_min)
+        {
+            MissionImage[1].sprite = Clear_Good_Sprite;
+        }
+        else
+        {
+            MissionImage[1].sprite = Clear_Bad_Sprite;
+        }
+
+        if (do_people_lose == false)
+        {
+            MissionImage[2].sprite = Clear_Good_Sprite;
+        }
+        else
+        {
+            MissionImage[2].sprite = Clear_Bad_Sprite;
+        }
+
         StartCoroutine("Result");
     }
     private IEnumerator Result()
@@ -400,6 +434,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
+        do_people_lose = true;
         if (playerMode == PlayerMode.Play)
         {
             m_audioSource.PlayOneShot(FoodHitSound);
@@ -469,7 +504,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                     break;
                 }
             }
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
             Debug.Log("peopleCount:" + peopleCount);
             if (peopleCount <= 6) { GameOver(); }
         }
@@ -492,7 +527,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             MovePeople(isR, ref decrCount, ref rowDecrCount);
 
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
         }
@@ -514,7 +549,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             MovePeople(isR, ref decrCount, ref rowDecrCount);
 
-            PeopleNumText.text = (peopleCount - 6).ToString("000") + "人神輿";
+            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
         }
