@@ -143,6 +143,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         ColCar = ColCarMode.None;
 
         //デバッグ用
+
         for (int i = 0; i < 12; i++)
         {
             peopleCount++;
@@ -161,6 +162,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             GenerateMikoshiPeople();
         }
         gameoverController = GetComponent<GameoverController>();
+
     }
 
     private void Update()
