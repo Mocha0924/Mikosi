@@ -5,35 +5,56 @@ using UnityEngine;
 public class RigdollController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Rigidbody[] rBody;
+    private Rigidbody[] rBody;
+    private BoxCollider[] BoxCol;
+    private CapsuleCollider[] CapsuleCol; 
+    private SphereCollider[] SphereCol;
+    private Animator animator;
     void Start()
     {
-        //自身が持つリジッドボディを全て配列に格納
+        animator = GetComponent<Animator>();
         rBody = GetComponentsInChildren<Rigidbody>();
+        BoxCol = GetComponentsInChildren<BoxCollider>();
+        CapsuleCol = GetComponentsInChildren<CapsuleCollider>();
+        SphereCol = GetComponentsInChildren<SphereCollider>();
         foreach (Rigidbody RB in rBody)
         {
             RB.isKinematic = true;
         }
-    }
-    private void Update()
-    {
-        if(Input.anyKeyDown)
+        foreach(BoxCollider BC in BoxCol)
         {
-            if(rBody[0].isKinematic == true)
-            {
-                SetRagDoll(false);
-            }
-            else
-                SetRagDoll(true);
+            BC.enabled = false;
+        }
+        foreach (CapsuleCollider CC in CapsuleCol)
+        {
+            CC.enabled = false;
+        }
+        foreach(SphereCollider SC in SphereCol)
+        {
+            SC.enabled = false; 
         }
     }
-    //ラグドールのオン・オフ関数
-    void SetRagDoll(bool on_off)
+   
+    
+    public void SetRagDoll()
     {
-        //rBody配列内のリジッドボディ全てのisKinematicを切り替える
+        animator.enabled = false;
         foreach (Rigidbody RB in rBody)
         {
-            RB.isKinematic = on_off;
+            RB.isKinematic = false;
+        }
+        foreach (BoxCollider BC in BoxCol)
+        {
+            BC.enabled = true;
+        }
+        foreach (CapsuleCollider CC in CapsuleCol)
+        {
+            CC.enabled = true;
+        }
+        foreach (SphereCollider SC in SphereCol)
+        {
+            SC.enabled = true;
         }
     }
+    
 }

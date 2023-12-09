@@ -13,6 +13,7 @@ public class EndCorner : MonoBehaviour
     private LoadDirector Director;
     bool hit_check = true;
     private MikoshiCollisionDetection MikoshiCollision;
+    private GameoverController gameoverController;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class EndCorner : MonoBehaviour
         TurnStick = corner_start.GetComponent<TurnStick>();
         player_script = player.GetComponent<player>();
         MikoshiCollision = player.GetComponent<MikoshiCollisionDetection>();
+        gameoverController = player.GetComponent<GameoverController>();
     }
 
     // Update is called once per frame
@@ -47,7 +49,10 @@ public class EndCorner : MonoBehaviour
             else
             {
                 Debug.Log("failed");
-                MikoshiCollision.GameOver();
+              
+                gameoverController.FailureTurn();
+               
+
             }
 
             hit_check = false;
