@@ -28,6 +28,10 @@ public class GameoverController : MonoBehaviour
     public void TurnGameover()
     {
         mikosiCollision.GameOverDirection();
+        foreach (RigdollController r in ragdoll)
+        {
+            r.SetRagDoll();
+        }
         Invoke(nameof(Gameover), 3.5f);
     }
    private void Gameover()
