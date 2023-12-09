@@ -140,23 +140,23 @@ public class MikoshiCollisionDetection : MonoBehaviour
         ColCar = ColCarMode.None;
 
         //デバッグ用
-        for (int i = 0; i < 12; i++)
-        {
-            peopleCount++;
-            PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
-            behindPeopleCount = peopleCount - 18;
-            if (behindPeopleCount % 9 == 1)
-            {
-                //列に9人いる時、列を増やす
-                behindPeopleRow++;
-                GenerateParent(1);
-            }
+        //for (int i = 0; i < 12; i++)
+        //{
+        //    peopleCount++;
+        //    PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
+        //    behindPeopleCount = peopleCount - 18;
+        //    if (behindPeopleCount % 9 == 1)
+        //    {
+        //        //列に9人いる時、列を増やす
+        //        behindPeopleRow++;
+        //        GenerateParent(1);
+        //    }
 
-            Debug.Log(peopleCount);
+        //    Debug.Log(peopleCount);
 
-            //人の生成
-            GenerateMikoshiPeople();
-        }
+        //    //人の生成
+        //    GenerateMikoshiPeople();
+        //}
     }
 
     private void Update()
