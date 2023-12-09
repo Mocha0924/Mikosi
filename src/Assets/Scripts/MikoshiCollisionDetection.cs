@@ -68,6 +68,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private Sprite Clear_Bad_Sprite;
     [SerializeField] private int MaxWaitTime;
     [SerializeField] private int Clear_Good_Time = 2;
+
+    private GameoverController gameoverController;
     public enum PlayerMode
     {
         Before,
@@ -76,6 +78,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Bonus,
         Clear,
         Result,
+        GameoverDirection,
         Gameover
     }
 
@@ -140,23 +143,26 @@ public class MikoshiCollisionDetection : MonoBehaviour
         ColCar = ColCarMode.None;
 
         //デバッグ用
-        //for (int i = 0; i < 12; i++)
-        //{
-        //    peopleCount++;
-        //    PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
-        //    behindPeopleCount = peopleCount - 18;
-        //    if (behindPeopleCount % 9 == 1)
-        //    {
-        //        //列に9人いる時、列を増やす
-        //        behindPeopleRow++;
-        //        GenerateParent(1);
-        //    }
 
-        //    Debug.Log(peopleCount);
+        for (int i = 0; i < 12; i++)
+        {
+            peopleCount++;
+            PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
+            behindPeopleCount = peopleCount - 18;
+            if (behindPeopleCount % 9 == 1)
+            {
+                //列に9人いる時、列を増やす
+                behindPeopleRow++;
+                GenerateParent(1);
+            }
 
-        //    //人の生成
-        //    GenerateMikoshiPeople();
-        //}
+            Debug.Log(peopleCount);
+
+            //人の生成
+            GenerateMikoshiPeople();
+        }
+        gameoverController = GetComponent<GameoverController>();
+
     }
 
     private void Update()
@@ -258,17 +264,22 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     }
 
-    public void GameOver()
+    public void GameOverDirection()
     {
-        Debug.Log("Game Over");
+       
         ColCar = ColCarMode.Center;
         MainBGMAudio.Stop();
-        GameoverBGMAudio.Play();
-        playerMode = PlayerMode.Gameover;
-        GameoverResult.SetActive(true);
+        
+        playerMode = PlayerMode.GameoverDirection;
+      
         TimeNum.SetActive(false);
     }
-
+    public void Gameover()
+    {
+        Debug.Log("Game Over");
+        GameoverBGMAudio.Play();
+        GameoverResult.SetActive(true);
+    }
     public void GameStart()
     {
         MainBGMAudio.Play();
@@ -525,7 +536,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             }
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
             Debug.Log("peopleCount:" + peopleCount);
-            if (peopleCount <= 6) { GameOver(); }
+            if (peopleCount <= 6) { GameOverDirection();gameoverController.Disapper(); }
         }
 
     }

@@ -338,14 +338,18 @@ public class player : MonoBehaviour
                  
              
         }
-        if (Horizon_move == "leftmove")
-            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed*Time.deltaTime);
+        if(WholeObject!=null)
+        {
+            if (Horizon_move == "leftmove")
+                WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed * Time.deltaTime);
 
 
-        else if (Horizon_move == "rightmove")
-            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime);
-        else
-            WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime);
+            else if (Horizon_move == "rightmove")
+                WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime);
+            else
+                WholeObject.transform.localRotation = Quaternion.RotateTowards(WholeObject.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime);
+        }
+       
 
         force.y = -gravity;
 
