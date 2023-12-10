@@ -14,10 +14,10 @@ public class PeopleAnimatorController : MonoBehaviour
         PeopleAnimator = GetComponent<Animator>();
         if(Rand)
         {
-            int Randnum = UnityEngine.Random.Range(1,4);
+            int Randnum = UnityEngine.Random.Range(1,5);
             PeopleAnimator.SetBool("Case"+Randnum,true);
         }
-        else if(AnimationNum > 0&&AnimationNum<4)
+        else if(AnimationNum > 0&&AnimationNum<5)
             PeopleAnimator.SetBool("Case" +AnimationNum, true);
     }
 
