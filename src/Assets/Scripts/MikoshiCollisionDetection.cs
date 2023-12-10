@@ -50,6 +50,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private AudioClip SubSound;
     [SerializeField] private AudioClip FoodHitSound;
     [SerializeField] private AudioClip StartSound;
+    [SerializeField] private AudioClip CarTouch;
+    [SerializeField] private AudioClip CarTouchCrush;
 
     [SerializeField] UnityEngine.UI.Image ClearImage;
     [SerializeField] UnityEngine.UI.Image[] MissionImage;
@@ -267,7 +269,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void GameOverDirection()
     {
        
-        ColCar = ColCarMode.Center;
+       
         MainBGMAudio.Stop();
         
         playerMode = PlayerMode.GameoverDirection;
@@ -279,6 +281,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Debug.Log("Game Over");
         GameoverBGMAudio.Play();
         GameoverResult.SetActive(true);
+    }
+    public void CarHitGameover()
+    {
+        m_audioSource.PlayOneShot(CarTouchCrush);
+        ColCar = ColCarMode.Center;
+        GameOverDirection();
     }
     public void GameStart()
     {
@@ -544,7 +552,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void RightHit()
     {
         Debug.Log("右側");
-
+        m_audioSource.PlayOneShot(CarTouch);
         if (ColCar == ColCarMode.None)
         {
             ColCar = ColCarMode.Right;
@@ -566,6 +574,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void LeftHit()
     {
         Debug.Log("左側");
+        m_audioSource.PlayOneShot(CarTouch);
 
         if (ColCar == ColCarMode.None)
         {

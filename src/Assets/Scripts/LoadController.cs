@@ -18,6 +18,7 @@ public class LoadController : MonoBehaviour
     [SerializeField] private GameObject LeftEndTurnLoad;
     [SerializeField] GameObject people;
     [SerializeField] GameObject food;
+    [SerializeField] GameObject car;
     [SerializeField] private LoadDirector Director;
     private player player;
     private Vector3 SpawnPosition = Vector3.zero;
@@ -29,6 +30,8 @@ public class LoadController : MonoBehaviour
     [SerializeField] private int PeopleGenerationMax;
     [SerializeField] private int FoodGenerationMin;
     [SerializeField] private int FoodGenerationMax;
+    [SerializeField] private int CarGenerationMin;
+    [SerializeField] private int CarGenerationMax;
     private bool HitCheck = true;
     [SerializeField] private TurnSlider turnSlider;
     [SerializeField] private TurnStick turnStick;
@@ -270,6 +273,20 @@ public class LoadController : MonoBehaviour
         {
             GameObject FoodPre = Instantiate(food, CoodinateList[i], Quaternion.identity);
             ObjectList.Add(FoodPre);
+        }
+        int Carrand = Random.Range(CarGenerationMin,CarGenerationMax + 1);
+        for (int i = Foodrand; i < Carrand+ Foodrand; i++)
+        {
+            GameObject CarPre = Instantiate(car, new Vector3(CoodinateList[i].x,-3.33f, CoodinateList[i].z), Quaternion.identity);
+            switch (Angle)
+            {
+                case LoadType.Up: CarPre.transform.eulerAngles = new Vector3(0, 90, 0); break;
+                case LoadType.Right: CarPre.transform.eulerAngles = new Vector3(0, 180, 0); break;
+                case LoadType.Down: CarPre.transform.eulerAngles = new Vector3(0, 270, 0); break;
+                case LoadType.Left: CarPre.transform.eulerAngles = new Vector3(0, 0, 0); break;
+            }
+
+           
         }
     }
 

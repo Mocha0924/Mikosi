@@ -345,6 +345,7 @@ MonoBehaviour:
   LeftEndTurnLoad: {fileID: 3553569239620983565, guid: f03c984edabdfbb4c8aee151f9e65eac, type: 3}
   people: {fileID: 1276616861821600420, guid: fcf404eee3c5ff644bb2f1fbe2a75d71, type: 3}
   food: {fileID: 3984345303793805276, guid: 8801323ac64b696489998ca0deebded6, type: 3}
+  car: {fileID: 4013683250400152655, guid: 3be57afd4f77154409767296a5f34c73, type: 3}
   Director: {fileID: 0}
   ObjectList: []
   TurnStartLoad: {fileID: 0}
@@ -352,6 +353,8 @@ MonoBehaviour:
   PeopleGenerationMax: 25
   FoodGenerationMin: 10
   FoodGenerationMax: 15
+  CarGenerationMin: 0
+  CarGenerationMax: 0
   turnSlider: {fileID: 0}
   turnStick: {fileID: 6650239721843671452}
   randObject: 1
