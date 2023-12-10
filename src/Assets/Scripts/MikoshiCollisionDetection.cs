@@ -72,6 +72,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private int Clear_Good_Time = 2;
 
     private GameoverController gameoverController;
+    [SerializeField] private CameraController cameraController;
     public enum PlayerMode
     {
         Before,
@@ -285,6 +286,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void CarHitGameover()
     {
         m_audioSource.PlayOneShot(CarTouchCrush);
+        gameoverController.CarHit();
         ColCar = ColCarMode.Center;
         GameOverDirection();
     }
@@ -475,6 +477,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         do_people_lose = true;
         if (playerMode == PlayerMode.Play)
         {
+            cameraController.FoodHitCamera();
             m_audioSource.PlayOneShot(FoodHitSound);
             int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
             Vector3 destroyObj = Vector3.zero;
@@ -552,6 +555,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void RightHit()
     {
         Debug.Log("右側");
+        cameraController.RightHitCamer();
         m_audioSource.PlayOneShot(CarTouch);
         if (ColCar == ColCarMode.None)
         {
@@ -574,6 +578,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void LeftHit()
     {
         Debug.Log("左側");
+        cameraController.LeftHitCamer();
         m_audioSource.PlayOneShot(CarTouch);
 
         if (ColCar == ColCarMode.None)

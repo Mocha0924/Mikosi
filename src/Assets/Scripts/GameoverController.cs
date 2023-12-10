@@ -31,7 +31,11 @@ public class GameoverController : MonoBehaviour
       
         Invoke(nameof(Gameover), 3.5f);
     }
-   private void Gameover()
+    public void CarHit()
+    {
+        Invoke(nameof(Gameover), 3.5f);
+    }
+    private void Gameover()
     {
         mikosiCollision.Gameover();
     }

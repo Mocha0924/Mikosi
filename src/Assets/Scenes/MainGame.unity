@@ -5596,7 +5596,7 @@ MonoBehaviour:
   LeftSliser: {fileID: 1455768675}
   turnStick: {fileID: 0}
   endCorner: {fileID: 0}
-  TurnTime_CompleteEnd: 0
+  TurnTime_CompleteEnd: 8
 --- !u!114 &757922514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6685,6 +6685,10 @@ MonoBehaviour:
   ClearSpeed: 0.007
   ClearAngleSpeed: 0.007
   HitNum: 0.5
+  LeftCarHitPos: {x: 0, y: 0, z: 0}
+  LeftCarHitAngle: {x: 0, y: 0, z: 0, w: 0}
+  RightCarHitPos: {x: 0, y: 0, z: 0}
+  RightCarHitAngle: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &970577794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1015752054551748950, guid: 588852c148cf3ca4aa24a57805545e83, type: 3}
@@ -7978,6 +7982,7 @@ MonoBehaviour:
   Clear_Bad_Sprite: {fileID: 21300000, guid: 98d27d599dd504f40b603c2304ba0794, type: 3}
   MaxWaitTime: 3
   Clear_Good_Time: 1
+  cameraController: {fileID: 0}
   playerMode: 0
 --- !u!114 &1363608242
 MonoBehaviour:

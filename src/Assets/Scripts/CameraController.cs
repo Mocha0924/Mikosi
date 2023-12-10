@@ -31,20 +31,32 @@ public class CameraController : MonoBehaviour
     private bool Clear = false;
     private bool FoodHit = false;
     [SerializeField] private float HitNum;
+    [SerializeField] private Vector3 LeftCarHitPos;
+    [SerializeField] private Quaternion LeftCarHitAngle;
+    [SerializeField] private Vector3 RightCarHitPos;
+    [SerializeField] private Quaternion RightCarHitAngle;
+    private bool LeftHit = false;
+    private bool RightHit = false;
     // Start is called before the first frame update
- 
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(mikosiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Before)
+        if(mikosiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Before||Clear)
         {
             MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, BeforePos, speed);
             MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, BeforeAngle, Anglespeed);
         }
-        else if(Clear)
+
+        else if (LeftHit)
         {
-            MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, ClearPos, ClearSpeed);
-            MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, ClearAngle, ClearAngleSpeed);
+            MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, LeftCarHitPos, speed);
+            MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, LeftCarHitAngle, Anglespeed);
+        }
+        else if (RightHit)
+        {
+            MainCamera.transform.localPosition = Vector3.Lerp(MainCamera.transform.localPosition, RightCarHitPos, speed);
+            MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, RightCarHitAngle, Anglespeed);
         }
         else
         {
@@ -64,7 +76,7 @@ public class CameraController : MonoBehaviour
                         MainCamera.transform.localRotation = Quaternion.Lerp(MainCamera.transform.localRotation, FrontAngle, Anglespeed); break;
                 }
             }
-         
+          
             else
             {
                 switch (Player.Angle)
@@ -101,5 +113,22 @@ public class CameraController : MonoBehaviour
     {
         FoodHit = false;
     }
-    
+    public void LeftHitCamer()
+    {
+        LeftHit = true;
+        Invoke("FinisLeftHitCamera", HitNum);
+    }
+    private void FinisLeftHitCamera()
+    {
+        LeftHit = false;
+    }
+    public void RightHitCamer()
+    {
+        RightHit = true;
+        Invoke("FinisRightHitCamera", HitNum);
+    }
+    private void FinisRightHitCamera()
+    {
+        RightHit = false;
+    }
 }

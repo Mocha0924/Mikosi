@@ -15,7 +15,6 @@ public class ColCheckScript : MonoBehaviour
         if (other.gameObject.tag == "Food")
         {
             Destroy(other.gameObject);
-            cameracontroller.FoodHitCamera();
             foodHit.Invoke();
         }
         if (other.gameObject.tag == "Car")
