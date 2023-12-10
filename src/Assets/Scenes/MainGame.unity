@@ -5596,7 +5596,7 @@ MonoBehaviour:
   LeftSliser: {fileID: 1455768675}
   turnStick: {fileID: 0}
   endCorner: {fileID: 0}
-  TurnTime_CompleteEnd: 8
+  TurnTime_CompleteEnd: 0
 --- !u!114 &757922514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8015,11 +8015,11 @@ MonoBehaviour:
   ReturnSpeed: 30
   HumansAnimation:
   - {fileID: 39615560}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1062033352}
+  - {fileID: 190428998}
+  - {fileID: 1023422231}
+  - {fileID: 970577795}
+  - {fileID: 172840782}
   MikosiAnimation: {fileID: 1726234585}
 --- !u!114 &1363608243
 MonoBehaviour:

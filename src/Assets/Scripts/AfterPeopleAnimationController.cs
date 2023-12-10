@@ -6,6 +6,7 @@ public class AfterPeopleAnimationController : MonoBehaviour
 {
     private Animator animator;
     private MikoshiCollisionDetection mikosiCollision;
+    private bool TurnCheck = false;
     [SerializeField] private float MinChangeTime;
     [SerializeField] private float MaxChangeTime;
     private float RandomTime;
@@ -37,51 +38,78 @@ public class AfterPeopleAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int Colum = mikosiCollision.ColumnCount;
-        animator.SetFloat("Speed", 2 + (Colum * 0.2f + 1));
-
-        
-        if (NowTime >= RandomTime)
+        if(Player.turn_complete_R)
         {
-            animator.SetInteger("Rand", Random.Range(0, 2));
-            RandomTime = Random.Range(MinChangeTime, MaxChangeTime);
-            NowTime = 0;
+            if(!TurnCheck)
+            {
+                animator.SetBool("RightTurn",true);
+                TurnCheck = true;
+            }
+                
+        }
+        else if(Player.turn_complete_L)
+        {
+            if (!TurnCheck)
+            {
+                animator.SetBool("LeftTurn", true);
+                TurnCheck = true;
+            }
+        }
+        else if(!Player.turn_complete_R&& !Player.turn_complete_L&&TurnCheck)
+        {
+            animator.SetBool("RightTurn", false);
+            animator.SetBool("LeftTurn", false);
+            TurnCheck = false;
         }
         else
-            NowTime += Time.deltaTime;
-
-        if (Player.Horizon_move == "leftmove")
         {
+            int Colum = mikosiCollision.ColumnCount;
+            animator.SetFloat("Speed", 2 + (Colum * 0.2f + 1));
 
-            this.transform.localRotation = Quaternion.RotateTowards(this.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed * Time.deltaTime*RandSpeed);
-            if(direction != Direction.left)
+
+            if (NowTime >= RandomTime)
             {
-                direction = Direction.left;
-                RandSpeed = Random.Range(MinRandSpeed, MaxRandSpeed);
+                animator.SetInteger("Rand", Random.Range(0, 2));
+                RandomTime = Random.Range(MinChangeTime, MaxChangeTime);
+                NowTime = 0;
+            }
+            else
+                NowTime += Time.deltaTime;
+
+            if (Player.Horizon_move == "leftmove")
+            {
+
+                this.transform.localRotation = Quaternion.RotateTowards(this.transform.localRotation, Quaternion.Euler(0, -25, 0), BendSpeed * Time.deltaTime * RandSpeed);
+                if (direction != Direction.left)
+                {
+                    direction = Direction.left;
+                    RandSpeed = Random.Range(MinRandSpeed, MaxRandSpeed);
+                }
+            }
+
+
+
+            else if (Player.Horizon_move == "rightmove")
+            {
+                this.transform.localRotation = Quaternion.RotateTowards(this.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime * RandSpeed);
+                if (direction != Direction.right)
+                {
+                    direction = Direction.right;
+                    RandSpeed = Random.Range(MinRandSpeed, MaxRandSpeed);
+                }
+            }
+
+            else
+            {
+                this.transform.localRotation = Quaternion.RotateTowards(this.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime * RandSpeed);
+                if (direction != Direction.front)
+                {
+                    direction = Direction.front;
+                    RandSpeed = Random.Range(MinRandSpeed, MaxRandSpeed);
+                }
             }
         }
-           
-
-
-        else if (Player.Horizon_move == "rightmove")
-        {
-            this.transform.localRotation = Quaternion.RotateTowards(this.transform.localRotation, Quaternion.Euler(0, 25, 0), BendSpeed * Time.deltaTime * RandSpeed);
-            if (direction != Direction.right)
-            {
-                direction = Direction.right;
-                RandSpeed = Random.Range(MinRandSpeed, MaxRandSpeed);
-            }
-        }
-            
-        else
-        {
-            this.transform.localRotation = Quaternion.RotateTowards(this.transform.localRotation, Quaternion.Euler(0, 0, 0), ReturnSpeed * Time.deltaTime * RandSpeed);
-            if (direction != Direction.front)
-            {
-                direction = Direction.front;
-                RandSpeed = Random.Range(MinRandSpeed, MaxRandSpeed);
-            }
-        }
+       
            
 
 

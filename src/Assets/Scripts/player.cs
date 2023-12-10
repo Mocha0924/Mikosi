@@ -400,7 +400,7 @@ public class player : MonoBehaviour
                 audioSource.PlayOneShot(TurnSound);
                 foreach (Animator Human in HumansAnimation)
                 {
-                    Human.SetBool("Turn", true);
+                    Human.SetBool("RightTurn", true);
                 }
             }
             turn_times += Turn_speed;
@@ -415,7 +415,7 @@ public class player : MonoBehaviour
                 turnSlider.RightTurnEnd();
                 foreach (Animator Human in HumansAnimation)
                 {
-                    Human.SetBool("Turn", false);
+                    Human.SetBool("RightTurn", false);
                 }
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
@@ -433,7 +433,7 @@ public class player : MonoBehaviour
                 audioSource.PlayOneShot(TurnSound);
                 foreach (Animator Human in HumansAnimation)
                 {
-                    Human.SetBool("Turn", true);
+                    Human.SetBool("LeftTurn", true);
                     Debug.Log("true");
                 }
             }
@@ -449,7 +449,7 @@ public class player : MonoBehaviour
                 turnSlider.LeftTurnEnd();
                 foreach (Animator Human in HumansAnimation)
                 {
-                    Human.SetBool("Turn", false);
+                    Human.SetBool("LeftTurn", false);
                 }
             }
             if (mikoshiCollision.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus)
