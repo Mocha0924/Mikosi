@@ -21,7 +21,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     [SerializeField] int scaleCorrection;
     public int behindPeopleCount;
-    int behindPeopleRow;
+    public int behindPeopleRow;
     int behindMax;
     int behind0Max;
     int behindMoveCount;
@@ -31,7 +31,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     bool do_people_lose;
     int game_time_sec;
     int game_time_min;
-
+    float fever_Slider_dec;
+    int fever_elapsed_time;
 
     Vector3[] behindMovePoint;
     Vector3[] behindMoveAll;
@@ -62,6 +63,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
     [SerializeField] private GameObject TimeNum;
+    [SerializeField] private GameObject FeverSliderObj;
+    [SerializeField] private UnityEngine.UI.Slider FeverSlider;
 
     [SerializeField] private TextMeshProUGUI WaitText;
     [SerializeField] private TextMeshProUGUI TimeNumText;
@@ -106,6 +109,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
         AfterPeople.transform.localPosition = Vector3.zero;
 
         isFever = false;
+        FeverSliderObj.SetActive(false);
+        FeverSlider.value = 1;
 
         behindPeopleCount = 0;
         behindPeopleRow = 0;
@@ -115,6 +120,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
         behind0MoveCount = behind0Max / 2;
         sortRow = 0;
         isSort = false;
+
+        fever_Slider_dec = 1 / BonusTime;
 
         pos = new Vector3(0.0f, -0.25f, 0.0f);
         parentPos = new Vector3(0.0f, -0.25f, 0.0f);
@@ -211,6 +218,19 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         }
 
+        if (playerMode == PlayerMode.Bonus)
+        {
+
+            fever_elapsed_time++;
+
+            if (fever_elapsed_time == 50)
+            {
+                FeverSlider.value -= fever_Slider_dec;
+                fever_elapsed_time = 0;
+            }
+        }
+
+
     }
 
 
@@ -261,6 +281,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("Fever");
         playerMode = PlayerMode.Bonus;
+        FeverSliderObj.SetActive(true) ;  
         MainBGMAudio.Stop();
         BonusBGMAudio.Play();
         StartCoroutine("GameClear");
@@ -317,6 +338,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
         TimeNum.SetActive(false);
+        FeverSliderObj.SetActive(false);
         if (Clear_Good_Time > game_time_min)
         {
             ClearImage.sprite = Clear_Good_Sprite;
@@ -474,13 +496,15 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-        do_people_lose = true;
+        
         if (playerMode == PlayerMode.Play)
         {
             cameraController.FoodHitCamera();
             m_audioSource.PlayOneShot(FoodHitSound);
             int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
             Vector3 destroyObj = Vector3.zero;
+
+            do_people_lose = true;
 
             for (int i = 0; i < touchFoodDecrPeople; i++)
             {
