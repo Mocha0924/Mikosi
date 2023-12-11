@@ -542,8 +542,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 {
                     for (int j = 0; j < childCount; j++)
                     {
-                        Transform childTransform = aPeopleParents[behindPeopleRow].transform.GetChild(j);
-                        Vector3 childObj = childTransform.localPosition;
+                        GameObject childVec = aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject;
+                        AfterPeopleMoveScript afterPeopleMoveScript = childVec.GetComponent<AfterPeopleMoveScript>();
+                        Vector3 childObj = afterPeopleMoveScript.GetPoint();
 
                         //Debug.Log("destroyObj:" + destroyObj);
                         //Debug.Log("childObj" + childObj);
@@ -801,10 +802,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
             //Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + "behindRow:" + behindPeopleRow);
             //Debug.Log(" row:" + row + " Count:" + rowDecrCount[row]);
             int z = behindRowHold - cMRPeopleCount;
-            Debug.Log("チェック:" + z + " /" + row);
+            Debug.Log("チェック:" + z + " <= " + row);
             if (behindRowHold - cMRPeopleCount <= row)
             {
                 //移動できる人の列と補充しないといけない列が同じなら、ループを終わらせてその列だけ並び替えをさせる
+                Debug.Log("ソートON");
                 sortRow = row;
                 isSort = true;
                 break;
