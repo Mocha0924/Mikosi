@@ -285,8 +285,8 @@ public class LoadController : MonoBehaviour
                 case LoadType.Down: CarPre.transform.eulerAngles = new Vector3(0, 270, 0); break;
                 case LoadType.Left: CarPre.transform.eulerAngles = new Vector3(0, 0, 0); break;
             }
+            ObjectList.Add(CarPre);
 
-           
         }
     }
 

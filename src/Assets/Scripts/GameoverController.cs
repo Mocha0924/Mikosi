@@ -7,7 +7,10 @@ public class GameoverController : MonoBehaviour
     [SerializeField] private GameObject Whole;
     private MikoshiCollisionDetection mikosiCollision;
     public bool FailureTurnCheck = false;
-    [SerializeField] private RigdollController[] ragdoll; 
+    [SerializeField] private RigdollController[] ragdoll;
+    [SerializeField] private MikosiRagdollController mikosiRagdoll;
+    [SerializeField] private AudioSource mikosiAudioSource;
+    [SerializeField] private AudioClip FailureTurnSound;
     private void Start()
     {
         mikosiCollision = GetComponent<MikoshiCollisionDetection>();
@@ -28,11 +31,13 @@ public class GameoverController : MonoBehaviour
     public void TurnGameover()
     {
         mikosiCollision.GameOverDirection();
-      
+        mikosiRagdoll.SetRagDoll();
+        mikosiAudioSource.PlayOneShot(FailureTurnSound);
         Invoke(nameof(Gameover), 3.5f);
     }
     public void CarHit()
     {
+        mikosiRagdoll.SetRagDoll();
         Invoke(nameof(Gameover), 3.5f);
     }
     private void Gameover()
