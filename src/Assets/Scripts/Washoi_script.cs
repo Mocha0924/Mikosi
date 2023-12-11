@@ -88,12 +88,11 @@ public class Washoi_script : MonoBehaviour
                 Debug.Log("People Touch");
 
                 MCD.peopleCount++;
-                MCD.PeopleNumText.text = (MCD.peopleCount - 6).ToString("") + "人神輿";
+                MCD.PeopleNumText.text = (MCD.peopleCount - 6).ToString("000") + "人神輿";
                 MCD.behindPeopleCount = MCD.peopleCount - 18;
                 if (MCD.behindPeopleCount % 9 == 1)
                 {
                     //列に9人いる時、列を増やす
-                    MCD.behindPeopleRow--;
                     MCD.GenerateParent(1);
                 }
 
@@ -104,7 +103,7 @@ public class Washoi_script : MonoBehaviour
                 //人の生成
                 MCD.GenerateMikoshiPeople();
 
-                if (MCD.peopleCount - 6 >= MCD.clearConditions && MCD.isFever == false)
+                if (MCD.peopleCount >= MCD.clearConditions && MCD.isFever == false)
                 {
                     MCD.isFever = true;
                     MCD.FeverTime();
