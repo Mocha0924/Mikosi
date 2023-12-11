@@ -53,7 +53,7 @@ public class stamina : MonoBehaviour
 
 
             Debug.Log(stamina_image_pos);
-            stamina_rest = stamina_number_first;
+            stamina_rest = stamina_number_first - 1 ;
         }
     }
 
@@ -78,7 +78,8 @@ public class stamina : MonoBehaviour
 
             //for (int i = 2; i >= stamina_number_now; i--) { Debug.Log(i); slider_clone[i].value = 1; }
 
-            if (time >= 50)
+            if ((MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Play && time >= 50)||
+                (MCD.playerMode == MikoshiCollisionDetection.PlayerMode.Bonus && time >= 2))
             {
 
                 slide_value += slide_sec_value;
