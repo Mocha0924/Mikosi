@@ -7,7 +7,7 @@ public class player : MonoBehaviour
 
     Rigidbody my_Rigidbody;
     Transform my_Transform;
-    Vector3 force;
+    public Vector3 force;
     Vector3 pos;
     LoadController load;
     stamina stamina_script;

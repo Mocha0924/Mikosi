@@ -641,6 +641,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         while (true)
         {
+            //Debug.Log("無限ループ1");
             if (decrCount == 0) { break; }
             Vector3 moveObjPoint = Vector3.zero;
             Vector3 compaObjPoint = Vector3.zero;
@@ -766,11 +767,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
         //for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
         while (true)
         {
+            //Debug.Log("無限ループ2");
             if (decrCount == 0) { break; }
 
             //Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + "behindRow:" + behindPeopleRow);
             //Debug.Log(" row:" + row + " Count:" + rowDecrCount[row]);
-
+            int z = behindRowHold - cMRPeopleCount;
+            Debug.Log("チェック:" + z + " /" + row);
             if (behindRowHold - cMRPeopleCount <= row)
             {
                 //移動できる人の列と補充しないといけない列が同じなら、ループを終わらせてその列だけ並び替えをさせる
