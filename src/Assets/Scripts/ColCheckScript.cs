@@ -14,12 +14,20 @@ public class ColCheckScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Food")
         {
-            Destroy(other.gameObject);
-            foodHit.Invoke();
+            if(foodHit != null)
+            {
+                Destroy(other.gameObject);
+                foodHit.Invoke();
+            }
+            
         }
         if (other.gameObject.tag == "Car")
         {
-            carHit.Invoke();
+            if(carHit!=null)
+            {
+                carHit.Invoke();
+            }
+           
         }
     }
 }

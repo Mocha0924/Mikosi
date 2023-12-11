@@ -233,8 +233,8 @@ MonoBehaviour:
   PeopleGenerationMax: 35
   FoodGenerationMin: 0
   FoodGenerationMax: 0
-  CarGenerationMin: 1
-  CarGenerationMax: 3
+  CarGenerationMin: 0
+  CarGenerationMax: 0
   turnSlider: {fileID: 0}
   turnStick: {fileID: 0}
   randObject: 1

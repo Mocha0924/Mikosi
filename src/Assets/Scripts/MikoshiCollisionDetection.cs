@@ -398,7 +398,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         aPeopleParents[childCount] = cloneParent;
     }
 
-    void DestroyParent()
+    public void DestroyParent()
     {
         Debug.Log("parentDestroy");
         int childCount = Parents.transform.childCount - 1;
@@ -589,12 +589,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
             bool isR = true;
 
             int decrCount = 0;
+            Debug.Log("a");
             int[] rowDecrCount = new int[behindPeopleRow + 1];
-
+            Debug.Log("b");
             DecrPeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("c");
             MovePeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("d");
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
@@ -613,12 +614,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
             bool isR = false;
 
             int decrCount = 0;
+            Debug.Log("a");
             int[] rowDecrCount = new int[behindPeopleRow + 1];
-
+            Debug.Log("b");
             DecrPeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("c");
             MovePeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("d");
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
@@ -665,7 +667,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         int[] canMoveRowPeople = new int[behindPeopleRow + 1];
         int cMRPeopleCount = 0;
 
-        while (true)
+        for (int c = 0; c < 10; c++)
         {
             if (decrCount == 0) { break; }
             Vector3 moveObjPoint = Vector3.zero;
@@ -790,7 +792,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         arrayCount = 0;
         decrCount = dCHold;
         //for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
-        while (true)
+        for (int b = 0; b < 10; b++)
         {
             if (decrCount == 0) { break; }
 
@@ -820,6 +822,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 else
                 {
                     canMoveRowPeople[cMRPeopleCount] = a;
+                }
+                if (aPeopleParents[cMRPeopleCount].transform.childCount <= 0)
+                {
+                    Debug.Log("B");
+                    DestroyParent();
                 }
             }
             else
@@ -903,7 +910,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
         for (int i = behindPeopleRow; i > sortrow; i--)
         {
             if (aPeopleParents[i].transform.childCount <= 0)
-            { Debug.Log("A" + i + " sRow:" + sortrow); DestroyParent(); }
+            {
+                Debug.Log("A" + i + " sRow:" + sortrow); DestroyParent(); }
+            }
         }
     }
-}
+
