@@ -169,7 +169,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log(peopleCount);
 
             //人の生成
-            GenerateMikoshiPeople();
+            GenerateMikoshiPeople(transform.position);
         }
         gameoverController = GetComponent<GameoverController>();
 
@@ -258,7 +258,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log(peopleCount);
 
             //人の生成
-            GenerateMikoshiPeople();
+            GenerateMikoshiPeople(other.transform.position);
 
             if (peopleCount - 6 >= clearConditions && isFever == false)
             {
@@ -414,7 +414,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     }
 
     //人の生成
-    public void GenerateMikoshiPeople()
+    public void GenerateMikoshiPeople(Vector3 PeoplePos)
     {
         pos = Vector3.zero;
 
@@ -488,8 +488,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
         var parent = aPeopleParents[behindPeopleRow].transform;
 
         AfterPeople.name = peopleCount.ToString();
-        AfterPeople.transform.position = pos;
-        Instantiate(AfterPeople, parent);
+        GameObject AfterPeoplePre = Instantiate(AfterPeople, parent);
+        AfterPeoplePre.transform.position = PeoplePos;
+        AfterPeopleMoveScript afterPeopleMoveScript = AfterPeoplePre.GetComponent<AfterPeopleMoveScript>();
+        afterPeopleMoveScript.Setpoint(pos);
     }
 
     //食べ物との衝突

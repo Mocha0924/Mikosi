@@ -102,7 +102,7 @@ public class Washoi_script : MonoBehaviour
                 Debug.Log(MCD.peopleCount);
 
                 //l‚Ì¶¬
-                MCD.GenerateMikoshiPeople();
+                MCD.GenerateMikoshiPeople(hit.transform.position);
 
                 if (MCD.peopleCount - 6 >= MCD.clearConditions && MCD.isFever == false)
                 {
