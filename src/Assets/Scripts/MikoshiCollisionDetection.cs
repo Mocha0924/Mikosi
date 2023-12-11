@@ -21,7 +21,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     [SerializeField] int scaleCorrection;
     public int behindPeopleCount;
-    int behindPeopleRow;
+    public int behindPeopleRow;
     int behindMax;
     int behind0Max;
     int behindMoveCount;
@@ -31,7 +31,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     bool do_people_lose;
     int game_time_sec;
     int game_time_min;
-
+    float fever_Slider_dec;
+    int fever_elapsed_time;
 
     Vector3[] behindMovePoint;
     Vector3[] behindMoveAll;
@@ -62,6 +63,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject BeforePlay;
     [SerializeField] private GameObject PeopleNum;
     [SerializeField] private GameObject TimeNum;
+    [SerializeField] private GameObject FeverSliderObj;
+    [SerializeField] private UnityEngine.UI.Slider FeverSlider;
 
     [SerializeField] private TextMeshProUGUI WaitText;
     [SerializeField] private TextMeshProUGUI TimeNumText;
@@ -106,6 +109,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
         AfterPeople.transform.localPosition = Vector3.zero;
 
         isFever = false;
+        FeverSliderObj.SetActive(false);
+        FeverSlider.value = 1;
 
         behindPeopleCount = 0;
         behindPeopleRow = 0;
@@ -115,6 +120,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
         behind0MoveCount = behind0Max / 2;
         sortRow = 0;
         isSort = false;
+
+        fever_Slider_dec = 1 / BonusTime;
 
         pos = new Vector3(0.0f, -0.25f, 0.0f);
         parentPos = new Vector3(0.0f, -0.25f, 0.0f);
@@ -162,7 +169,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log(peopleCount);
 
             //人の生成
-            GenerateMikoshiPeople();
+            GenerateMikoshiPeople(transform.position);
         }
         gameoverController = GetComponent<GameoverController>();
 
@@ -211,6 +218,19 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         }
 
+        if (playerMode == PlayerMode.Bonus)
+        {
+
+            fever_elapsed_time++;
+
+            if (fever_elapsed_time == 50)
+            {
+                FeverSlider.value -= fever_Slider_dec;
+                fever_elapsed_time = 0;
+            }
+        }
+
+
     }
 
 
@@ -238,7 +258,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             Debug.Log(peopleCount);
 
             //人の生成
-            GenerateMikoshiPeople();
+            GenerateMikoshiPeople(other.transform.position);
 
             if (peopleCount - 6 >= clearConditions && isFever == false)
             {
@@ -261,6 +281,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("Fever");
         playerMode = PlayerMode.Bonus;
+        FeverSliderObj.SetActive(true) ;  
         MainBGMAudio.Stop();
         BonusBGMAudio.Play();
         StartCoroutine("GameClear");
@@ -317,6 +338,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         playerMode = PlayerMode.Clear;
         PeopleNum.SetActive(false);
         TimeNum.SetActive(false);
+        FeverSliderObj.SetActive(false);
         if (Clear_Good_Time > game_time_min)
         {
             ClearImage.sprite = Clear_Good_Sprite;
@@ -376,7 +398,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         aPeopleParents[childCount] = cloneParent;
     }
 
-    void DestroyParent()
+    public void DestroyParent()
     {
         Debug.Log("parentDestroy");
         int childCount = Parents.transform.childCount - 1;
@@ -392,7 +414,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     }
 
     //人の生成
-    public void GenerateMikoshiPeople()
+    public void GenerateMikoshiPeople(Vector3 PeoplePos)
     {
         pos = Vector3.zero;
 
@@ -466,21 +488,25 @@ public class MikoshiCollisionDetection : MonoBehaviour
         var parent = aPeopleParents[behindPeopleRow].transform;
 
         AfterPeople.name = peopleCount.ToString();
-        AfterPeople.transform.position = pos;
-        Instantiate(AfterPeople, parent);
+        GameObject AfterPeoplePre = Instantiate(AfterPeople, parent);
+        AfterPeoplePre.transform.position = PeoplePos;
+        AfterPeopleMoveScript afterPeopleMoveScript = AfterPeoplePre.GetComponent<AfterPeopleMoveScript>();
+        afterPeopleMoveScript.Setpoint(pos);
     }
 
     //食べ物との衝突
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-        do_people_lose = true;
+        
         if (playerMode == PlayerMode.Play)
         {
             cameraController.FoodHitCamera();
             m_audioSource.PlayOneShot(FoodHitSound);
             int childCount = aPeopleParents[behindPeopleRow].transform.childCount, rl;
             Vector3 destroyObj = Vector3.zero;
+
+            do_people_lose = true;
 
             for (int i = 0; i < touchFoodDecrPeople; i++)
             {
@@ -563,12 +589,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
             bool isR = true;
 
             int decrCount = 0;
+            Debug.Log("a");
             int[] rowDecrCount = new int[behindPeopleRow + 1];
-
+            Debug.Log("b");
             DecrPeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("c");
             MovePeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("d");
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
@@ -587,12 +614,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
             bool isR = false;
 
             int decrCount = 0;
+            Debug.Log("a");
             int[] rowDecrCount = new int[behindPeopleRow + 1];
-
+            Debug.Log("b");
             DecrPeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("c");
             MovePeople(isR, ref decrCount, ref rowDecrCount);
-
+            Debug.Log("d");
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
             ColCar = ColCarMode.None;
@@ -639,7 +667,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         int[] canMoveRowPeople = new int[behindPeopleRow + 1];
         int cMRPeopleCount = 0;
 
-        while (true)
+        for (int c = 0; c < 10; c++)
         {
             //Debug.Log("無限ループ1");
             if (decrCount == 0) { break; }
@@ -765,7 +793,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         arrayCount = 0;
         decrCount = dCHold;
         //for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
-        while (true)
+        for (int b = 0; b < 10; b++)
         {
             //Debug.Log("無限ループ2");
             if (decrCount == 0) { break; }
@@ -797,6 +825,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 else
                 {
                     canMoveRowPeople[cMRPeopleCount] = a;
+                }
+                if (aPeopleParents[cMRPeopleCount].transform.childCount <= 0)
+                {
+                    Debug.Log("B");
+                    DestroyParent();
                 }
             }
             else
@@ -880,7 +913,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
         for (int i = behindPeopleRow; i > sortrow; i--)
         {
             if (aPeopleParents[i].transform.childCount <= 0)
-            { Debug.Log("A" + i + " sRow:" + sortrow); DestroyParent(); }
+            {
+                Debug.Log("A" + i + " sRow:" + sortrow); DestroyParent(); }
+            }
         }
     }
-}
+

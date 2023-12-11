@@ -23,4 +23,5 @@ public class ButtonController : MonoBehaviour
         _audioSource.PlayOneShot(ClickSound);
         Application.Quit();
     }
+
 }
