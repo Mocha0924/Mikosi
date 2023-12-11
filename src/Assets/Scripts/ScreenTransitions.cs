@@ -9,7 +9,6 @@ public class ScreenTransitions : MonoBehaviour
 {
 
 
-    [SerializeField] private Image ScreenImages;
     [SerializeField] private Sprite[] ScreenSprits;
     [SerializeField] private GameObject[] BeforeObj;
     [SerializeField] private GameObject[] AfterObj;
@@ -21,7 +20,7 @@ public class ScreenTransitions : MonoBehaviour
     {
         Sprites_Nownum = 0;
         Sprites_Maxnum = ScreenSprits.Length;
-        ScreenImages.sprite = ScreenSprits[Sprites_Nownum];
+       
     }
 
     // Update is called once per frame
@@ -45,11 +44,5 @@ public class ScreenTransitions : MonoBehaviour
 
     }
 
-    public void Screentransitions()
-    {
-
-        ScreenImages.sprite = ScreenSprits[0];
-        
-    }
-
+   
 }

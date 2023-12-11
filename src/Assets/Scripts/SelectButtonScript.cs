@@ -61,13 +61,7 @@ public class SelectButtonScript : MonoBehaviour
                 audioSource.PlayOneShot(SelctSound);
 
             }
-            else
-            {
-                Button_Nownum = Button_Maxnum;
-                buttonType = ButtonType.Down;
-                cursor.transform.localPosition = Buttons[Button_Nownum].transform.localPosition;
-                audioSource.PlayOneShot(SelctSound);
-            }
+           
 
         }
         if ((lsh <= -0.8f) && buttonType == ButtonType.Normal)
@@ -79,13 +73,7 @@ public class SelectButtonScript : MonoBehaviour
                 cursor.transform.localPosition = Buttons[Button_Nownum].transform.localPosition;
                 audioSource.PlayOneShot(SelctSound);
             }
-            else
-            {
-                Button_Nownum = 0;
-                buttonType = ButtonType.Up;
-                cursor.transform.localPosition = Buttons[Button_Nownum].transform.localPosition;
-                audioSource.PlayOneShot(SelctSound);
-            }
+          
         }
         if ((lsh == 0) && buttonType == ButtonType.Up)
             buttonType = ButtonType.Normal;
