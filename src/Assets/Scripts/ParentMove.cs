@@ -1,102 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static player;
 
 public class ParentMove : MonoBehaviour
 {
     GameObject parent;
     float childCount;
-    Rigidbody rigidbody;
+    float call;
+    Rigidbody my_Rigidbody;
     Vector3 firstPos;
-    Vector3 pos;
+    GameObject Player;
     player p;
 
-    bool isJump;
-    bool isRightSride;
-    bool isLeftSride;
     Vector3 velocty;
+    Vector3 force;
+    float slide_power;
 
+    int Horizontal_controll;
+    float jumpVec;
     float Input_Horizontal;
     float old_Horizontal;
-    float Input_Vertical;
-    float old_Vertical;
     float Input_Jump;
     float old_Jump;
+    float Input_Jump_once;
+
+    stamina stamina_Script;
+
+    Vector3 pos;
 
     // Start is called before the first frame update
     void Start()
     {
         childCount = this.gameObject.transform.parent.childCount - 1;
+        call = childCount / 4;
         Debug.Log("AfterPeople:" + childCount);
-        rigidbody = this.GetComponent<Rigidbody>();
-        p = GetComponent<player>();
+        my_Rigidbody = this.GetComponent<Rigidbody>();
+        Player = GameObject.Find("Player");
+        p = Player.GetComponent<player>();
 
-        isJump = false;
-        isRightSride = false;
-        isLeftSride = false;
         velocty = new Vector3(0, 10f, 0);
-        pos = Vector3.zero;
+        jumpVec = 10f;
+        slide_power = 2f;
         firstPos = this.transform.localPosition;
+
+        stamina_Script = Player.GetComponent<stamina>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Input_Horizontal = Input.GetAxis("Horizontal");
-        Input_Vertical = Input.GetAxis("Vertical");
         Input_Jump = Input.GetAxis("Jump");
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        Input_Jump_once = old_Jump - Input_Jump;
+
+        if (Input_Jump_once == -1
+            && transform.position.y <= 2
+            && stamina_Script.stamina_rest > 0)
         {
-            isJump = true;
-            Invoke("Jump", childCount);
+            Invoke("Jump", call);
         }
 
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    isRightSride = true;
-        //    Invoke("RSride", childCount);
-        //}
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    isLeftSride = true;
-        //    Invoke("LSride", childCount);
-        //}
+        //forceÇÃê›íË
 
-        if (isRightSride == false && isLeftSride == false)
-        {
-            pos = this.transform.localPosition;
-            pos.x = 0;
-            this.transform.localPosition = pos;
-        }
+        //force *= Time.deltaTime;
+        //StartCoroutine(Sride(force));
 
         pos = this.transform.localPosition;
+        pos.x = 0;
         pos.z = firstPos.z;
         this.transform.localPosition = pos;
 
+        old_Horizontal = Input_Horizontal;
+        //old_Jump = Input_Jump;
     }
 
     void Jump()
     {
         Debug.Log("Jump" + childCount);
 
-        rigidbody.velocity = velocty;
-
-        isJump = false;
+        velocty = my_Rigidbody.velocity;
+        velocty.y = jumpVec;
+        my_Rigidbody.velocity = velocty;
     }
 
-    void RSride()
+    IEnumerator Sride(Vector3 Force)
     {
-        Debug.Log("RSride" + childCount);
-    }
-
-    void LSride()
-    {
-        Debug.Log("LSride" + childCount);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        isJump= false;
+        yield return call;
+        Debug.Log("Sride" + childCount);
+        my_Rigidbody.AddForce(Force, ForceMode.Acceleration);
     }
 }
