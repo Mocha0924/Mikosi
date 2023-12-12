@@ -12,9 +12,10 @@ public class ScreenTransitions : MonoBehaviour
     [SerializeField] private Sprite[] ScreenSprits;
     [SerializeField] private GameObject[] BeforeObj;
     [SerializeField] private GameObject[] AfterObj;
-
+    [SerializeField] bool decideButtonMode = false;
     int Sprites_Maxnum;
     int Sprites_Nownum;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,18 @@ public class ScreenTransitions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(decideButtonMode == true)
+        {
+            if (Input.GetKeyDown("joystick button 0"))
+            {
+                Menutrantitons();
+            }
+
+            if (Input.GetKeyDown("space"))
+            {
+                Menutrantitons();
+            }
+        }
     }
 
     public void Menutrantitons()
