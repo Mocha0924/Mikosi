@@ -542,8 +542,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 {
                     for (int j = 0; j < childCount; j++)
                     {
-                        Transform childTransform = aPeopleParents[behindPeopleRow].transform.GetChild(j);
-                        Vector3 childObj = childTransform.localPosition;
+                        GameObject childVec = aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject;
+                        AfterPeopleMoveScript afterPeopleMoveScript = childVec.GetComponent<AfterPeopleMoveScript>();
+                        Vector3 childObj = afterPeopleMoveScript.GetPoint();
 
                         //Debug.Log("destroyObj:" + destroyObj);
                         //Debug.Log("childObj" + childObj);
@@ -669,6 +670,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         for (int c = 0; c < 10; c++)
         {
+            //Debug.Log("無限ループ1");
             if (decrCount == 0) { break; }
             Vector3 moveObjPoint = Vector3.zero;
             Vector3 compaObjPoint = Vector3.zero;
@@ -794,14 +796,17 @@ public class MikoshiCollisionDetection : MonoBehaviour
         //for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
         for (int b = 0; b < 10; b++)
         {
+            //Debug.Log("無限ループ2");
             if (decrCount == 0) { break; }
 
             //Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + "behindRow:" + behindPeopleRow);
             //Debug.Log(" row:" + row + " Count:" + rowDecrCount[row]);
-
+            int z = behindRowHold - cMRPeopleCount;
+            Debug.Log("チェック:" + z + " <= " + row);
             if (behindRowHold - cMRPeopleCount <= row)
             {
                 //移動できる人の列と補充しないといけない列が同じなら、ループを終わらせてその列だけ並び替えをさせる
+                Debug.Log("ソートON");
                 sortRow = row;
                 isSort = true;
                 break;

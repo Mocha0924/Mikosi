@@ -54,6 +54,7 @@ public class ParentMove : MonoBehaviour
         Input_Jump = Input.GetAxis("Jump");
 
         Input_Jump_once = old_Jump - Input_Jump;
+        //Debug.Log("o:"+old_Jump)
 
         if (Input_Jump_once == -1
             && transform.position.y <= 2
@@ -65,7 +66,7 @@ public class ParentMove : MonoBehaviour
         //force‚ÌÝ’è
 
         //force *= Time.deltaTime;
-        //StartCoroutine(Sride(force));
+        //StartCoroutine(Sride(p.force));
 
         pos = this.transform.localPosition;
         pos.x = 0;
@@ -87,8 +88,8 @@ public class ParentMove : MonoBehaviour
 
     IEnumerator Sride(Vector3 Force)
     {
-        yield return call;
-        Debug.Log("Sride" + childCount);
+        yield return call*10;
+        //Debug.Log("Sride" + childCount);
         my_Rigidbody.AddForce(Force, ForceMode.Acceleration);
     }
 }

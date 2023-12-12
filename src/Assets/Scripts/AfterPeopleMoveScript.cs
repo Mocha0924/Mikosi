@@ -31,4 +31,9 @@ public class AfterPeopleMoveScript : MonoBehaviour
         point = setPos;
        
     }
+
+    public Vector3 GetPoint()
+    {
+        return point;
+    }
 }
