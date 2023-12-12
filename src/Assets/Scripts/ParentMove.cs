@@ -80,7 +80,16 @@ public class ParentMove : MonoBehaviour
     void Jump()
     {
         //Debug.Log("Jump" + childCount);
-
+        int childCount = transform.childCount;
+        for(int i = 0; i < childCount; i++)
+        {
+            GameObject AfterPeople = transform.GetChild(i).gameObject;
+            if(AfterPeople != null)
+            {
+                AfterPeopleAnimationController PeopleAnimation = AfterPeople.transform.GetChild(0).GetComponent<AfterPeopleAnimationController>();
+                PeopleAnimation.Jump();
+            }
+        }
         velocty = my_Rigidbody.velocity;
         velocty.y = jumpVec;
         my_Rigidbody.velocity = velocty;

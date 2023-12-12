@@ -109,9 +109,18 @@ public class AfterPeopleAnimationController : MonoBehaviour
                 }
             }
         }
-       
+     
            
 
 
+    }
+    public void Jump()
+    {
+        animator.SetBool("Jump", true);
+        Invoke("FinishJump",2.0f);
+    }
+    private void FinishJump()
+    {
+        animator.SetBool("Jump", false);
     }
 }
