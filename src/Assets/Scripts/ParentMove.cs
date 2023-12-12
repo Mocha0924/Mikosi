@@ -79,7 +79,7 @@ public class ParentMove : MonoBehaviour
 
     void Jump()
     {
-        Debug.Log("Jump" + childCount);
+        //Debug.Log("Jump" + childCount);
 
         velocty = my_Rigidbody.velocity;
         velocty.y = jumpVec;
