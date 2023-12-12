@@ -26,6 +26,7 @@ public class GameoverController : MonoBehaviour
         {
             r.SetRagDoll();
         }
+        mikosiRagdoll.SetPhysics();
         Invoke(nameof(Gameover), 3.5f);
     }
     public void TurnGameover()
