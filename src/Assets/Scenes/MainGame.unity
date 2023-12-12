@@ -7695,9 +7695,9 @@ MonoBehaviour:
   ClearSpeed: 0.007
   ClearAngleSpeed: 0.007
   HitNum: 0.5
-  LeftCarHitPos: {x: 0, y: 0, z: 0}
+  LeftCarHitPos: {x: -9, y: 5, z: -21}
   LeftCarHitAngle: {x: 0, y: 0, z: 0, w: 0}
-  RightCarHitPos: {x: 0, y: 0, z: 0}
+  RightCarHitPos: {x: 9, y: 5, z: -21}
   RightCarHitAngle: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &969634712 stripped
 GameObject:
@@ -9730,6 +9730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55fe5cfb72556a4ea6575f95776ff2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: {x: 0, y: 0, z: 0}
   Horizon_move: 
   my_Thrust: 4000
   my_Thrust_Max: 70
