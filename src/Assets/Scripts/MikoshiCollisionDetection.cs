@@ -404,9 +404,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void DestroyParent()
     {
-        Debug.Log("parentDestroy");
         int childCount = Parents.transform.childCount - 1;
-        //Debug.Log("cc:" + childCount + " bpr:" + behindPeopleRow);
+        Debug.Log("parentDestroy:" + childCount);
         ColumnCount--;
 
         Destroy(Parents.transform.GetChild(childCount).gameObject);
@@ -844,6 +843,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 {
                     Debug.Log("B");
                     DestroyParent();
+                    Debug.Log("ソートON");
+                    sortRow = cMRPeopleCount;
+                    isSort = true;
+                    break;
                 }
             }
             else
@@ -854,8 +857,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 decrCount -= canMoveRowPeople[cMRPeopleCount];
                 if (aPeopleParents[cMRPeopleCount].transform.childCount <= 0)
                 {
-                    Debug.Log("B");
+                    Debug.Log("C");
                     DestroyParent();
+                    Debug.Log("ソートON");
+                    sortRow = cMRPeopleCount;
+                    isSort = true;
+                    break;
                 }
                 cMRPeopleCount++;
             }
