@@ -6206,18 +6206,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 724757672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0396449c3d3886046a1a5583a171d6cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cc0af231a5bd7049a80e86a7842ffa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  Buttons:
   - {fileID: 317924730}
   - {fileID: 93080185}
   - {fileID: 761331398}
-  ButtonNum: 0
-  Select: {fileID: 1130687286}
+  cursor: {fileID: 1130687286}
   audioSource: {fileID: 757922516}
   SelctSound: {fileID: 8300000, guid: 21380c5b38c3b8346af9ef87d00c25f0, type: 3}
   buttonType: 0
+  input: 0
 --- !u!1 &731213926
 GameObject:
   m_ObjectHideFlags: 0
