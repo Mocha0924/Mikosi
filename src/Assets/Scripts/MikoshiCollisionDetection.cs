@@ -647,14 +647,19 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             for (int j = 0; j < childCount; j++)
             {
-                Transform childTransform = aPeopleParents[i].transform.GetChild(j);
-                Vector3 childObj = childTransform.localPosition;
+                //Transform childTransform = aPeopleParents[i].transform.GetChild(j);
+                //Vector3 childObj = childTransform.localPosition;
+                GameObject childVec = aPeopleParents[i].transform.GetChild(j).gameObject;
+                AfterPeopleMoveScript afterPeopleMoveScript = childVec.GetComponent<AfterPeopleMoveScript>();
+                Vector3 childObj = afterPeopleMoveScript.GetPoint();
 
-                float x = childObj.x;
+                //float x = childObj.x;
 
-                if ((isR == true) && (x >= 1.2f * scaleCorrection) ||
-                    (isR == false) && (x <= -1.2f * scaleCorrection))
+                if ((isR == true) && (childObj.x >= 1.2f * scaleCorrection) ||
+                    (isR == false) && (childObj.x <= -1.2f * scaleCorrection))
                 {
+                    Debug.Log(childVec.name + "/ childObj:" + childObj);
+
                     Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
                     peopleCount--;
                     decrCount++;
@@ -679,7 +684,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         int[] canMoveRowPeople = new int[behindPeopleRow + 1];
         int cMRPeopleCount = 0;
 
-        for (int c = 0; c < 10; c++)
+        for (int c = 0; c < 13; c++)
         {
             //Debug.Log("無限ループ1");
             if (decrCount == 0) { break; }
@@ -767,15 +772,18 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
                 if ((isR == true) && (corrSkip == false)) { compaObjPoint.x *= -1; }
 
-                Transform childTransform = aPeopleParents[bPRowHold].transform.GetChild(i);
-                moveObjPoint = childTransform.localPosition;
+                //Transform childTransform = aPeopleParents[bPRowHold].transform.GetChild(i);
+                //moveObjPoint = childTransform.localPosition;
+                GameObject childVec = aPeopleParents[bPRowHold].transform.GetChild(i).gameObject;
+                AfterPeopleMoveScript afterPeopleMoveScript = childVec.GetComponent<AfterPeopleMoveScript>();
+                moveObjPoint = afterPeopleMoveScript.GetPoint();
+
 
                 //判定
                 if (compaObjPoint == moveObjPoint)
                 {
-                    //Debug.Log("arrCount:" + arrayCount + " allDCount:" + allRDCount);
+                    Debug.Log("移動できる人:" + childVec.name);
                     moveObject[arrayCount] = aPeopleParents[bPRowHold].transform.GetChild(i).gameObject;
-                    //Debug.Log("moveObject:" + moveObject[arrayCount]);
 
                     arrayCount++;
                     decrCount--;
@@ -787,6 +795,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             if (isSkip == true || decrCount == 0)
             {
                 //Debug.Log("cMRPC:" + cMRPeopleCount + " childC:" + childCount + " bPRH:" + bPRowHold + " rDC:" + rowDecrCount[bPRowHold]);
+                Debug.Log("childCount:" + childCount + " /その列で居なくなった人:" + rowDecrCount[bPRowHold]);
                 canMoveRowPeople[cMRPeopleCount] = childCount - rowDecrCount[bPRowHold];//その列で移動できる人
                 //Debug.Log("canMovePeople:" + canMoveRowPeople[cMRPeopleCount]);
 
@@ -805,13 +814,18 @@ public class MikoshiCollisionDetection : MonoBehaviour
         arrayCount = 0;
         decrCount = dCHold;
         //for (int i = 0; i < canMoveRowPeople.Length; i++) { Debug.Log("canMoveRowPeople[" + i + "]:" + canMoveRowPeople[i]); }
-        for (int b = 0; b < 10; b++)
+        for (int b = 0; b < 13; b++)
         {
             //Debug.Log("無限ループ2");
-            if (decrCount == 0) { break; }
+            if (decrCount == 0) 
+            {
+                sortRow = 0;
+                isSort = true;
+                break;
+            }
 
-            //Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + "behindRow:" + behindPeopleRow);
-            //Debug.Log(" row:" + row + " Count:" + rowDecrCount[row]);
+            Debug.Log("Row:" + cMRPeopleCount + " canMovePeople:" + canMoveRowPeople[cMRPeopleCount] + "behindRow:" + behindPeopleRow);
+            Debug.Log(" row:" + row + " Count:" + rowDecrCount[row]);
             int z = behindRowHold - cMRPeopleCount;
             Debug.Log("チェック:" + z + " <= " + row);
             if (behindRowHold - cMRPeopleCount <= row)
@@ -842,9 +856,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 if (aPeopleParents[cMRPeopleCount].transform.childCount <= 0)
                 {
                     Debug.Log("B");
-                    DestroyParent();
+                    //DestroyParent();
                     Debug.Log("ソートON");
-                    sortRow = cMRPeopleCount;
+                    sortRow = cMRPeopleCount--;
                     isSort = true;
                     break;
                 }
@@ -858,7 +872,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 if (aPeopleParents[cMRPeopleCount].transform.childCount <= 0)
                 {
                     Debug.Log("C");
-                    DestroyParent();
+                    //DestroyParent();
                     Debug.Log("ソートON");
                     sortRow = cMRPeopleCount;
                     isSort = true;
@@ -927,9 +941,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 afterPeopleMoveScript.Setpoint(movePoint);
             }
             sortrow++;
-            if (sortrow >= behindPeopleRow || aPeopleParents[sortrow].transform.childCount <= 0)  { sortrow--; break; }
+            if (sortrow > behindPeopleRow || aPeopleParents[sortrow].transform.childCount <= 0)  { sortrow--; break; }
         }
 
+        Debug.Log("Sort終了: 列数:" + behindPeopleRow + " sortRow:" + sortrow);
         //Sortより後ろの列があれば消す
         for (int i = behindPeopleRow; i > sortrow; i--)
         {
