@@ -6402,6 +6402,7 @@ GameObject:
   - component: {fileID: 757922514}
   - component: {fileID: 757922515}
   - component: {fileID: 757922516}
+  - component: {fileID: 757922517}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -6641,6 +6642,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &757922517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757922508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c4bbb51beb44d40a0ced2bb2ff1769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSources:
+  - {fileID: 1756974209}
+  - {fileID: 1783272856}
+  - {fileID: 910765640}
+  - {fileID: 1718180064}
+  - {fileID: 1363608240}
 --- !u!1 &761331396
 GameObject:
   m_ObjectHideFlags: 0
