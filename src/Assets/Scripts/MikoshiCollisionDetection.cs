@@ -306,10 +306,14 @@ public class MikoshiCollisionDetection : MonoBehaviour
     }
     public void CarHitGameover()
     {
-        m_audioSource.PlayOneShot(CarTouchCrush);
-        gameoverController.CarHit();
-        ColCar = ColCarMode.Center;
-        GameOverDirection();
+        if(playerMode == PlayerMode.Play)
+        {
+            m_audioSource.PlayOneShot(CarTouchCrush);
+            gameoverController.CarHit();
+            ColCar = ColCarMode.Center;
+            GameOverDirection();
+        }
+       
     }
     public void GameStart()
     {
@@ -580,51 +584,59 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void RightHit()
     {
-        Debug.Log("右側");
-        cameraController.RightHitCamer();
-        m_audioSource.PlayOneShot(CarTouch);
-        if (ColCar == ColCarMode.None)
+        if(playerMode == PlayerMode.Play)
         {
-            ColCar = ColCarMode.Right;
-            bool isR = true;
+            Debug.Log("右側");
+            cameraController.RightHitCamer();
+            m_audioSource.PlayOneShot(CarTouch);
+            if (ColCar == ColCarMode.None)
+            {
+                ColCar = ColCarMode.Right;
+                bool isR = true;
 
-            int decrCount = 0;
-            Debug.Log("a");
-            int[] rowDecrCount = new int[behindPeopleRow + 1];
-            Debug.Log("b");
-            DecrPeople(isR, ref decrCount, ref rowDecrCount);
-            Debug.Log("c");
-            MovePeople(isR, ref decrCount, ref rowDecrCount);
-            Debug.Log("d");
-            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
+                int decrCount = 0;
+                Debug.Log("a");
+                int[] rowDecrCount = new int[behindPeopleRow + 1];
+                Debug.Log("b");
+                DecrPeople(isR, ref decrCount, ref rowDecrCount);
+                Debug.Log("c");
+                MovePeople(isR, ref decrCount, ref rowDecrCount);
+                Debug.Log("d");
+                PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
-            ColCar = ColCarMode.None;
+                ColCar = ColCarMode.None;
+            }
         }
+       
     }
 
     public void LeftHit()
     {
-        Debug.Log("左側");
-        cameraController.LeftHitCamer();
-        m_audioSource.PlayOneShot(CarTouch);
-
-        if (ColCar == ColCarMode.None)
+        if(playerMode == PlayerMode.Play)
         {
-            ColCar = ColCarMode.Left;
-            bool isR = false;
+            Debug.Log("左側");
+            cameraController.LeftHitCamer();
+            m_audioSource.PlayOneShot(CarTouch);
 
-            int decrCount = 0;
-            Debug.Log("a");
-            int[] rowDecrCount = new int[behindPeopleRow + 1];
-            Debug.Log("b");
-            DecrPeople(isR, ref decrCount, ref rowDecrCount);
-            Debug.Log("c");
-            MovePeople(isR, ref decrCount, ref rowDecrCount);
-            Debug.Log("d");
-            PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
+            if (ColCar == ColCarMode.None)
+            {
+                ColCar = ColCarMode.Left;
+                bool isR = false;
 
-            ColCar = ColCarMode.None;
+                int decrCount = 0;
+                Debug.Log("a");
+                int[] rowDecrCount = new int[behindPeopleRow + 1];
+                Debug.Log("b");
+                DecrPeople(isR, ref decrCount, ref rowDecrCount);
+                Debug.Log("c");
+                MovePeople(isR, ref decrCount, ref rowDecrCount);
+                Debug.Log("d");
+                PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
+
+                ColCar = ColCarMode.None;
+            }
         }
+      
     }
 
     void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)

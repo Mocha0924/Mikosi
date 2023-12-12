@@ -8,6 +8,8 @@ public class MikosiRagdollController : MonoBehaviour
     private BoxCollider[] BoxCol;
     private MeshCollider[] MeshCol;
     private Animator animator;
+    [SerializeField] private Rigidbody MikosiRig;
+    [SerializeField] private BoxCollider MikosiBox;
     void Start()
     {
         
@@ -46,5 +48,11 @@ public class MikosiRagdollController : MonoBehaviour
         {
             MC.enabled = true;
         }
+    }
+    public void SetPhysics()
+    {
+        animator.enabled = false;
+        MikosiRig.isKinematic = false;
+        MikosiBox.enabled = true;
     }
 }
