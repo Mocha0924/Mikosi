@@ -179,6 +179,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         if (Input.anyKeyDown && playerMode == PlayerMode.Before)
             WaitStart();
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            if(playerMode == PlayerMode.Play)
+            FeverTime();
+        }
     }
 
     private void FixedUpdate()
