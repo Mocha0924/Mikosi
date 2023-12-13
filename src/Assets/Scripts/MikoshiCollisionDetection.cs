@@ -255,7 +255,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             Destroy(other.gameObject);
 
-            Debug.Log(peopleCount);
+            //Debug.Log(peopleCount);
 
             //人の生成
             GenerateMikoshiPeople(other.transform.position);
@@ -641,24 +641,22 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)
     {
-        for (int i = behindPeopleRow; i >= 0; i--)
+        Debug.Log("behind:" + behindPeopleRow);
+        for (int i = behindPeopleRow ; i >= 0; i--)
         {
             int childCount = aPeopleParents[i].transform.childCount;
+            Debug.Log("decrChildCount" + childCount);
 
             for (int j = 0; j < childCount; j++)
             {
-                //Transform childTransform = aPeopleParents[i].transform.GetChild(j);
-                //Vector3 childObj = childTransform.localPosition;
                 GameObject childVec = aPeopleParents[i].transform.GetChild(j).gameObject;
                 AfterPeopleMoveScript afterPeopleMoveScript = childVec.GetComponent<AfterPeopleMoveScript>();
                 Vector3 childObj = afterPeopleMoveScript.GetPoint();
 
-                //float x = childObj.x;
-
                 if ((isR == true) && (childObj.x >= 1.2f * scaleCorrection) ||
                     (isR == false) && (childObj.x <= -1.2f * scaleCorrection))
                 {
-                    Debug.Log(childVec.name + "/ childObj:" + childObj);
+                    Debug.Log(childVec.name + "/" + childObj);
 
                     Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
                     peopleCount--;
@@ -681,6 +679,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         int dCHold = decrCount, arrayCount = 0;
 
         GameObject[] moveObject = new GameObject[decrCount];
+        //ここまで確認中
         int[] canMoveRowPeople = new int[behindPeopleRow + 1];
         int cMRPeopleCount = 0;
 
