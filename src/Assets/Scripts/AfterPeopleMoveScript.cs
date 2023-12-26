@@ -51,6 +51,19 @@ public class AfterPeopleMoveScript : MonoBehaviour
 
     public void FoodDeath()
     {
+        if(point.x >= 0)
+        {
+            point.x += 100;
+        }
+        else
+            point.x -= 100;
 
+        Move();
+        Invoke("DeathPeople",1);
+    }
+
+    private void DeathPeople()
+    {
+        Destroy(gameObject);
     }
 }

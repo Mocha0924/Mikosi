@@ -560,7 +560,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
                         if (childObj == destroyObj)
                         {
-                            Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                          //  Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                            afterPeopleMoveScript.FoodDeath();
                             peopleCount--;
                             childCount--;
                             break;
