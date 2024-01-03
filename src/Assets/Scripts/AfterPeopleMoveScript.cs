@@ -29,12 +29,7 @@ public class AfterPeopleMoveScript : MonoBehaviour
         // Move();
     }
 
-    public void Move()
-    {
-        //this.transform.localPosition = point;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition,point, 10.0f*Time.deltaTime);
-        transform.DOLocalMove(point, 10);
-    }
+   
 
     public void Setpoint(Vector3 setPos)
     {
@@ -53,15 +48,20 @@ public class AfterPeopleMoveScript : MonoBehaviour
     {
         if(point.x >= 0)
         {
-            point.x += 100;
+            point.x += 10;
         }
         else
-            point.x -= 100;
-
-        Move();
-        Invoke("DeathPeople",1);
+            point.x -= 10;
+        transform.DOLocalMove(point, 1);
+      
+        Invoke("DeathPeople",2);
     }
-
+    public void CarHitdeath()
+    {
+        point += (Vector3.back * 300 + Vector3.up*20);
+        transform.DOLocalMove(point, 3);
+        Invoke("DeathPeople", 2);
+    }
     private void DeathPeople()
     {
         Destroy(gameObject);

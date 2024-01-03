@@ -5847,11 +5847,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c4a268c9de8ae8449fd9281c0446704, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01999998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c4a268c9de8ae8449fd9281c0446704, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4400005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c4a268c9de8ae8449fd9281c0446704, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7695,9 +7695,9 @@ MonoBehaviour:
   ClearSpeed: 0.007
   ClearAngleSpeed: 0.007
   HitNum: 0.5
-  LeftCarHitPos: {x: -9, y: 5, z: -21}
+  LeftCarHitPos: {x: -9, y: 10, z: -100}
   LeftCarHitAngle: {x: 0, y: 0, z: 0, w: 0}
-  RightCarHitPos: {x: 9, y: 5, z: -21}
+  RightCarHitPos: {x: 9, y: 10, z: -100}
   RightCarHitAngle: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &969634712 stripped
 GameObject:
@@ -9045,7 +9045,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 880848485}
   m_HandleRect: {fileID: 0}
@@ -9717,6 +9717,7 @@ MonoBehaviour:
   MaxWaitTime: 3
   Clear_Good_Time: 1
   cameraController: {fileID: 924382033}
+  mikosiAnimationController: {fileID: 1726234585}
   playerMode: 0
 --- !u!114 &1363608242
 MonoBehaviour:
@@ -10300,7 +10301,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 499677779}
   m_HandleRect: {fileID: 0}

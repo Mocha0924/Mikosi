@@ -5,11 +5,14 @@ using UnityEngine;
 public class MikosiAnimationController : MonoBehaviour
 {
     public bool JumpCheck = false;
+    private bool LeftGetCheck = true;
     // Start is called before the first frame update
     private Animator animator;
+    
     void Start()
     {
         animator = GetComponent<Animator>();
+     
     }
 
     // Update is called once per frame
@@ -41,5 +44,25 @@ public class MikosiAnimationController : MonoBehaviour
     public void FinishRightTurn()
     {
         animator.SetBool("RightTurn", false);
+    }
+    public void GetPeople()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("MikosiNormal")||animator.GetBool("LeftGet")|| animator.GetBool("RightGet"))
+        {
+            if(transform.rotation.z < 0|| animator.GetBool("RightGet"))
+            {
+                animator.SetTrigger("LeftGet");
+                animator.ResetTrigger("RightGet");
+            }
+            else if(transform.rotation.z > 0|| animator.GetBool("LeftGet"))
+            {
+                animator.SetTrigger("RightGet");
+                animator.ResetTrigger("LeftGet");
+            }
+
+           
+
+        }
+      
     }
 }
