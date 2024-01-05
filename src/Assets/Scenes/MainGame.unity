@@ -7681,8 +7681,8 @@ MonoBehaviour:
   RightPos: {x: -5, y: 10, z: -11}
   LeftPos: {x: 5, y: 10, z: -11}
   FrontAngle: {x: 0.18223552, y: 0, z: 0, w: 0.9832549}
-  RightAngle: {x: 0.17825325, y: 0.2044302, z: -0.0378889, w: 0.96176845}
-  LeftAngle: {x: -0.17825328, y: 0.20443012, z: -0.03788889, w: -0.96176845}
+  RightAngle: {x: 0.1815421, y: 0.08569631, z: -0.015882874, w: 0.97951335}
+  LeftAngle: {x: 0.1815421, y: -0.08569631, z: 0.015882874, w: 0.97951335}
   speed: 0.1
   Anglespeed: 0.1
   mikosiCollision: {fileID: 1363608241}
