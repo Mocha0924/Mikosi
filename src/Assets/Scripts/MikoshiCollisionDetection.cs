@@ -76,6 +76,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     private GameoverController gameoverController;
     [SerializeField] private CameraController cameraController;
+
+    [SerializeField] private MikosiAnimationController mikosiAnimationController;
     public enum PlayerMode
     {
         Before,
@@ -246,6 +248,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         //人との接触
         if (other.gameObject.tag == "People")
         {
+            mikosiAnimationController.GetPeople();
             m_audioSource.PlayOneShot(PeopleRecoverySound);
             Debug.Log("People Touch");
 
@@ -560,7 +563,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
                         if (childObj == destroyObj)
                         {
-                            Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                          //  Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                            afterPeopleMoveScript.FoodDeath();
                             peopleCount--;
                             childCount--;
                             break;
@@ -662,9 +666,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 if ((isR == true) && (childObj.x >= 1.2f * scaleCorrection) ||
                     (isR == false) && (childObj.x <= -1.2f * scaleCorrection))
                 {
-                    Debug.Log(childVec.name + "/" + childObj);
-
-                    Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
+                    AfterPeopleMoveScript afterPeopleMoveScript = aPeopleParents[i].transform.GetChild(j).gameObject.GetComponent<AfterPeopleMoveScript>();
+                    afterPeopleMoveScript.CarHitdeath();
+                    //Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
                     peopleCount--;
                     decrCount++;
                     rowDecrCount[i]++;
