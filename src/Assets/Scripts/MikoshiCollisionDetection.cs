@@ -194,7 +194,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (isSort == true)
         {
             //関数
-            Sort(sortRow);
+            Invoke("Sort", 2);
             isSort = false;
         }
 
@@ -588,6 +588,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
             Debug.Log("peopleCount:" + peopleCount);
             if (peopleCount <= 6) { GameOverDirection();gameoverController.Disapper(); }
+            isSort = true;
         }
 
     }
@@ -613,6 +614,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 MovePeople(isR, ref decrCount, ref rowDecrCount);
                 Debug.Log("d");
                 PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
+
+                isSort = true;
 
                 ColCar = ColCarMode.None;
             }
@@ -643,6 +646,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 Debug.Log("d");
                 PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
+                isSort = true;
+
                 ColCar = ColCarMode.None;
             }
         }
@@ -666,7 +671,6 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 if ((isR == true) && (childObj.x >= 1.2f * scaleCorrection) ||
                     (isR == false) && (childObj.x <= -1.2f * scaleCorrection))
                 {
-                    AfterPeopleMoveScript afterPeopleMoveScript = aPeopleParents[i].transform.GetChild(j).gameObject.GetComponent<AfterPeopleMoveScript>();
                     afterPeopleMoveScript.CarHitdeath();
                     //Destroy(aPeopleParents[i].transform.GetChild(j).gameObject);
                     peopleCount--;
@@ -928,8 +932,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
         }
     }
 
-    void Sort(int sortrow)
+    void Sort()
     {
+        int sortrow = 0;
         while (true)
         {
             Debug.Log("Sort");
