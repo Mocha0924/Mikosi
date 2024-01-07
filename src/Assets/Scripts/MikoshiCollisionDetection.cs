@@ -31,6 +31,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     bool do_people_lose;
     int game_time_sec;
     int game_time_min;
+    int good_count = 0;
     float fever_Slider_dec;
     int fever_elapsed_time;
 
@@ -69,6 +70,9 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI WaitText;
     [SerializeField] private TextMeshProUGUI TimeNumText;
     [SerializeField] public TextMeshProUGUI PeopleNumText;
+    [SerializeField] private TextMeshProUGUI ResultTimeText;
+    [SerializeField] public TextMeshProUGUI ResultPeoplecountText;
+    [SerializeField] private TextMeshProUGUI HyoukaText;
     [SerializeField] private Sprite Clear_Good_Sprite;
     [SerializeField] private Sprite Clear_Bad_Sprite;
     [SerializeField] private int MaxWaitTime;
@@ -217,10 +221,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
             if (game_time_min > 0)
             {
                 TimeNumText.text = game_time_min + "," + (game_time_sec / 100).ToString("00") + "," + (game_time_sec % 100).ToString("00");
+                ResultTimeText.text = game_time_min + "," + (game_time_sec / 100).ToString("00") + "," + (game_time_sec % 100).ToString("00");
             }
             else
             {
                 TimeNumText.text = (game_time_sec / 100).ToString() + "," + (game_time_sec % 100).ToString("00");
+                ResultTimeText.text = (game_time_sec / 100).ToString() + "," + (game_time_sec % 100).ToString("00");
             }
 
 
@@ -254,6 +260,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
             peopleCount++;
             PeopleNumText.text = (peopleCount - 6).ToString() + "人神輿";
+            ResultPeoplecountText.text = (peopleCount - 6).ToString("") + "人神輿";
             behindPeopleCount = peopleCount - 18;
             if (behindPeopleCount % 9 == 1)
             {
@@ -364,6 +371,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (peopleCount >= clearConditions - 6)
         {
             MissionImage[0].sprite = Clear_Good_Sprite;
+            good_count++;
         }
         else
         {
@@ -373,6 +381,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (Clear_Good_Time > game_time_min)
         {
             MissionImage[1].sprite = Clear_Good_Sprite;
+            good_count++;
         }
         else
         {
@@ -382,10 +391,23 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (do_people_lose == false)
         {
             MissionImage[2].sprite = Clear_Good_Sprite;
+            good_count++;
         }
         else
         {
             MissionImage[2].sprite = Clear_Bad_Sprite;
+        }
+
+        if(good_count <= 1)
+        {
+            HyoukaText.text = "見習い";
+        }
+        else if(good_count == 3) 
+        {
+            HyoukaText.text = "達人";
+        }
+        else
+        { HyoukaText.text = "名人";
         }
 
         StartCoroutine("Result");

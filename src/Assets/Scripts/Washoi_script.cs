@@ -89,6 +89,7 @@ public class Washoi_script : MonoBehaviour
 
                 MCD.peopleCount++;
                 MCD.PeopleNumText.text = (MCD.peopleCount - 6).ToString("") + "êlê_ó`";
+                MCD.ResultPeoplecountText.text = (MCD.peopleCount - 6).ToString("") + "êlê_ó`";
                 MCD.behindPeopleCount = MCD.peopleCount - 18;
                 if (MCD.behindPeopleCount % 9 == 1)
                 {
