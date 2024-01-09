@@ -3614,7 +3614,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 1, g: 0.5240722, b: 0, a: 1}
+        key1: {r: 0, g: 0.6691313, b: 1, a: 1}
         key2: {r: 1, g: 0.5240722, b: 0, a: 0}
         key3: {r: 1, g: 0.5240722, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4972,11 +4972,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3804921155947358131, guid: 10946b7c778526745826a94b2fde8129, type: 3}
       propertyPath: ColorBySpeedModule.gradient.maxGradient.key1.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3804921155947358131, guid: 10946b7c778526745826a94b2fde8129, type: 3}
       propertyPath: ColorBySpeedModule.gradient.maxGradient.key1.g
-      value: 0.32980254
+      value: 0.63909
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804921155947358131, guid: 10946b7c778526745826a94b2fde8129, type: 3}
+      propertyPath: ColorBySpeedModule.gradient.maxGradient.key1.r
+      value: 0.5981132
       objectReference: {fileID: 0}
     - target: {fileID: 3804921155947358131, guid: 10946b7c778526745826a94b2fde8129, type: 3}
       propertyPath: ColorBySpeedModule.gradient.maxGradient.m_NumColorKeys
