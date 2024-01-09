@@ -104,7 +104,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         Left
     }
     ColCarMode ColCar = ColCarMode.None;
-  
+
 
     // Start is called before the first frame update
     void Start()
@@ -186,10 +186,10 @@ public class MikoshiCollisionDetection : MonoBehaviour
         if (Input.anyKeyDown && playerMode == PlayerMode.Before)
             WaitStart();
 
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(playerMode == PlayerMode.Play)
-            FeverTime();
+            if (playerMode == PlayerMode.Play)
+                FeverTime();
         }
     }
 
@@ -297,7 +297,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("Fever");
         playerMode = PlayerMode.Bonus;
-        FeverSliderObj.SetActive(true) ;  
+        FeverSliderObj.SetActive(true);
         MainBGMAudio.Stop();
         BonusBGMAudio.Play();
         StartCoroutine("GameClear");
@@ -306,12 +306,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void GameOverDirection()
     {
-       
-       
+
+
         MainBGMAudio.Stop();
-        
+
         playerMode = PlayerMode.GameoverDirection;
-      
+
         TimeNum.SetActive(false);
     }
     public void Gameover()
@@ -322,14 +322,14 @@ public class MikoshiCollisionDetection : MonoBehaviour
     }
     public void CarHitGameover()
     {
-        if(playerMode == PlayerMode.Play)
+        if (playerMode == PlayerMode.Play)
         {
             m_audioSource.PlayOneShot(CarTouchCrush);
             gameoverController.CarHit();
             ColCar = ColCarMode.Center;
             GameOverDirection();
         }
-       
+
     }
     public void GameStart()
     {
@@ -398,11 +398,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
             MissionImage[2].sprite = Clear_Bad_Sprite;
         }
 
-        if(good_count <= 1)
+        if (good_count <= 1)
         {
             HyoukaText.text = "見習い";
         }
-        else if(good_count == 3) 
+        else if (good_count == 3)
         {
             HyoukaText.text = "達人";
         }
@@ -435,7 +435,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void DestroyParent()
     {
-        int childCount = Parents.transform.childCount - 1;
+        int childCount = behindPeopleRow;
         Debug.Log("parentDestroy:" + childCount);
         ColumnCount--;
 
@@ -532,7 +532,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void FoodTouch()
     {
         Debug.Log("Food Touch");
-        
+
         if (playerMode == PlayerMode.Play)
         {
             cameraController.FoodHitCamera();
@@ -585,7 +585,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
                         if (childObj == destroyObj)
                         {
-                          //  Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
+                            //  Destroy(aPeopleParents[behindPeopleRow].transform.GetChild(j).gameObject);
                             afterPeopleMoveScript.FoodDeath();
                             peopleCount--;
                             childCount--;
@@ -609,7 +609,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             }
             PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
             Debug.Log("peopleCount:" + peopleCount);
-            if (peopleCount <= 6) { GameOverDirection();gameoverController.Disapper(); }
+            if (peopleCount <= 6) { GameOverDirection(); gameoverController.Disapper(); }
             isSort = true;
         }
 
@@ -617,7 +617,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
     public void RightHit()
     {
-        if(playerMode == PlayerMode.Play)
+        if (playerMode == PlayerMode.Play)
         {
             Debug.Log("右側");
             cameraController.RightHitCamer();
@@ -635,6 +635,16 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 Debug.Log("c");
                 MovePeople(isR, ref decrCount, ref rowDecrCount);
                 Debug.Log("d");
+
+                int count = 0;
+                for (int i = 0; i <= behindPeopleRow; i++)
+                {
+                    Debug.Log(i + ":" + aPeopleParents[i].transform.childCount);
+                    count += aPeopleParents[i].transform.childCount;
+                }
+                count += 6;
+                Debug.Log("count" + count);
+                peopleCount = count;
                 PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
                 isSort = true;
@@ -642,12 +652,12 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 ColCar = ColCarMode.None;
             }
         }
-       
+
     }
 
     public void LeftHit()
     {
-        if(playerMode == PlayerMode.Play)
+        if (playerMode == PlayerMode.Play)
         {
             Debug.Log("左側");
             cameraController.LeftHitCamer();
@@ -666,6 +676,16 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 Debug.Log("c");
                 MovePeople(isR, ref decrCount, ref rowDecrCount);
                 Debug.Log("d");
+
+                int count = 0;
+                for (int i = 0; i <= behindPeopleRow; i++)
+                {
+                    Debug.Log(i + ":" + aPeopleParents[i].transform.childCount);
+                    count += aPeopleParents[i].transform.childCount;
+                }
+                count += 6;
+                Debug.Log("count" + count);
+                peopleCount = count;
                 PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
 
                 isSort = true;
@@ -673,13 +693,13 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 ColCar = ColCarMode.None;
             }
         }
-      
+
     }
 
     void DecrPeople(bool isR, ref int decrCount, ref int[] rowDecrCount)
     {
         Debug.Log("behind:" + behindPeopleRow);
-        for (int i = behindPeopleRow ; i >= 0; i--)
+        for (int i = behindPeopleRow; i >= 0; i--)
         {
             int childCount = aPeopleParents[i].transform.childCount;
             Debug.Log("decrChildCount" + childCount);
@@ -852,7 +872,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
         for (int b = 0; b < 13; b++)
         {
             //Debug.Log("無限ループ2");
-            if (decrCount == 0) 
+            if (decrCount == 0)
             {
                 sortRow = 0;
                 isSort = true;
@@ -977,7 +997,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
                 afterPeopleMoveScript.Setpoint(movePoint);
             }
             sortrow++;
-            if (sortrow > behindPeopleRow || aPeopleParents[sortrow].transform.childCount <= 0)  { sortrow--; break; }
+            if (sortrow > behindPeopleRow || aPeopleParents[sortrow].transform.childCount <= 0) { sortrow--; break; }
         }
 
         Debug.Log("Sort終了: 列数:" + behindPeopleRow + " sortRow:" + sortrow);
@@ -987,7 +1007,18 @@ public class MikoshiCollisionDetection : MonoBehaviour
             if (aPeopleParents[i].transform.childCount <= 0)
             {
                 Debug.Log("A" + i + " sRow:" + sortrow); DestroyParent(); }
-            }
         }
+
+        int count = 0;
+        for (int i = 0; i <= behindPeopleRow; i++)
+        {
+            Debug.Log(i + ":" + aPeopleParents[i].transform.childCount);
+            count += aPeopleParents[i].transform.childCount;
+        }
+        count += 6;
+        Debug.Log("count" + count);
+        peopleCount = count;
+        PeopleNumText.text = (peopleCount - 6).ToString("") + "人神輿";
     }
+}
 
