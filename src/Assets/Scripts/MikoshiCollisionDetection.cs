@@ -65,6 +65,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     [SerializeField] private GameObject PeopleNum;
     [SerializeField] private GameObject TimeNum;
     [SerializeField] private GameObject FeverSliderObj;
+    [SerializeField] private GameObject FeverSliderText;
     [SerializeField] private UnityEngine.UI.Slider FeverSlider;
 
     [SerializeField] private TextMeshProUGUI WaitText;
@@ -115,8 +116,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
         AfterPeople.transform.localPosition = Vector3.zero;
 
         isFever = false;
-        FeverSliderObj.SetActive(false);
-        FeverSlider.value = 1;
+        FeverSliderObj.SetActive(true);
+        FeverSlider.value = 0.12f;
 
         behindPeopleCount = 0;
         behindPeopleRow = 0;
@@ -232,7 +233,11 @@ public class MikoshiCollisionDetection : MonoBehaviour
 
         }
 
-        if (playerMode == PlayerMode.Bonus)
+        if(playerMode == PlayerMode.Play)
+        {
+            FeverSlider.value = (peopleCount - 6) /100.0f;
+        }
+        else if (playerMode == PlayerMode.Bonus)
         {
 
             fever_elapsed_time++;
@@ -297,7 +302,8 @@ public class MikoshiCollisionDetection : MonoBehaviour
     {
         Debug.Log("Fever");
         playerMode = PlayerMode.Bonus;
-        FeverSliderObj.SetActive(true) ;  
+        FeverSliderText.SetActive(true);
+        FeverSlider.value = 1;
         MainBGMAudio.Stop();
         BonusBGMAudio.Play();
         StartCoroutine("GameClear");
@@ -317,6 +323,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
     public void Gameover()
     {
         Debug.Log("Game Over");
+        FeverSliderObj.SetActive(false);
         GameoverBGMAudio.Play();
         GameoverResult.SetActive(true);
     }
