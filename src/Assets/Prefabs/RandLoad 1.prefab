@@ -257,7 +257,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a39f1a176fa7a5444a8031a506b58926, type: 2}
+  - {fileID: 2100000, guid: 70ab28687462a3c419ca495a735a20ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -384,6 +384,7 @@ MonoBehaviour:
   LeftEndTurnLoad: {fileID: 3553569239620983565, guid: f03c984edabdfbb4c8aee151f9e65eac, type: 3}
   people: {fileID: 1276616861821600420, guid: fcf404eee3c5ff644bb2f1fbe2a75d71, type: 3}
   food: {fileID: 3984345303793805276, guid: 8801323ac64b696489998ca0deebded6, type: 3}
+  car: {fileID: 0}
   Director: {fileID: 0}
   ObjectList: []
   TurnStartLoad: {fileID: 0}
@@ -391,6 +392,8 @@ MonoBehaviour:
   PeopleGenerationMax: 35
   FoodGenerationMin: 0
   FoodGenerationMax: 0
+  CarGenerationMin: 0
+  CarGenerationMax: 0
   turnSlider: {fileID: 0}
   turnStick: {fileID: 0}
   randObject: 1
