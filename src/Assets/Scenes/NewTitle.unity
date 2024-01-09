@@ -1760,6 +1760,10 @@ MonoBehaviour:
   - {fileID: 1720591369}
   - {fileID: 450174948}
   - {fileID: 1102462350}
+  - {fileID: 1056108284}
+  - {fileID: 1891273625}
+  - {fileID: 1949496135}
+  - {fileID: 818567825}
   AfterObj:
   - {fileID: 1663449684}
   - {fileID: 382962664}
@@ -3721,7 +3725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -502, y: -599}
+  m_AnchoredPosition: {x: -515, y: 180}
   m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764293443
@@ -3744,7 +3748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c9b083ca7f0fbf24980995eeb98b3cf6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6be5307372c64d5458a3db1e68829840, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7209,6 +7213,8 @@ MonoBehaviour:
   - {fileID: 729135946}
   - {fileID: 608108370}
   - {fileID: 1720591369}
+  - {fileID: 1949496135}
+  - {fileID: 818567825}
   AfterObj:
   - {fileID: 608359415}
   - {fileID: 374454602}
