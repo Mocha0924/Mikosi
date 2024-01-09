@@ -378,7 +378,7 @@ public class MikoshiCollisionDetection : MonoBehaviour
             MissionImage[0].sprite = Clear_Bad_Sprite;
         }
 
-        if (Clear_Good_Time > game_time_min)
+        if (Clear_Good_Time >= game_time_min)
         {
             MissionImage[1].sprite = Clear_Good_Sprite;
             good_count++;
