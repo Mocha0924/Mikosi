@@ -752,7 +752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &139124669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9674,7 +9674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0aea05032335434a9dd472fb13a4025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearConditions: 100
+  clearConditions: 1
   AfterPeople: {fileID: 1276616861821600420, guid: 95489918d89ecd040898896e5a8e63a8, type: 3}
   aPeopleParents: []
   aPeopleParent: {fileID: 4856096215076513259, guid: fd591c1ba5986de449073e1e2db29088, type: 3}
@@ -10996,7 +10996,7 @@ MonoBehaviour:
   - {fileID: 7896625116911358905, guid: 0f4848fde36fab14b973f020bdeae600, type: 3}
   - {fileID: 7896625116911358905, guid: 2ba8858cfd42ded49849fff95cb28919, type: 3}
   - {fileID: 7896625116911358905, guid: edd001d95bfd2e642b1eef1c07422dba, type: 3}
-  MaxFireWorksTime: 1
+  MaxFireWorksTime: 0.75
 --- !u!4 &1564298601
 Transform:
   m_ObjectHideFlags: 0

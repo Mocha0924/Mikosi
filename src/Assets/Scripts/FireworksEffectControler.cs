@@ -24,7 +24,7 @@ public class FireworksEffectControler : MonoBehaviour
             {
                 ParticleSystem newFirework = Instantiate(Fireworks[Random.Range(0, Fireworks.Length)]);
                 newFirework.transform.position = Camera.transform.position + (Camera.transform.forward * 500) +(Camera.transform.right*Random.Range(-800f,800f));
-                newFirework.transform.position += new Vector3(0,-45,0);
+                newFirework.transform.position += new Vector3(0, Random.Range(-200, -45), 0);
                 newFirework.Play();
                 FireWorksTime = 0;
             }
