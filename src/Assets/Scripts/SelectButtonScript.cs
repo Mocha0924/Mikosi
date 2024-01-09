@@ -47,7 +47,7 @@ public class SelectButtonScript : MonoBehaviour
         }
         else
         {
-            lsh = Input.GetAxis("Horizontal");
+            lsh = -1 * Input.GetAxis("Horizontal");
         }
 
 
